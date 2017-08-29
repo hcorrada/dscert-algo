@@ -1,6 +1,6 @@
-baseurl = "http://www.hcbravo.org/networks-across-scales/"
+baseurl = "http://www.hcbravo.org/dscert-mldm"
 languageCode = "en-us"
-title = "CMSC828O: Networks Across Scales (Fall 2017)"
+title = "CMSC643: Machine Learning and Data Mining"
 theme = "hugo-material-docs"
 metadataformat = "yaml"
 canonifyurls = true
@@ -10,12 +10,12 @@ googleAnalytics = ""
 [params]
 	# General information
 	author = "Héctor Corrada Bravo"
-	description = "Analysis tools for biological networks across scales (COMBINE NRT course), Department of Computer Science, University of Maryland"
+	description = "Machine Learning and Data Mining course. Part of the Department of Computer Science of the University of Maryland's Graduate Certificate in Data Science"
 	copyright = "Released under the MIT license"
 
 	# Repository
 	provider = "GitHub"
-	repo_url = "https://github.com/hcorrada/networks-across-scales.git"
+	repo_url = "https://github.com/hcorrada/dscert-mldm.git"
 
 	logo = "images/logo.png"
 	favicon = ""
@@ -30,8 +30,8 @@ googleAnalytics = ""
 	highlight_css  = ""
 
 	[params.palette]
-    	primary = "light-blue"
-    	accent  = "orange"
+    	primary = "red"
+    	accent  = "blue"
 
  [params.font]
     	text = "Roboto"
