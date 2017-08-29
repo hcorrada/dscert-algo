@@ -1,6 +1,6 @@
 ---
 date: 2016-08-28T17:13:09-04:00
-title: "CMSC828O: Computational and Mathematical Analysis of Biological Networks across Scales"
+title: "CMSC643: Machine Learning and Data Mining"
 
 
 type: index
@@ -8,7 +8,7 @@ type: index
 
 ## Course Information
 
-**CMSC828O: Computational and Mathematical Analysis of Biological Networks Across Scales**  
+**CMSC643: Machine Learning and Data Mining**  
 **Spring 2017**
 
 *	Instructor:  
@@ -19,7 +19,7 @@ type: index
     Office: [3114F Biomolecular Sciences Building](https://www.cbcb.umd.edu/about-us/directions)  
 
 *	Lecture Meeting Times    
-    Tuesday and Thursday, 9:30am-10:45am, CSI 1122  
+    Tuesdays 7:00-9:30pm CSI 2120
 
 ## Links
 
