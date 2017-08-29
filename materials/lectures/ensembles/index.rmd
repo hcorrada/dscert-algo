@@ -1,0 +1,407 @@
+---
+title: "Ensemble Methods"
+author: "Héctor Corrada Bravo"
+company: "University of Maryland"
+date: "`r Sys.Date()`"
+css: ["custom.css"]
+output: 
+  xaringan::moon_reader:
+    lib_dir: libs
+    seal: false
+    includes:
+      after_body: "custom.html"
+    nature:
+      ratio: "16:9"
+---
+
+class: title-slide, center, middle
+count: false
+
+.banner[![](img/epiviz.png)]
+
+.title[Ensemble Methods]
+
+.author[Héctor Corrada Bravo]
+
+.other-info[
+University of Maryland, College Park, USA  
+Fannie Mae: `r Sys.Date()`
+]
+
+.logo[![](img/logo.png)]
+
+---
+
+# Ensemble Learning
+
+In studying the Random Forest algorithm we have seen some advantages of aggregating models to improve our predictions. 
+
+--
+
+This idea of combining models is called _Ensemble Learning_ in general. 
+
+--
+
+At a high level, _Ensemble Learning_ is _the aggregation of predictions of multiple weak learners with the goal of improving prediction performance._
+
+---
+
+## Ensemble Learning
+
+We will see two general approaches to this methodology: 
+
+--
+
+**bagging**: uses ensembles to reduce the variability of single ML models, 
+
+--
+
+**boosting**: uses ensembles of ML models each capturing a specific subspace of predictor space. 
+
+---
+
+## The story of the Netflix Prize
+
+In October 2006 Netflix announced an ML prize around their movie recommendation engine. 
+
+--
+
+Supervised learning task: 
+
+- Dataset of users and their ratings, (1,2,3,4 or 5 stars), of movies they have rated. 
+- Build an ML model that given predicts a specific user's rating to a movie they have not rated. 
+
+--
+
+The idea is that they can then recommend movies to those users if they predict they would rate them highly.
+
+---
+
+## The story of the Netflix Prize
+
+Netflix would award $1M for the first ML system that provided a 10% improvement to their existing system
+
+---
+class: split-30
+
+## The story of the Netflix Prize
+
+.column[
+Existing system had a 0.9514 mean squared error
+]
+
+.column[
+.image-60[![Netflix Challenge 3 week leaderboard](images/netflix1.png)
+]]
+
+---
+class: split-30
+
+## The story of the Netflix Prize
+
+.column[
+Within three weeks, at least 40 teams had improved upon the existing Netflix system. 
+
+The top teams were showing improvement over 5%. 
+]
+
+.column[
+.image-60[![Netflix Challenge 3 week leaderboard](images/netflix1.png)
+]]
+
+---
+class: split-50
+
+## The story of the Netflix Prize
+
+.column[
+Progress soon slowed and teams were stuck at around 8-9% improvement over the existing system.
+]
+
+.column[
+.image-50[![Netflix Challenge progress](images/netflix2.png)]]
+
+---
+class: split-50
+
+## The story of the Netflix Prize
+
+
+.column[Along the way, progress prizes were awarded based on the top team at each challenge anniversary. 
+
+The top teams were using ensemble methods.]
+
+.column[
+.image-50[![Netflix Challenge Progress Prize](images/netflix3.png)]]
+
+---
+class: split-50
+
+## The story of the Netflix Prize
+
+.column[
+- **Arek Paterek**: "combine the results of many methods"  
+- **U of Toronto**: "when the predictions of multiple RBM and SVD models are linearly combined..."
+]
+
+.column[
+.image-50[![Netflix Challenge Progress Prize](images/netflix3.png)]]
+
+---
+class: split-50
+
+## The story of the Netflix Prize
+
+.column[
+- **When Gravity and Dinosaurs Unite**: "Our common team blends the result of team Gravity and team Dinosaur Planet"  
+- **BellKor**: "Our final solution consists of blending 107 individual resluts"
+]
+
+.column[
+.image-50[![Netflix Challenge Progress Prize](images/netflix3.png)]]
+
+---
+class: split-30
+
+## The story of the Netflix Prize
+
+.column[
+Ultimately, the challenge was won when multiple top teams allied to combine their own ensemble models as ensembles. 
+]
+
+.column[
+.image-70[![Netflix Challenge Final Leaderboard](images/netflix4.png)]]
+
+---
+
+## Intuition behind ensemble methods
+
+So what is the intuition behind the success of these ensemble models?
+
+--
+
+First, there is the general protective mechanism of diversification. 
+
+--
+
+For instance, combining diverse independent opinions in human decision-making. 
+
+--
+
+Averting risk by diversifying a stock portfolio.
+
+---
+
+## Intuition behind ensemble methods
+
+So what is the intuition behind the success of these ensemble models?
+
+Second, it is generally difficult to establish precisely the type and complexity of model required for a specific learning task. 
+
+--
+
+A combination of models of diverse types and complexities can alleviate this challenge.
+
+---
+
+## Intuition behind ensemble methods
+
+Here is another, mathematical intuition behind model combination. 
+
+--
+
+Suppose we have completely independent classifiers, each having 70% accuracy on a specific task. 
+
+--
+
+Now, suppose we combine them using majority vote, where each classifiers predicts a label for an instance, and we make a final prediction based on what the majority of classifiers predicted. 
+
+---
+class:split-50
+
+## Intuition behind ensemble methods
+
+.column[In this case, the accuracy of the ensemble increases as the number of classifiers increase. 
+
+In this case, we would reach 99% accuracy with about 40 classifiers.]
+
+.column[
+```{r ch4_binom_ensemble, echo=FALSE, cache=TRUE, fig.width=5}
+x <- seq(1, 101, by=2)
+y <- sapply(x, function(x) 1-pbinom(floor(x/2), x, .7))
+plot(x, 100*y, type="l", lty=1, lwd=1.6, xlab="Number of classifiers", ylab="Accuracy", cex.axis=1.6, cex.lab=1.6)
+```
+]
+
+---
+
+## Ensemble Models
+
+We will look at two strategies for building ensembles.
+
+Bagging: The goal is to construct diverse models. 
+
+--
+
+Use different samples of instances and/or attributes to independently train diverse classifiers. 
+
+--
+
+Then, aggregate the classifiers using majority vote (classification) or averaging (regression).
+
+---
+
+## Ensemble Models
+
+Boosting: Build the ensemble sequentially, using the performance of the ensemble to train the next classifier in the ensmeble.
+
+---
+
+## Bagging
+
+The name Bagging comes from combining the _bootstrap_ to generate different samples of instances and _aggregation_ used to combine predictions. 
+
+--
+
+This method increases diversity of the weak learners using randomness in two ways
+
+1. using bootstrap sampling to generate the training set for each weak learner  
+2. using random subsets of features to train each weak learner
+
+
+---
+
+## Bagging
+
+The general bootstrap algorithm was designed to estimate variability of estimates when we do not have support for a specific data generating model. 
+
+---
+
+## Bagging
+
+The general bootstrap procedure is as follows for parameter $\theta$ and estimator $s$:
+
+1. Select $B$ independent bootstrap samples $\mathbf{x}_1^*, \ldots, \mathbf{x}_B^*$ each consisting of $N$ data values drawing _with replacement_ from training set $\mathbf{x}$.  
+
+2. Evaluate each bootstrap replication to estimate $\hat{\theta}(b) = s(\mathbf{x}_b^*)$, for $b=1,\ldots,B$.
+
+3. Estimate standard error of $\hat{\theta}$ using the sample standard error of the $B$ $\hat{\theta}$ estimates.
+
+---
+
+## Bagging
+
+In the ensemble learning case, $s$ is an ML training algorithm 
+
+--
+
+$\hat{\theta}_b$ is interpreted as the predictions made by the ML algorithm trained using bootstrap sample $b$. 
+
+--
+
+In this case we are not necessarily interested in the inferential task. 
+
+--
+
+Instead, we use aggregation of these multiple predictions to make final predictions.
+
+---
+
+## Bagging
+
+Bagging  works best when perturbing the training data can cause significant changes in the estimated model. 
+
+--
+
+This is specially notable in decision trees. 
+
+--
+
+For some models, like linear regression models, we can show anatically that this strategy decreases variance without increasing bias.
+
+---
+
+## Boosting
+
+Create an ensemble of classifiers sequentially. 
+
+At each iteration of the sequence we use a _weighted_ version of the training instances so that instances that are incorrectly classified by the current set of classifiers are given higher weight. 
+
+--
+
+Here diversity is injected into the ensemble by re-weighting training instances. 
+
+---
+
+## Boosting
+
+Final prediction from the ensemble is also given by aggregation (majority decision or averaging) 
+
+--
+
+Predictions are weighted based on each classifiers accuracy. 
+
+---
+
+## Adaboost
+
+The Adaboost algorithm is probably the best known example of boosting. The algorithm is as follows:
+
+- Initialize weights: each instance gets the same weight
+
+$$
+w_i = 1/N, i = 1, \ldots, N
+$$
+
+
+- Construct a classifier $m$ using current weights (Decision Trees, SVM, linear/logistic regression). Compute the error of the new classifier
+
+$$
+\epsilon_m = \frac{\sum_i w_i I\{y_i \neq g_m(x_i)\}}{\sum_i w_i}
+$$
+
+---
+
+## Adaboost
+
+- Get the _influence_ of the new classifier and update training instance weights
+
+$$
+\alpha_m = \log \left( \frac{1-\epsilon_i}{\epsilon_i}\right) \\\\
+w_i \leftarrow w_i \exp\{\alpha_m I\{y_i \neq g_m(x_i)\}\}
+$$
+
+- Goto step 2
+
+For final prediction, average predictions from each classifier with weight $\alpha_m$. 
+
+---
+class: middle, center
+
+## Adaboost
+
+.image-70[![Adaboost illustration](images/adaboost.png)]
+
+---
+
+## Adaboost
+
+Adaboost has the advantage of its simplicity 
+
+--
+
+Like bagging, adaboost reduces the variability of individual weak learners. 
+
+--
+
+Unlike bagging it is sensitive to noise and outliers.
+
+---
+
+## Summary
+
+Ensemble methods seek to reduce variance of individual weak learners by aggregating their predictions. 
+
+--
+
+Bagging and boosting are alternative methods of training ensembles while providing diversity to each of the trained weak learners. 

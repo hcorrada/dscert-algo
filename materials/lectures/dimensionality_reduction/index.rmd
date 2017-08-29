@@ -1,0 +1,689 @@
+---
+title: "Unsupervised Learning: Dimensionality Reduction"
+author: "Héctor Corrada Bravo"
+company: "University of Maryland"
+date: "`r Sys.Date()`"
+css: ["custom.css"]
+output: 
+  xaringan::moon_reader:
+    lib_dir: libs
+    seal: false
+    includes:
+      after_body: "custom.html"
+    nature:
+      ratio: "16:9"
+---
+
+class: title-slide, center, middle
+count: false
+
+.banner[![](img/epiviz.png)]
+
+.title[Unsupervised Learning: Dimensionality Reduction]
+
+.author[Héctor Corrada Bravo]
+
+.other-info[
+University of Maryland, College Park, USA  
+Fannie Mae: `r Sys.Date()`
+]
+
+.logo[![](img/logo.png)]
+
+---
+
+## Unsupervised Learning
+
+Unsupervised data: characterize patterns in predictor space where observation measurements are represented.
+
+Mathematically, characterize $Pr(X)$ over $p$-dimensional predictor space. 
+
+Clustering methods assume that this space $Pr(X)$ can be partitioned into subspaces containing "similar" observations. 
+
+---
+
+## Unsupervised Learning: Dimensionality Reduction
+
+Dimensionality reduction: assume observations can be represented in a space with dimension much lower than $p$. 
+
+We will see two general strategies for dimensionality reduction: 
+
+- data transformations into spaces of smaller dimension that capture global properties of a data set $X$, 
+
+- data embeddings into lower dimensional spaces that retain local properties of a data set $X$.
+
+---
+
+## Principal Component Analysis
+
+Principal Component Analysis (PCA) is a dimensionality reduction method. 
+
+Goal: _embed data in high dimensional space (e.g., observations with a large number of variables), onto a small number of dimensions_. 
+
+--
+
+Most frequent use is in Exploratory Data Analysis and visualization
+
+--
+
+Also be helpful in regression (linear or logistic) where we can transform input variables into a smaller number of predictors for modeling. 
+
+---
+
+## Principal Component Analysis
+
+Mathematically, the PCA problem is:
+
+Given: 
+ - Data set $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$, where $\mathbf{x}_i$ is the vector
+of $p$ variable values for the $i$-th observation. 
+
+Return: 
+  - Matrix $\left[ \phi_1, \phi_2, \ldots, \phi_p \right]$ of _linear transformations_ that retain _maximal variance_.
+
+---
+
+## Principal Component Analysis
+
+Think of the first vector $\phi_1$ as a linear transformation that embeds observations into 1 dimension:
+
+$$Z_1 = \phi_{11}X_1 + \phi_{21} X_2 + \cdots + \phi_{p1} X_p$$
+
+where $\phi_1$ is selected so that the resulting dataset $\{ z_1, \ldots, z_n\}$ has _maximum variance_. 
+
+---
+
+## Principal Component Analysis
+
+In order for this to make sense mathematically: 
+
+- data has to be centered, i.e., each $X_j$ has mean equal to zero 
+
+- transformation vector $\phi_1$ has to be normalized, i.e., $\sum_{j=1}^p \phi_{j1}^2=1$. 
+
+---
+
+## Principal Component Analysis
+
+Find $\phi_1$ by solving optimization problem:
+
+$$\max_{\phi{11},\phi_{21},\ldots,\phi_{p1}} \frac{1}{n} \sum_{i=1}^n \left( \sum_{j=1}^p \phi_{j1} x_{ij} \right)^2 \\
+\mathrm{s.t.} \sum_{j=1}^p \phi_{j1}^2 = 1$$
+
+---
+
+## Principal Component Analysis
+
+Conceptually: _maximize variance_ but _subject to normalization constraint_.
+
+The second transformation $\phi_2$ is obtained next solving a similar problem with the added constraint that $\phi_2$ **is orthogonal** to $\phi_1$. 
+
+---
+
+## Principal Component Analysis
+
+Taken together $\left[ \phi_1, \phi_2 \right]$ define a pair of linear transformations of the data into 2 dimensional space.
+
+$$Z_{n\times 2} = X_{n \times p} \left[ \phi_1, \phi_2 \right]_{p \times 2}$$
+
+---
+
+## Principal Component Analysis
+
+Each of the columns of the $Z$ matrix are called _Principal Components_. 
+
+The units of the PCs are _meaningless_. 
+
+In particular, comparing numbers _across_ PCs doesn't make mathematical sense. 
+
+---
+
+## Principal Component Analysis
+
+In practice, may also use a scaling transformation on the variables $X_j$ to have unit variance. 
+
+In general, if variables $X_j$ are measured in different units (e.g, miles vs. liters vs. dollars), variables should be scaled to have unit variance. 
+
+Conversely, if they are all measured in the same units, they should be scaled.
+
+
+```{r setup_pca, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(readr)
+library(lubridate)
+
+datadir <- "data"
+url <- "http://files.zillowstatic.com/research/public/Affordability_Wide_2017Q1_Public.csv"
+filename <- basename(url)
+datafile <- file.path(datadir, filename)
+
+if (!file.exists(datafile)) {
+  download.file(url, file.path(datadir, filename))
+}
+
+afford_data <- read_csv(datafile)
+```
+
+```{r tidy_pca, echo=FALSE, cache=FALSE, message=FALSE}
+tidy_afford <- afford_data %>%
+  filter(Index == "Mortgage Affordability") %>% 
+  drop_na() %>%
+  filter(RegionID != 0) %>%
+  dplyr::select(RegionID, matches("^[1|2]")) %>%
+  gather(time, affordability, matches("^[1|2]")) %>%
+  type_convert(col_types=cols(time=col_date(format="%Y-%m")))
+
+wide_afford_df <- tidy_afford %>%
+  dplyr::select(RegionID, time, affordability) %>%
+  spread(time, affordability)
+
+value_mat <-  wide_afford_df %>%
+  dplyr::select(-RegionID) %>%
+  as.matrix() 
+```
+
+```{r zillow_pca, cache=TRUE, echo=FALSE}
+pca_res <- prcomp(value_mat, scale=FALSE)
+pca_au <- broom::augment(pca_res, wide_afford_df)
+pca_d <- broom::tidy(pca_res, matrix="d")
+pc_loading <- broom::tidy(pca_res, matrix="variables") %>%
+  type_convert(col_types=cols(column=col_date("%Y-%m-%d"))) %>%
+  mutate(PC=as.character(PC))
+                            
+pc_mean <- pca_res$center
+pc_mean <- data_frame(column=names(pc_mean), PC="mean", value=pc_mean) %>%
+  type_convert(col_types=cols(column=col_date("%Y-%m-%d")))
+
+pc_loading <- pc_mean %>%
+  bind_rows(pc_loading)
+```
+
+---
+class: split-60
+
+## Principal Component Analysis
+
+.column[Mortgage affordability data embedded into the first two principal components.]
+
+.column[
+```{r zillow_pcplot, echo=FALSE}
+ggplot(pca_au, aes(.fittedPC1, .fittedPC2)) +
+    geom_point(size=2) +
+    labs(x="PC1", y="PC2")
+```
+]
+
+---
+
+## Principal Component Analysis
+
+A natural question that arises: How many PCs should we consider in post-hoc analysis?
+
+One result of PCA is a measure of the variance corresponding to each PC relative to the total variance of the dataset. 
+
+From that calculate the _percentage of variance explained_ for the $m$-th PC:
+
+$$PVE_m=\frac{\sum_{i=1}^n z_{im}^2}{\sum_{j=1}^p \sum_{i=1}^n x_{ij}^2}$$
+
+---
+class: split-60
+
+## Principal Component Analysis
+
+.column[We can use this measure to choose number of PCs in an ad-hoc manner. In our case, using more than 10 or so PCs does not add information.]
+
+.column[
+```{r pca_scree, echo=FALSE}
+pca_d <- broom::tidy(pca_res, matrix="d")
+pca_d %>%
+  filter(PC <= 30) %>%
+  ggplot(aes(PC, 100 * cumulative)) + 
+    geom_line(size=1.32) +
+    labs(x="PC", y="Pct. Variance Explained")
+```
+]
+
+---
+
+## Principal Component Analysis
+
+A useful _rule of thumb_: 
+  - If no apparent patterns in first couple of PCs, stop! 
+  - Otherwise, look at other PCs using PVE as guide.
+
+--
+
+There are bootstrap based methods to perform a statistically guided selection of the number of PCs. 
+
+--
+
+However, there is no commonly agreed upon method for choosing number of PCs used in practice, and methods are somewhat ad-hoc.
+
+---
+
+## Solving the PCA
+
+The Principle Component solutions $\phi$ are obtained from the _singular value decomposition_ of observation matrix $X_{n\times p}=UDV^T$ 
+
+--
+
+Matrices $U$ and $V$ are orthogonal matrices, $U^TU=I$ and $V^TV=I$ 
+
+Called the left and right _singular vectors_ respectively. 
+
+--
+
+$D$ is a diagonal matrix with $d_1 \geq d_2 \geq \ldots d_p \geq 0$. These are referred to as the _singular values_. 
+
+---
+
+## Solving the PCA
+
+Using our previous notation $V$ is the transformation matrix $V=\left[\phi_1,\phi_2,\cdots,\phi_p \right]$. 
+
+Principal components $Z$ are given by the columns of $UD$. Since $U$ is orthogonal, $d_j^2$ equals the variance of the $j$th PC.
+
+---
+
+## Solving the PCA
+
+From this observation we also see that we can write original observations $x_i$ in terms of PCs $z$ and transformations $\phi$. 
+
+Specifically 
+
+$$x_i = z_{i1}\phi_1 + z_{i2}\phi_2 + \cdots + z_{ip} \phi_p$$. 
+
+---
+
+## Solving the PCA
+
+We can think of the $\phi_j$ vectors as a basis over which we can represent original observations $i$. 
+
+For this reason, another useful post-hoc analysis is to plot the transformation vectors $\phi_1, \phi_2, \ldots$. 
+
+---
+
+Here we plot the mean time series (since we center observations $X$ before performing the embedding) along with the first three $\phi_j$ vectors.
+
+```{r pca_loadings, echo=FALSE, fig.align="center"}
+pc_loading %>%
+  mutate(PC=forcats::fct_shift(factor(PC),-1)) %>%
+  filter(PC %in% c("mean",1:3)) %>%
+  ggplot(aes(column, value)) + 
+    geom_line() +
+    facet_wrap(~PC)
+```
+
+---
+
+## Kernel PCA
+
+There is a connection between the singular value decomposition of $X$ and the _eigenvalue_ decomposition of $XX^T$ such that 
+
+$$XX^T = UD^2U^T$$. 
+
+Notice that the $ij$th position of matrix $XX^T$ is the inner product $x_i'x_j$. 
+
+---
+
+## Kernel PCA
+
+As we saw before, we can use certain functions, kernel functions, in place of inner products 
+
+- induce non-linearities in learning methods, 
+- apply methods where we can obtain "similarity" functions directly. 
+
+---
+
+## Kernel PCA
+
+Given a kernel matrix $K$, we obtain the eigenvalue decomposition of a "centered" kernel matrix 
+
+$$\tilde{K}=(I-M)K(I-M)^T=UD^2U$$ 
+
+Where $M=\mathbf{1}\mathbf{1}^T/N$. 
+
+The principal components are obtained as before $Z=UD$.
+
+---
+
+## Kernel PCA
+
+We apply kernel PCA using a radial basis function kernel 
+
+$$k(x,x_i) = \exp\{-\gamma \sum_{j=1}^p (x_{j}-x_{ij})^2\}$$ 
+
+with various values of parameter $\gamma$. 
+
+---
+
+## Kernel PCA
+
+```{r kpca_setup, echo=FALSE, message=FALSE}
+library(kernlab)
+```
+
+```{r kpca_run, echo=FALSE, cache=TRUE}
+library(kernlab)
+
+kpca_res <- data_frame(sigma=c(.1,1,10,100)) %>%
+  group_by(sigma) %>%
+  do(kpca(value_mat, kernel="rbfdot", features=2,
+                     kpar=list(sigma=.$sigma)) %>%
+       pcv() %>% as_data_frame() %>%
+       dplyr::select(PC1=1,PC2=2)) 
+```
+
+```{r kpca_plot, echo=FALSE, fig.align="center"}
+kpca_res %>%
+  ggplot(aes(PC1,PC2)) +
+    geom_point() +
+    facet_wrap(~sigma, scales="free")
+
+```
+
+---
+
+## Kernel PCA
+
+As usual in unsupervised learning, there is no principled way of choosing appropriate kernel functions or parameters other than ad-hoc observation of the resulting embeddings.
+
+---
+
+## Multidimensional Scaling
+
+Multidimensional scaling is a similar approach to PCA but looks at the task in a little different manner. 
+
+Given observations $x_1,\ldots,x_N$ in $p$ dimensions, let $d_{ij}$ be the distance between observations $i$ and $j$. We may also use this algorithm given distances initially instead of $p$ dimensional observations. 
+
+--
+
+Multidimensional Scaling (MDS) seeks to find embeddings $z_1, \ldots, z_N$ of $k$ dimensions for which Euclidean distance (in $k$ dimensional space) is close to the input distances $d_{ij}$. 
+
+---
+
+## Multidimensional Scaling
+
+In _least squares_ MDS, we can do this by minimizing 
+
+$$S_M(z_1,\ldots,z_N) = \sum_{i\neq j} (d_{ij}- \|z_i - z_j\|)^2$$
+
+A gradient descent algorithm is used to minimize this function. 
+
+---
+
+## Multidimensional Scaling
+
+A related method that tends to better capture small distances is given by the _Sammon_ mapping:
+
+$$S_{S_m}(z_1,\ldots,z_N) = \sum_{i\neq j} \frac{(d_{ij}- \|z_i - z_j\|)^2}{d_{ij}}$$
+
+---
+
+## Manifold learning and local embedding
+
+PCA seeks to maximize variance of observations in the lower dimensional embedding. 
+
+Intuitively, that will result in faithfully capturing large distances between observations in predictor space.
+
+
+--
+
+Similarly, MDS attempts to capture all pairwise distances between observations. 
+
+---
+
+## Manifold learning and local embedding
+
+In some applications, this is not ideal, and methods that preserve _local_ properties may be better suited. 
+
+A classical example is when observations lie in a smaller dimensional subspace of predictor space. 
+
+---
+
+Methods that capture local structure are often able to better capture these subspaces.
+
+.center[.image-50[![](images/swiss.jpg)]]
+
+---
+
+## Locally-Linear Embedding
+
+A significant advance in manifold learning was achieved by the Locally-Linear Embedding method. 
+
+The intuition behind the method is that to capture local properties of the data in high-dimension, we should concentrate on preserving distances of neighbors in high-dimensional space, 
+
+---
+
+## Locally-Linear Embedding
+
+In LLE, this is achieved by approximating each data point by linear combinations of neighboring points. 
+
+Then choose a lower dimensional embedding that best preserves these local approximations. 
+
+---
+
+## Locally-Linear Embedding
+
+The algorithm is as follows:
+  
+- For each observation $x_i$ in $p$ dimensions, find its $K$ nearest neighbors $\mathcal{N}(i)$.
+  
+- Approximate each observation as a linear combination of its neighbors by solving
+
+$$\min_{w_{ik}} \|x_i - \sum_{k\in \mathcal{N}(i)} w_{ik} x_k \|^2$$
+
+Add constraints $w_{ik}=0$ if $k \notin \mathcal{N}(i)$ and $\sum_{k=1}^N w_{ik} = 1$. 
+
+---
+
+## Locally-Linear Embedding
+
+These amounts to solving many small least squares problems. 
+
+Also note that $K<p$ for the least squares problems to have a solution.
+
+---
+
+## Locally-Linear Embedding
+
+- Given these local approximations, now find a low-dimensional embeddings $z_i$ that approximates these well by minimizing
+
+$$\sum_{i=1}^N \|z_i - \sum_{k=1}^N w_{ik} z_k \|^2$$
+
+---
+
+## Locally-Linear Embedding
+
+The solution to this problem is given by the eigenvalue decomposition of matrix 
+
+$$(I-W)^T(I-W)$$ 
+
+where $W$ is the $N \times N$ approximation matrix. 
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+Building on ideas from LLE, we arrive at a recent, very popular, embedding method. 
+
+t-SNE was designed to address a shortcoming of LLE where neighbors tended to crowd each other in the embedded space. 
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+For example, this is a LLE embedding of the MNIST digits dataset
+
+.center[![](images/mnist_lle.png)]
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+The two main ideas behind t-SNEs approach to solve the overcrowding problem are as follows: 
+
+- instead of linear approximations over neighbors use local density estimates based on a normal distribution; 
+
+- embed these density estimates to low dimension but use a heavier tailed distribution to overcome the crowding problem. 
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+Instead of operating directly over Euclidean distances in high-dimension in t-SNE we operate over conditional probability distributions based on Euclidean Distance. 
+
+Define
+
+$$p_{j|i} = \frac{\exp\{-\|x_i - x_j\|^2/2\sigma_i^2\}}{\sum_{k\neq i} \exp\{-\|x_i-x_k\|^2/2\sigma_i^2\}}$$
+
+---
+
+## t-Distributed Stochastic Neighbord Embedding
+
+One way of performing an embedding is to define conditional probability distributions on the lower dimensional space 
+
+$$q_{j|i} = \frac{\exp\{-\|z_i-z_j\|^2\}}{\sum_{k\neq i}\exp\{-\|z_i-z_k\|^2\}}$$
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+Minimize a divergence measure, e.g. Kullback-Liebler, between the two distributions 
+
+$$\sum_i KL(P_i||Q_i) = \sum_i \sum_j p_{j|i} \log \frac{p_{j|i}}{q_{j|i}}$$
+
+--
+
+A gradient method can be used to minimize this loss function.
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+To overcome the crowding problem t-SNE uses two approaches. 
+
+First: notice that the conditional probabilities are not symmetric 
+
+$$p_{j|i} \neq p_{i|j}$$. 
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+To address this, joint probability distributions are defined
+
+$$p_{ij} = \frac{\exp\{-\|x_i - x_j\|^2/2\sigma_i^2\}}{\sum_{k\neq l} \exp\{-\|x_k-x_l\|^2/2\sigma_i^2\}}$$
+
+and
+
+$$q_{ij} = \frac{\exp\{-\|z_i-z_j\|^2\}}{\sum_{k\neq l}\exp\{-\|z_k-z_l\|^2\}}$$
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+KL divergence between the two joint probability distributions is minimized
+
+$$C=KL(P||Q) = \sum_i \sum_j p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
+
+--
+
+The gradient of this divergence has a very simple form
+
+$$\frac{\partial C}{\partial z_i} = 4\sum_j(p_{ij}-q_{ij})(z_i-z_j)$$
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+Second, instead of a normal distribution to define the joint probabilities $q_{ij}$ in the embedding space, a longer tailed $t$ distribution with one degree of freedom is used:
+
+$$q_{ij} = 
+\frac{(1 + \|z_i - z_j\|^2)^{-1}}{\sum_{k\neq l}(1+\|z_k-z_l\|^2)^{-1}}$$
+
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+KL divergence is again minimized, with slightly different gradient
+
+$$\frac{\partial C}{\partial z_i} = 4\sum_j(p_{ij}-q_{ij})(z_i-z_j)(1+\|z_i-z_j\|^2)^{-1}$$
+
+---
+
+Here is the result of t-SNE on the MNIST digits data for which we showed the LLE result previously.
+
+.center[![](images/mnist_tsne.png)]
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+.center[.image-90[![](images/tsne_alg.png)]]
+
+---
+
+## t-Distributed Stochastic Neighbor Embedding
+
+The parameter _Perplexity_ is used to set parameter $\sigma$ in the high-dimensional joint distribution, and is expressed roughly as the average number of neighbors contributing to the conditional probability distribution estimate.
+
+```{r tsne_setup, echo=FALSE, message=FALSE}
+library(Rtsne)
+set.seed(2357)
+
+```{r tsne_run, echo=FALSE, cache=TRUE}
+tsne_res <- Rtsne(value_mat, perplexity=7)
+tsne_res <- tsne_res$Y
+
+tsne_df <- wide_afford_df %>%
+  mutate(tSNE1=tsne_res[,1], tSNE2=tsne_res[,2])
+
+tsne_kmeans <- kmeans(tsne_df %>% 
+                        dplyr::select(starts_with("tSNE")), 
+                      centers=5)
+tsne_df2 <- tsne_kmeans %>% broom::augment(tsne_df)
+```
+
+---
+class: split-30
+
+.column[t-SNE on affordability time series data with a perplexity parameter of 7. 
+
+Observations colored using the K-means algorithm on the two dimensional embedding.]
+
+.column[
+```{r tsne_embedplot, echo=FALSE, fig.width=7, fig.height=6}
+tsne_df2 %>%
+  ggplot(aes(tSNE1,tSNE2,color=.cluster)) +
+    geom_point()
+```
+]
+
+---
+
+Timeseries in the resulting clusters over the tSNE embedding.
+
+```{r tsne_clusters, echo=FALSE, fig.align="center"}
+tsne_df2 %>%
+  gather(time, affordability, matches("^X[1|2]")) %>%
+  mutate(time=stringr::str_replace(time,"^X","")) %>%  
+  type_convert(col_types=cols(time=col_date(format="%Y.%m.%d"))) %>%
+  ggplot(aes(x=time,y=affordability,group=RegionID)) +
+  geom_line() +
+  facet_wrap(~.cluster)
+```
+
+---
+
+## Summary
+
+Principal Component Analysis is a conceptually simple but powerful EDA tool. It is very useful at many stages of analyses.
+
+PCA interpretation can be very ad-hoc, however. It is part of large set of unsupervised methods based on _matrix decompositions_, including Kernel PCA, Non-negative Matrix Factorization and others.
+
+Embedding methods seek to capture local properties of observations. A popular recent method is the t-SNE method.
+
+
+
