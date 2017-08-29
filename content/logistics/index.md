@@ -7,13 +7,13 @@ This page and the [Course Calendar]({{< baseurl >}}/calendar/index.html) constit
 
 ## Course Information
 
-**Computational and Mathematical Analysis of Biological Networks Across Scales**  
-**CMSC828O Fall 2017**  
+**Machine Learning and Data Mining**  
+**CMSC643 Fall 2017**
 
 
 *	Lecture Meeting Times    
-    Tuesday and Thursday, 9:30am-10:45am, CSI 1122
-
+    Tuesdays 7:00pm-9:30pm CSI 2120
+    
 *	Instructor:  
     [H&eacute;ctor Corrada Bravo](http://www.cbcb.umd.edu/~hcorrada)  
     Center for Bioinformatics and Computational Biology  
@@ -21,29 +21,42 @@ This page and the [Course Calendar]({{< baseurl >}}/calendar/index.html) constit
     <hcorrada@umiacs.umd.edu>  
     Office: 3114F Biomolecular Sciences Building  
     Phone Number: 301-405-2481  
-    **Office Hours:** Friday 1:00pm-2:00pm AVW 3223 and by appointment
+    **Office Hours:** before and after class or by appointment
 * Communication:  
     - For course related questions, use [Piazza]({{< piazzaurl >}}) as indicated below.  
-    - For any other communication (e.g., absences accomodations etc.) email me including `[CMSC828O]` in the message subject.  
+    - For any other communication (e.g., absences accomodations etc.) email me including `[CMSC643]` in the message subject.  
 
 We will use the class Piazza site [{{< piazzaurl >}}]({{< piazzaurl >}}) for questions, discussion and announcements. Assignments and grades for the class will be posted to the class ELMS site: [{{< elmurl >}}]({{< elmurl >}}).
 In case of an extended emergency closure, announcements on policy and procedures will be posted to Piazza.
 
 ## Textbook and Resources:
 
-We will refer to the following two textbooks frequently:
 
-- Newman, M.E.J. (2010) _Networks, An Introduction_. Oxford University Press. [Amazon](https://www.amazon.com/Networks-Introduction-Mark-Newman/dp/0199206651/ref=pd_bxgy_14_img_2?_encoding=UTF8&psc=1&refRID=Z4KKMKQBBRDZB7092JB9i)
-- Barabasi, et al. (2016) _Network Science_. Cambridge University Press. [Book Site](http://barabasi.com/networksciencebook/)
+We will use the following textbooks:
+
+- Daume (2017) _A Course in Machine Learning_ [Book Site](http://ciml.info/) 
+- Leskovec, et al. (2016). _Mining of Massive Datasets_. [Book Site](http://www.mmds.org/)  
+- Geron (2017) _Hands-On Machine Learning wiht Scikit-Learn and TensorFlow_. [Safari](https://www.safaribooksonline.com/library/view/hands-on-machine-learning/9781491962282/)
 
 
 Other readings will be posted in the [Course Calendar]({{< baseurl >}}/calendar/index.html).
 
 ## Expected outcomes and topics covered
 
+Machine Learning methods have found their way into the modern data
+analyst's toolbox. This course introduces popular methods with an
+emphasis on their practical usage for data analysis. Coverage
+of their statistical and computational theoretical underpinnings acquaints students with methods to evaluate statistical machine learning models
+defined in terms of algorithms or function approximations.
+
+Topics covered include: regression and prediction, tree-based methods,
+overview of supervised learning theory, support vector machines,
+kernel methods, ensemble methods, clustering,
+visualization of large datasets, graphical models among others.
+
 At the end of this course, students will be able to describe,
 implement and analyze algorithms that solve fundamental problems in
-biological network analysis: descriptive summaries of network structure and properties, probabilistic and dynamical network models, statistical models for networked data and network visualization. They will also be able to apply these methods to data in networks from biological applications: molecular, neuronal and ecological networks by completing a semester-long project.
+Machine Learning. They will also be able to apply these methods to data in  variety of applications.
 
 
 ## Expectations for Students
@@ -54,10 +67,6 @@ biological network analysis: descriptive summaries of network structure and prop
 The [Course Calendar]({{< baseurl >}}/calendar/index.html) will list
 readings (uploaded to [ELMS]({{< elmurl >}})). **You are
 required to read this material before lecture**
-
-### Presentations
-
-Students will present frequently during class. Groups will present project updates as it pertains to the analytical methods discussed throughout the semester. Students will also present papers discussing state-of-the-art methods in each of the course units.
 
 ### Announcements and discussion
 
@@ -77,11 +86,10 @@ announcements. Please use the [Piazza page]({{< piazzaurl >}}) for
 
 ### Grading Procedures 
 
-* Data project milestone submissions (30%, divided between multiple milestone submissions)  
+* Data analysis projects (50%)  
+* Written exercises (25%)  
 * Final data project submission (15%)  
-* Paper presentations (20%)  
 * Participation and discussion (10%)  
-* Written homeworks (25%)  
 
 ## University Policies and Resources
 
