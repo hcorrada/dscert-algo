@@ -7,7 +7,15 @@ date = "8/29"
 
 [[day01.covers]]
 title = "Course Introduction"
-#notes = "lectures/CMSC828O_course-intro.pdf" 
+notes = "lectures/cmsc643-intro.pdf"
+
+[[day01.covers]]
+title = "An example ML application (HTML)"
+notes = "notebooks/intro_lab.html"
+
+[[day01.covers]]
+title = "An example ML applications (IPython Notebook)"
+notes = "notebooks/intro_lab.ipynb"
 
 #### DAY 2
 [day02]
