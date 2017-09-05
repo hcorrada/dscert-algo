@@ -54,10 +54,10 @@ googleAnalytics = ""
 	url    = "logistics/"
 	weight = 10
 
-#[[menu.main]]
-	#name   = "Resources"
-	#url    = "resources/"
-	#weight = 30
+[[menu.main]]
+	name   = "Resources"
+	url    = "resources/"
+	weight = 30
 
 [[menu.main]]
 	name   = "Projects"

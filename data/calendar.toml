@@ -23,7 +23,7 @@ date = "9/5"
 
 [[day02.covers]]
 title = "Finding Similar Items / Itemset Mining"
-#notes = "lectures/CMSC828O_course-intro.pdf"
+notes = "lectures/cmsc643_itemsets.pdf"
 
 [[day02.prep]]
 title = "MMD, Ch. 3 and 6"
