@@ -1,107 +1,97 @@
 ---
 date: 2017-02-07
-title: "Project 1: Finding origin of DNA replication in a bacterial genome"
+title: "Project 1: Similar document searching via MinHash and Locality Sensitive Hashing" 
 ---
 
-**Due: Monday Feb. 20, 2017**  
-**Posted: Feb 9, 2017**   
-**Last Update: Feb 9, 2017** 
+**Due: Monday Oct 3, 2017**  
+**Posted: Sept. 12, 2017**   
+**Last Update:  Sept. 12, 2017** 
 
-# Part 1: Programming Exercises #
+In this first project we will implement the system described in the lecture notes for similar document searching.
+This project is inspired by http://mccormickml.com/2015/06/12/minhash-tutorial-with-python-code/ (Note: you can look at code there
+for inspiration but implement your own).
 
-Submit your answers to Problems 1-3 in the
-[Rosalind final submission page](http://rosalind.info/classes/401/).
+## The Task
 
-**NOTE: THESE PROGRAMS NEED TO BE SUBMITTED TO ROSALIND BY Monday 02/20 at 11:59PM**
+We will use documents from this repository http://www.inf.ed.ac.uk/teaching/courses/tts/assessed/assessment3.html.
+This is a dataset of documents for which we want to find possible plagiarism. It consists of 10,000 documents for which
+some pairs are tagged as instances of plagiarism. The goal of this exercise is to see how effectively and efficiently 
+a minhash and LSH system can identify these instances.
 
-**Question 1. (10pts)** For each of the 3 solutions submitted provide a
-runtime analysis of your solution.
-For full credit, include a short description of your algorithm and
-show how you derive your answer.
+Note that smaller subsets of data suitable for testing are available here:
+https://github.com/chrisjmccormick/MinHash/tree/master/data
 
-**Code Grading (45 pts)**
+# Part I: Preliminaries
 
-Each of the 3 Rosalind exercises will be evaluated based on correctness, efficiency and style.
+## Part IA: Dataset parsing
 
-1. Correctness: if you pass the Rosalind correctness check, you get full credit. Otherwise, your grade is determined by
-	* Program running without error when called as `python <script.py> <input_file>` where `<input_file>` is in the format used for that problem in Rosalind.
-	* Program reading input in the required format.  
-	* Program printing output in correct format as described in Rosalind.  
-	* Program implementing an algorithm that addresses the problem (i.e., you get more points if the algorithm is correct but you have a bug, e.g., with indexing)  
+Write a function `parse_data`that given the path to a filename, reads in the article data and returns an array of tuples. With
 
-2. Efficiency: points are awarded for providing efficient solutions. For example, a linear algorithm will score better than a quadratic algorithm. For full credit, implement the efficient algorithms described in textbook and discussed in class.
+- One tuple per article (there is one article per line)  
+- For each article tuples will contain `(id, string)` where `id` is the article id and `string` is the article text as described next
+- Process the article text to 
+  1. remove all punctuation
+  2. change all letters to lowercase
+  3. remove all whitespace so that all words are concatenated
 
-3. Is the code in your submission clean and easy to read, with non-obvious statements
-properly commented? Are functions used appropriately for clarity and organization?
+The function should have skeleton:
 
-# Part 2: Skew Diagrams #
-
-*Campylobacter jejuni* is a well-known bacterial pathogen, recently
- found
- [to be associated with childhood dysentery](http://genomebiology.com/2014/15/6/R76)
- in developing countries. Here, you will apply your new skills in a
- preliminary analysis of the genome of this pathogen.
-
-**Step 1. (5 pts)** Use the `BioPython` library to download the *Campylobacter
-  jejuni* genome from NCBI:
-
+```python
+def parse_data(filename):
+  # read lines from filename
+  # construct tuple of id and text
+  # process string as described above
+  # return tuple with id and processed string
 ```
-from Bio import Entrez, SeqIO
-Entrez.email = "me@example.com"
-campy_id = "AL111168.1"
+## Part IB: Document sharding
 
-# open an url handle for query
-handle = Entrez.efetch(db="nucleotide", id=campy_id, rettype="gb", retmode="text")
+Write a function `shard_document` that given a processed article string and a parameter `k` shards the document as follows:
 
-# read query result records
-record = SeqIO.read(handle, "genbank")
-handle.close()
+- each substring of lenght $k$ in document is hashed to a 32-bit integer (see `crc32` fucntion in https://docs.python.org/3/library/binascii.html)
+- returns a list of the unique 32-bit integers obtained in previous step (possibly look at python `sets` for this)
 
-# write sequence to fasta file (so you don't have to request again)
-SeqIO.write(record, "campy.fa", "fasta")
-```
+The function should have skeleton
 
-Variable `record` is a `SeqIO` object containing the *Campylobacter
-jejuni* genome. Check
-[Chapter 2 of the Biopython tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html)
-again to see how these objects work.
-Also see Chapter 9 of the tutorial for more info on how to obtain DNA
-sequences from NCBI.
-
-**Step 2. (15 pts)** Write a script to plot the skew diagram for
-  *Campylobacter jejuni*. One easy way of plotting is using pylab and IPython. If you start IPython as follows:
-
-```
-ipython
+```python
+def shard_document(string, k):
+  # initialize set data structure
+  # for each position in string, extract substring of length k
+  # hash into 32-bit integer
+  # insert into set
 ```
 
-and `skew` is the skew vector you computed for *Campylobacter jejuni*
-you can plot with
+## Part IC: Jaccard Similarity
 
+Write a function `jaccard` that given two sharded documents, computes their Jaccard distance
+
+Function should have skeleton
+
+```python
+def jaccard(a, b):
+  # initialize variables with size of union and intersections to 0
+  # scan both sets in sorted order
+  # update union and intersection sizes as appropriate
+  # return ratio of union and intersection
 ```
-%pylab
-plot(skew)
-```
 
-**Question 2 (10 pts)** Does this skew diagram look like the ones you've seen
-so far in book and discussion? What do you think may account for any
-differences? Where do you think replication origin for
-  *Campylobacter jejuni* is located?
+## Part ID: Put these together
 
-Save your skew diagram `pdf` or other image file and include in your submission (see below).
+Write a function that uses the above to do the following:
 
-# Part 3: DnaA boxes #
+- Parse a file with data
+- Return a list of tuples each tuple contains: `(id1, id2, s)`, where `id1` and `id2` are document ids and `s` is the computed Jaccard similarity
 
-Use your code to find most frequent words with mismatches (at most d=2 mismatches) and reverse complements to find candidate DnaA binding sequences in the oriC candidate region you found above (250bp on each side of position minimizing skew).
+## Part IE: Experiment 0
 
-**Question 3 (10 pts)** Construct a table that shows for each k=3,4,5,6,7,8,9:   
-(a) the number of distinct frequent words, and   
-(b) the number of times each frequent word occurs in the genomic region.  
+Use your function to carry out the following experiment:
 
-**Question 4 (5 pts)** Based on your result, did you find a reasonable candidate DnaA sequence you would provide to a biologist to test. If so, write down the candidate sequence and explain why you chose this particular candidate sequence. If not, explain why not.
+What is the effect of sharding length `k` on the Jaccard similarity of plagiarism instances versus instances that are not plagiarized. Carry out this experiment using the 1000 document dataset.
 
-# How to submit #
+# Part II: MinHash
 
-Prepare a writeup answering the four questions above and save as `pdf`. Submit any additional code (besides your solutions to the Rosalind exercises) used for this part of the homework. I highly recommend working with a `Jupyter` notebook, exporting the notebook as `pdf` and submitting that.
+COMING SOON
 
-Submit to ELMS by Monday 02/20 11:59pm here: https://myelms.umd.edu/courses/1218381/assignments/4362579
+# Part III: Locality-Sensitive Hashing
+
+COMING SOON
+

@@ -42,17 +42,16 @@ Note: Postmortem refers to short reviews usually done after completion of a proj
     </item>
     
     <item>
-      <title>Project 1: Finding origin of DNA replication in a bacterial genome</title>
+      <title>Project 1: Similar document searching via MinHash and Locality Sensitive Hashing</title>
       <link>http://www.hcbravo.org/dscert-mldm/projects/project_1/</link>
       <pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.hcbravo.org/dscert-mldm/projects/project_1/</guid>
-      <description>Due: Monday Feb. 20, 2017
-Posted: Feb 9, 2017
-Last Update: Feb 9, 2017
-Part 1: Programming Exercises Submit your answers to Problems 1-3 in the Rosalind final submission page.
-NOTE: THESE PROGRAMS NEED TO BE SUBMITTED TO ROSALIND BY Monday 02/20 at 11:59PM
-Question 1. (10pts) For each of the 3 solutions submitted provide a runtime analysis of your solution. For full credit, include a short description of your algorithm and show how you derive your answer.</description>
+      <description>Due: Monday Oct 3, 2017
+Posted: Sept. 12, 2017
+Last Update: Sept. 12, 2017
+In this first project we will implement the system described in the lecture notes for similar document searching. This project is inspired by http://mccormickml.com/2015/06/12/minhash-tutorial-with-python-code/ (Note: you can look at code there for inspiration but implement your own).
+The Task We will use documents from this repository http://www.inf.ed.ac.uk/teaching/courses/tts/assessed/assessment3.html. This is a dataset of documents for which we want to find possible plagiarism.</description>
     </item>
     
     <item>
@@ -106,7 +105,7 @@ conda install -c anaconda biopython=1.68  </description>
       <pubDate>Mon, 29 Aug 2016 08:54:44 -0400</pubDate>
       
       <guid>http://www.hcbravo.org/dscert-mldm/projects/</guid>
-      <description>COMING SOON</description>
+      <description> Similar document search with MinHash and LSH  </description>
     </item>
     
     <item>
