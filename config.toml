@@ -1,4 +1,4 @@
-baseurl = "http://www.hcbravo.org/dscert-mldm"
+baseurl = "http://www.hcbravo.org/dscert-mldm/"
 languageCode = "en-us"
 title = "CMSC643: Machine Learning and Data Mining"
 theme = "hugo-material-docs"
