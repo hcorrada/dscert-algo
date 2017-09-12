@@ -43,10 +43,10 @@ date = "9/12"
 
 [[day03.covers]]
 title = "Mathematical Background; Perceptrons"
-#notes = "lectures/Pattern Probabilties.pdf"
+notes = "lectures/cmsc643-preliminaries.pdf"
 
-#[[day03.prep]]
-#title = "Compeau & Pevzner, Vol. 1, Ch. 1, pp. 3-13, 39-44, 52-56"
+[[day03.prep]]
+title = "CIML 3 and 4"
 
 #[[day03.prep]]
 #title = "Compeau & Pevzner, playlist 1, videos 1 and 2"
@@ -67,8 +67,8 @@ date = "9/19"
 [[day04.covers]]
 title = "Linear Models"
 
-#[[day04.prep]]
-#title = "Compeau & Pevzner, Vol. 1, Ch. 1, 13-38, 44-51"
+[[day04.prep]]
+title = "CIML 7"
 
 #[[day04.prep]]
 #title = "Compeau & Pevzner, Ch. 1, playlist 1, videos 3-5"
