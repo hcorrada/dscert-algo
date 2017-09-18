@@ -56,7 +56,7 @@ The function should have skeleton
 def shard_document(string, k):
   # initialize set data structure
   # for each position in string, extract substring of length k
-  # hash into 32-bit integer
+  # hash into 32-bit integer using crc32
   # insert into set
 ```
 
@@ -68,9 +68,8 @@ Function should have skeleton
 
 ```python
 def jaccard(a, b):
-  # initialize variables with size of union and intersections to 0
-  # scan both sets in sorted order
-  # update union and intersection sizes as appropriate
+  # compute union size
+  # compute intersection size
   # return ratio of union and intersection
 ```
 
@@ -94,4 +93,43 @@ COMING SOON
 # Part III: Locality-Sensitive Hashing
 
 COMING SOON
+
+# Helpers
+
+## Obtaining data
+
+You can use the following python code to download data for the project
+
+```python
+import os
+from six.moves import urllib
+
+DOWNLOAD_ROOT = "https://raw.githubusercontent.com/chrisjmccormick/MinHash/master/data"
+PLAGIARISM_PATH = "datasets/plagiarism"
+DATA_SIZES = [100,1000,2500,10000]
+
+def fetch_data(download_root=DOWNLOAD_ROOT, 
+               plagiarism_path=PLAGIARISM_PATH, 
+               data_sizes=DATA_SIZES,
+               maxsize=1000):
+  if not os.path.isdir(plagiarism_path):
+      os.makedirs(plagiarism_path)
+  for size in data_sizes:
+      if size <= maxsize:
+          train_file = "articles_" + str(size) + ".train" 
+          train_path = plagiarism_path + '/' + train_file
+          if not os.path.exists(train_path):
+              train_url = download_root + '/' + train_file
+              urllib.request.urlretrieve(train_url, train_path)
+          
+          truth_file = "articles_" + str(size) + ".truth"
+          truth_path = plagiarism_path + '/' + truth_file
+          if not os.path.exists(truth_path):
+              truth_url = download_root + "/" + truth_file
+              urllib.request.urlretrieve(truth_url, truth_path)
+```
+
+Using the function `fetch_data` will download data to a subdirectory pointed to by the variable `PLAGIARISM_PATH`. You can assign
+the path you want to use for your data to taht variable. The `maxsize` argument of the `fetch_data` function is used to limit the size of data downloaded. For testing and development you should use the 1000 document dataset. You can get that with function call `fetch_data(maxsize=1000)`.
+
 
