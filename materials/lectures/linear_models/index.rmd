@@ -1,0 +1,1020 @@
+---
+title: "Linear Models"
+author: "Héctor Corrada Bravo"
+company: "University of Maryland"
+date: "`r Sys.Date()`"
+css: ["custom.css"]
+output: 
+  xaringan::moon_reader:
+    lib_dir: libs
+    seal: false
+    includes:
+      after_body: "custom.html"
+    nature:
+      ratio: "16:9"
+---
+
+class: title-slide, center, middle
+count: false
+
+.banner[![](img/epiviz.png)]
+
+.title[Linear Models]
+
+.author[Héctor Corrada Bravo]
+
+.other-info[
+University of Maryland, College Park, USA  
+CMSC643: `r Sys.Date()`
+]
+
+.logo[![](img/logo.png)]
+
+---
+
+## Support Vector Machines
+
+State-of-the-art classification and regression method
+
+Flexible and efficient framework to learn classifers. 
+
+--
+
+Build upon linear methods we have discussed previously and have a nice geometric interpretation of how they are trained (based maximum margin arguments). 
+
+---
+exclude: true
+
+## Support Vector Machines
+
+Can be estimated over _similarities_ between observations (more on this later) rather than standard data in tabular form. 
+
+E.g., applications where string similarities, or network similarities are readily available. 
+
+---
+class: split-60
+
+## Support Vector Machines
+
+.column[SVMs follow the "predictor space partition" framework]
+
+```{r, echo=FALSE}
+library(MASS)
+
+library(RColorBrewer)
+mycols <- brewer.pal(8, "Dark2")[c(3,2)]
+
+s <- sqrt(1/5)
+set.seed(30)
+
+makeX <- function(M, n=100, sigma=diag(2)*s) {
+  z <- sample(1:nrow(M), n, replace=TRUE)
+  m <- M[z,]
+  return(t(apply(m,1,function(mu) mvrnorm(1,mu,sigma))))
+}
+
+M0 <- mvrnorm(10, c(1,0), diag(2)) # generate 10 means
+x0 <- makeX(M0) ## the final values for y0=blue
+
+M1 <- mvrnorm(10, c(0,1), diag(2))
+x1 <- makeX(M1)
+
+x <- rbind(x0, x1)
+y <- c(rep(0,100), rep(1,100))
+cols <- mycols[y+1]
+
+GS <- 75 # put data in a Gs x Gs grid
+XLIM <- range(x[,1])
+tmpx <- seq(XLIM[1], XLIM[2], len=GS)
+
+YLIM <- range(x[,2])
+tmpy <- seq(YLIM[1], YLIM[2], len=GS)
+
+newx <- expand.grid(tmpx, tmpy)
+colnames(newx) <- c("X1","X2")
+```
+
+.column[
+```{r, echo=FALSE, fig.height=6, fig.width=7}
+layout(matrix(1:4, nr=2, byrow=TRUE))
+plot(x, col=cols, xlab="X1", ylab="X2", xlim=XLIM, ylim=YLIM, type="n", main="Training Set")
+points(x, col=cols)
+
+# linear SVM
+library(e1071)
+dat <- data.frame(X1=x[,1], X2=x[,2])
+fit <- svm(y~X1+X2, data=dat, cost=1, kernel="linear", type="C-classification")
+yhat <- attr(predict(fit, newdata=newx, decision.values=TRUE), "decision.values")[,1]
+yhat <- ifelse(yhat > 0, 2, 1)
+colshat <- mycols[yhat]
+
+plot(x, col=cols, xlab="X1", ylab="X2", xlim=XLIM, ylim=YLIM, type="n",main="linear svm")
+points(x, col=cols)
+points(newx, col=colshat, pch=".")
+
+contour(tmpx, tmpy, matrix(as.numeric(yhat),GS,GS), levels=c(1,2), add=TRUE, drawlabels=FALSE)
+
+fit <- svm(y~X1+X2, data=dat, cost=1, kernel="radial", type="C-classification", gamma=1)
+yhat <- attr(predict(fit, newdata=newx, decision.values=TRUE), "decision.values")[,1]
+yhat <- ifelse(yhat > 0, 2, 1)
+colshat <- mycols[yhat]
+
+plot(x, col=cols, xlab="X1", ylab="X2", xlim=XLIM, ylim=YLIM, type="n",main="non-linear svm RBF gamma=1")
+points(x, col=cols)
+points(newx, col=colshat, pch=".")
+
+contour(tmpx, tmpy, matrix(as.numeric(yhat),GS,GS), levels=c(1,2), add=TRUE, drawlabels=FALSE)
+
+fit <- svm(y~X1+X2, data=dat, cost=1, kernel="radial", type="C-classification", gamma=5)
+yhat <- attr(predict(fit, newdata=newx, decision.values=TRUE), "decision.values")[,1]
+yhat <- ifelse(yhat > 0, 2, 1)
+colshat <- mycols[yhat]
+
+plot(x, col=cols, xlab="X1", ylab="X2", xlim=XLIM, ylim=YLIM, type="n",main="non-linear svm RBF gamma=5")
+points(x, col=cols)
+points(newx, col=colshat, pch=".")
+
+contour(tmpx, tmpy, matrix(as.numeric(yhat),GS,GS), levels=c(1,2), add=TRUE, drawlabels=FALSE)
+```
+]
+
+---
+layout: true
+## Separating Hyperplanes
+
+---
+
+Training data: $\{(\mathbf{x}_1,y_1), (\mathbf{x}_2,y_2),\ldots,(\mathbf{x}_n,y_n)\}$
+
+
+- $\mathbf{x}_i$ is a vector of $p$ predictor values for $i$th observation,  
+
+- $y_i$ is the class label (we're going to use +1 and -1) 
+
+--
+
+Build a classifier by defining
+a _discriminative_ function such that
+
+$$b + w_1 x_{i1} + w_2 x_{i2} + \cdots + w_p x_{ip} > 0 \, \mathrm{ if } y_i = +1$$
+
+and
+
+$$b + w_1 x_{i1} + w_2 x_{i2} + \cdots + w_p x_{ip} < 0 \, \mathrm{ if } y_i = -1$$
+
+---
+
+Points where the _discriminative_ function equals 0 form a _hyper-plane_ (i.e., a line in 2D)
+
+$$\{x \, : \, b + w_1 x_{1} + \cdots + w_p x_p = 0 \}$$
+
+.center[.image-70[![](images/9_2.png)]]
+
+---
+
+Hyper-plane partitions the predictor space into two sets on
+each side of the line. 
+
+Denote $\mathbf{w}$ as the vector $(w_1, w_2, \ldots, w_p)$
+
+--
+
+Restrict estimates to those for which
+$\mathbf{w}'\mathbf{w}=\|\mathbf{w}\|^2=1$ 
+
+--
+
+Then, the *signed* distance of any point
+$x$ to the decision boundary $L$ is $b + \mathbf{w}'x$. 
+
+---
+
+With this we can easily
+describe the two partitions as
+
+
+\begin{aligned}
+L^+ & =\{x:b + \mathbf{w}'x>0\}, \\\\
+L^{-} & =\{x:b + \mathbf{w}'x<0\}
+\end{aligned}
+
+
+---
+
+The $\mathbf{w}$ we want as an estimate is one that separates
+the training data as perfectly as possible.
+
+--
+
+Describe this requirement as
+
+$$
+y_i(b + \mathbf{w}'x_i) > 0, i=1,\ldots,N
+$$
+
+---
+layout: true
+
+## Perceptron Algorithm
+
+---
+
+Algorithm to find vector $\mathbf{w}$ that
+satisfies the separation requirement as much as possible. 
+
+Penalize $\mathbf{w}$ by how far into the wrong side misclassified
+points are:
+
+$$D(b, \mathbf{w}) = - \sum_{i\in \mathcal{M}} y_i (b + \mathbf{w}'x_i)$$
+
+$\mathcal{M}$: set of points misclassified  by $\mathbf{w}$ (on the wrong side of the
+hyper-plane).
+
+---
+
+
+Estimate $\mathbf{w}$ by minimizing $D$. 
+
+_How do we do this??_
+
+---
+layout: true
+
+## Tangent: Why do we use means so much in Data Science?
+
+---
+
+Suppose I get some dataset for analysis, the first thing I do is to use Exploratory Data Analysis to get a sense of what this data looks like.
+
+One purpose of EDA is to spot problems in data (as part of data wrangling) and understand variable properties like:
+
+- central trends 
+- spread 
+- skew
+- suggest possible modeling strategies (e.g., probability distributions)
+  
+---
+layout: true
+class: split-50
+
+## Tangent: Why do we use means so much in Data Science?
+
+.column[
+```{r setup_diamonds, echo=FALSE}
+library(ggplot2)
+data(diamonds)
+library(dplyr)
+
+hist(diamonds$depth, main="Depth Histogram", xlab="Depth", nclass=200)
+```
+]
+
+---
+
+.column[
+This is a dataset about diamond characteristics, one of which is a diamonds _depth_ which we plot the distribution of here.
+]
+
+---
+
+.column[
+An obvious question to ask is _what is the central tendency of depth_ in this dataset?
+]
+
+---
+
+.column[
+The best known statistic for central tendency is the _mean_ of the data:
+
+$$\overline{x} = \frac{1}{n} \sum_{i=1}^n x_i$$
+]
+
+---
+layout: true
+
+## Tangent: Why do we use means so much in Data Science?
+
+---
+
+
+Turns out we can be a bit more formal about why the mean of the data makes sense as an estimate of central tendency
+
+--
+
+Define cost function $RSS$ of some parameter $\mu$ as
+
+$$RSS(\mu) = \frac{1}{2} \sum_{i=1}^n (x_i - \mu)^2$$
+
+---
+layout:true
+class: split-50
+
+# Tangent: Why do we use means so much in Data Science?
+
+.column[
+```{r plot_rss, echo=FALSE}
+rss <- function(mu) { 0.5 * sum((diamonds$depth - mu)^2)}
+mu_candidates <- seq(min(diamonds$depth), max(diamonds$depth), len=1000)
+plot(mu_candidates, sapply(mu_candidates, rss), xlab="Depth", ylab="RSS", type="l", lwd=2, main="Residual Sum of Squares")
+```
+]
+
+---
+
+.column[
+We can plot RSS for different values of $\mu$
+]
+
+---
+
+.column[
+We should use the $\mu$ that minimizes RSS as our estimate of central tendency. Why?
+]
+
+---
+
+.column[
+_Claim_ Setting $\mu=\overline{x}$ minimizes $RSS(\mu)$ over all values of $\mu$.
+
+_Quiz_ Prove this claim.
+]
+
+---
+layout: true
+
+## Math Review: Gradients
+
+---
+
+Gradients are a generalization of the derivative for vectors
+
+Their role in optimization is similar to what we saw in the proof to the previous claim
+
+For example: if we want to find the minimum of a function, find a point where gradient is 0
+
+---
+
+Suppose function $f: \mathbb{R}^p \to \mathbb{R}$
+
+Takes vector $x=\langle x_1, x_2, \ldots, x_p \rangle$ as input
+
+The gradient of $f$ is the vector where $j$th entry is the
+derivative of $f$ with respect to $x_j$.
+
+$$\nabla_x f = \left\langle \frac{\partial f}{x_1}, \ldots \frac{\partial f}{x_p}\right\rangle$$
+---
+
+Consider the following function
+
+$$f(\mu) = \frac{1}{2} \sum_{i=1}^N \| x_i - \mu \|^2$$
+
+_Quiz_: Write the gradient $\nabla_{\mu} f$
+
+---
+
+For now we will use two important properties of the gradient:
+
+- $\nabla_x f (x^*)= \mathbf{0}$ is a necessary (not sufficient) condition for vector $x^*$ to be an optimizer of $f$
+
+- $\nabla_x f(x^*)$ gives the direction of **steepest ascent** of function $f$ at point $x^*$
+
+---
+layout: true 
+
+## Optimization with gradients
+
+---
+
+Let's use these properties to concoct an optimization method: _gradient descent_
+
+--
+
+Given function $f$ to _minimize_
+
+- Start at some arbitrary vector $z$
+- Repeat until done:
+  - Find the direction of _steepest descent_: $-\nabla_x f(z)$
+  - Update $z$ by moving in that direction
+  
+---
+
+.center[.image-80[![](img/grad_descent.png)]]
+
+---
+
+_Quiz_ Sketch gradient descent algorithm to minimize function
+
+$$f(\mu) = \frac{1}{2} \sum_{i=1}^N \| x_i - \mu \|^2$$
+---
+
+Consider the linear regression (least squares problem): Given dataset 
+$\langle x_1, y_1 \rangle, \ldots, \langle x_n, y_n \rangle$, where outcomes $y_i$ are _continuous_.
+
+Suppose we want to model outcome $Y$ as a linear function of $X$:
+
+$$Y = b + \mathbf{w}'x$$
+
+--
+
+_Quiz_ Sketch gradient descent algorithm to minimize squared error loss
+
+$$L(b, \mathbf{w}) = \frac{1}{2}\sum_{i=1}^N \left[ y_i - (b + \mathbf{w}'x_i)\right]^2$$
+
+---
+layout: true
+
+## Perceptron Algorithm
+
+---
+
+Algorithm to find vector $\mathbf{w}$ that
+satisfies the separation requirement as much as possible. 
+
+Penalize $\mathbf{w}$ by how far into the wrong side misclassified
+points are:
+
+$$D(b, \mathbf{w}) = - \sum_{i\in \mathcal{M}} y_i (b + \mathbf{w}'x_i)$$
+
+$\mathcal{M}$: set of points misclassified  by $\mathbf{w}$ (on the wrong side of the
+hyper-plane).
+
+---
+
+Assuming $\mathcal{M}$ is fixed, the gradient of $D$ is
+
+$$\nabla_{\mathbf{w}} D  = -\sum_{i\in \mathcal{M}} y_i x_i$$
+
+and
+
+$$\nabla_b D = -\sum_{i \in \mathcal{M}} y_i$$
+
+---
+
+Perceptron algorithm uses *stochastic gradient descent*: 
+
+- Initialize parameters $b$ and $\mathbf{w}$
+- Cycle through training points $i$, if it is misclassified, update parameters as
+
+$$
+\mathbf{w} \leftarrow \mathbf{w} + \eta y_ix_i
+$$
+
+and
+
+$$
+b \leftarrow b + \eta y_i
+$$
+
+- Stop when converged (or get tired of waiting)
+
+_This is gradient descent_!
+
+---
+
+There are a few problems with this algorithm:
+
+If there exists $b$ and $\mathbf{w}$ that separates the training points perfectly, 
+
+--
+
+then there are an infinite number of $b$ and $\mathbf{w}$s that also separate the data perfectly
+
+---
+
+Algorithm will converge in a finite number of steps if the training data is separable
+
+--
+
+However, the number of finite steps can be *very* large
+
+---
+
+When the training data is *not* separable, the algorithm will not converge.
+
+---
+layout: true
+
+## Support Vector Machines
+
+---
+
+Support Vector Machines (SVMs) are designed to directly
+address these problems. 
+
+---
+class: split-50
+
+.column[A central concept in SVMs that we did not see in logistic regression is **the margin**: the distance between the separating plane and its nearest datapoints.]
+
+.column[
+.image-90[![](images/9_3.png)]
+]
+
+---
+
+When the data are separable, SVMs will choose the single
+optimal $\mathbf{w}$ that _maximizes_ the distance between the decision
+boundary and the closest point in each class.
+
+--
+
+Why is this a good idea?
+
+---
+exclude: true
+
+SVMs are designed from three _key insights_:
+
+1. **Look for the maximum margin hyper-plane**
+2. Only depend on pair-wise "similarities" of observations
+3. Only depend on a subset of observations (support vectors)
+
+
+
+Let's see these in turn.
+
+---
+
+## Maximum margin hyper-planes
+
+Goal: find the hyper-plane  that separates training data with largest margin. 
+
+This will tend to _generalize_ better since new observations have room to fall within margin and still be classified correctly. 
+
+---
+layout: true
+## Maximum margin hyper-planes
+
+---
+
+This can be cast as _optimization_ problem:
+
+$$
+\mathrm{max}_{b,\mathbf{w}} M \\\\
+\mathrm{s.t.} \|\mathbf{w}\|^2 = 1 \\\\
+y_i(b + \mathbf{w}'x_i) \geq M \, \forall i
+$$
+
+
+---
+
+Rewrite optimization problem setting $M=1/\|\mathbf{w}\|^2$ and using a little bit of algebra (see CIML):
+
+$$
+\mathrm{min}_{b, \mathbf{w}} \frac{1}{2} \| \mathbf{w} \|^2 \\\\
+\mathrm{s.t.} y_i(b + \mathbf{w}'x_i) \geq 1 \, \forall i
+$$
+
+---
+
+$$
+\mathrm{min}_{b, \mathbf{w}} \frac{1}{2} \|\mathbf{w}\|^2 \\\\
+\mathrm{s.t.} y_i(b + \mathbf{w}'x_i) \geq 1 \, \forall i
+$$
+
+This is a _constrained_ optimization problem
+
+Minimize the norm of $\mathbf{w}$ under the constraint that it classifies every observation correctly. 
+
+---
+exclude: true
+
+We can switch between equivalent constrained minimization and constrained maximization problems. 
+
+In the maximum-margin hyper-plane case, the equivalent constrained maximization problem (the _dual_ problem) is:
+
+$$\mathrm{max}_{\alpha} \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k x_i'x_k \\\\
+\mathrm{s.t.} \alpha_i \geq 0 \, \forall i$$
+
+---
+exclude: true
+
+## Maximum margin hyper-planes
+
+$$\mathrm{max}_{\alpha} \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k x_i'x_k \\\\
+\mathrm{s.t.} \alpha_i \geq 0 \, \forall i$$
+
+This quadratic optimization problem is usually easier to optimize than the original problem (notice there is only positivity constraints on $\alpha$).
+
+---
+exclude: true
+
+## Support Vector Machines
+
+_Key insight no. 2_: **SVMs only depend on pairwise "similarity" functions of observations**
+
+$$\mathrm{max}_{\alpha} \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k x_i'x_k \\\\
+\mathrm{s.t.} \alpha_i = 0 \, \forall i$$
+
+Only inner products between observations are required as opposed to the observations themselves.
+
+---
+exclude: true
+
+## Support Vector Machines
+
+
+Also, we can write the _discriminant_ function in equivalent form
+
+$$f(x) = \beta_0 + \sum_{i=1}^n y_i \alpha_i x'x_i$$
+
+
+
+Geometrically, we can think of the inner product between observations as a "similarity" measure. 
+
+
+
+Therefore, we can fit these models with other measures that works as "similarities". 
+
+---
+exclude: true
+
+## Support Vector Machines
+
+_Key insight no. 3_: **SVMs only depend on a subset of observations (support vectors)**
+
+Optimial solutions $\beta$ and $\alpha$ must satisfy the following condition:
+
+$$
+\alpha_i [ y_i(\beta_0 + \beta'x_i) -1] = 0 \, \forall i.
+$$
+
+---
+exclude: true
+
+## Support Vector Machines
+
+$$
+\alpha_i [ y_i(\beta_0 + \beta'x_i) -1] = 0 \, \forall i.
+$$
+
+Case 1: $\alpha_i > 0$, then the signed distance between observation $x_i$ and the decision boundary is 1. 
+
+This means that observation $x_i$ is _on the margin_
+
+---
+exclude: true
+
+## Support Vector Machines
+
+$$
+\alpha_i [ y_i(\beta_0 + \beta'x_i) -1] = 0 \, \forall i.
+$$
+
+Case 2: $y_i (\beta_0 + \beta'x_i) > 1$, then observation $x_i$ is not on the margin and $\alpha_i=0$.
+
+---
+exclude: true
+
+## Support Vector Machines
+
+To define the discriminant function in terms of $\alpha$s we only need observations that are _on the margin_, 
+
+i.e., those for which $\alpha_i > 0$. 
+
+
+
+These are called _support vectors_. 
+
+
+
+Also implies we only need Support Vectors to make predictions.
+
+---
+layout: false
+class: split-30
+
+## Non-separable data
+
+.column[The method we have discussed so far runs into an important complication: 
+
+_What if there is no separating hyper-plane?_. 
+]
+
+.column[![](images/9_6.png)]
+
+---
+class: split-30
+
+## Non-separable data
+
+The solution is to penalize observations on the **wrong side of the margin** by introducing _slack variables_ to the optimization problem.
+
+
+$$\mathrm{min}_{\beta_0,\beta,\xi} \; C\sum_{i=1}^N \xi_i + \frac{1}{2} \|\beta\|^2 \\\\
+\mathrm{s.t} \; y_i(\beta_0 + \beta'x_i) \geq 1 - \xi_i \, \forall i \\\\
+\xi_i \geq 0 \, \forall i$$
+
+---
+
+## Non-separable data
+
+$$\mathrm{min}_{b,\mathbf{w},\xi} \; C\sum_{i=1}^N \xi_i + \frac{1}{2} \|\mathbf{w}\|^2 \\\\
+\mathrm{s.t} \; y_i(b + \mathbf{w}'x_i) \geq 1 - \xi_i \, \forall i \\\\
+\xi_i \geq 0 \, \forall i$$
+
+$C$ is a parameter that tradeoffs the width of the margin vs. the penalty on observations on the _wrong_ side of the margin. 
+
+--
+
+This is a "data fit + model complexity" loss function.
+
+---
+class: split-30
+
+## Non-separable data
+
+.column[ 
+$C$ is a hyper-parameter to be selected by the user or via cross-validation model selection methods.]
+
+.column[
+.image-50[![](images/9_7.png)]
+]
+
+---
+exclude: true
+
+## Non-separable data
+
+An elegant result is that this formulation doesn't change the dual problem we saw before very much:
+
+$$\mathrm{max}_{\alpha} \; \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k x_i'x_k \\\\
+\mathrm{s.t.} \; 0 \leq \alpha_i \leq C \, \forall i$$
+
+---
+exclude: true
+
+## Non-separable data
+
+Only need support vectors, where $\alpha_i > 0$ to define the discriminant function and make predictions. 
+
+
+The smaller the cost parameter $C$, the learned SVM will have fewer support vectors. 
+
+
+Think of the number of support vectors as a rough measure of the _complexity_ of the SVM obtained. 
+
+---
+exclude: true
+class: split-50
+
+## Non-linear Support Vector Machine
+
+.column[What to do when we need non-linear partitions of predictor space to get a classifier?]
+
+.column[
+![](images/9_8.png)
+]
+
+---
+exclude: true
+
+## Non-linear Support Vector Machine
+
+We can define the SVM discriminant function in terms of inner products of observations. 
+
+We can generalize inner product using "kernel" functions that provide something like an inner product:
+
+$$f(x) = \beta_0 + \sum_{i=1}^n y_i \alpha_i k(x, x_i)$$
+
+
+---
+exclude: true
+class: split-50
+
+## Non-linear Support Vector Machine
+
+.column[But, what is $k$? Let's consider two examples.
+
+- _Polynomial kernel_: $k(x,x_i) = 1+\langle x, x_i \rangle^d$
+
+- _RBF (radial) kernel_: $k(x,x_i) = \exp\{-\gamma \sum_{j=1}^p (x_{j}-x_{ij})^2\}$
+]
+
+.column[![](images/9_9.png)]
+
+---
+exclude: true
+
+## Non-linear Support Vector Machine
+
+```{r, echo=FALSE, fig.align='center'}
+library(RColorBrewer)
+palette(brewer.pal(8, "Dark2"))
+
+k <- function(x, x0=0, gamma=1) {
+  exp(-gamma*(x-x0)^2)
+}
+x <- seq(-3, 3, len=100)
+plot(x, k(x), type="l", lwd=2, col=1, main="RBF kernel")
+lines(x, k(x,gamma=10), lwd=2, col=2)
+lines(x, k(x,gamma=.1), lwd=2, col=3)
+legend("topright", legend=paste("gamma=",c(1,10,.1)), lty=1, lwd=2, col=1:3)
+```
+
+---
+exclude: true
+
+## Non-linear Support Vector Machine
+
+The optimization problem is very similar
+
+$$\mathrm{max}_{\alpha} \; \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k k(x_i,x_k) \\\\
+\mathrm{s.t.} \; 0 \leq \alpha_i \leq C \, \forall i$$
+
+---
+exclude: true
+
+## SVM classification example
+
+Let's try fitting SVMs to the credit card default dataset we saw in previous examples. 
+
+Let's start with a linear SVM (where $k$ is the inner product). 
+
+---
+exclude: true
+
+## SVM classification example
+
+Here we are fitting three different SVMs resulting from using three different values of cost parameter $C$.
+
+```{r ch06_fitsvm, cache=TRUE, echo=FALSE}
+library(e1071)
+library(ISLR)
+data(Default)
+
+n <- nrow(Default)
+train_indices <- sample(n, n/2)
+
+costs <- c(.01, 1, 100)
+svm_fits <- lapply(costs, function(cost) {
+  svm(default~., data=Default, cost=cost, kernel="linear",subset=train_indices)
+})
+```
+
+```{r, echo=FALSE}
+number_svs <- sapply(svm_fits, function(fit) fit$tot.nSV)
+error_rate <- sapply(svm_fits, function(fit) {
+  yhat <- predict(fit, newdata=Default[train_indices,])
+  train <- mean(yhat != Default$default[train_indices])
+  yhat <- predict(fit, newdata=Default[-train_indices,])
+  test <- mean(yhat != Default$default[-train_indices])
+  c(train=train, test=test)
+})
+
+tab <- data.frame(cost=costs, number_svs=number_svs, train_error=error_rate["train",]*100,test_error=error_rate["test",]*100)
+knitr::kable(tab, format="html")
+```
+
+---
+exclude: true
+
+## SVM classification example
+
+Let's try now a _non-linear_ SVM by using a radial kernel. 
+
+Notice now that we have two parameters to provide to the fitting function: cost parameter $C$ and parameter $\gamma$ of the radial kernel function.
+
+---
+exclude: true
+
+## SVM classification example
+
+```{r ch06_fitradialsvm, cache=TRUE, echo=FALSE}
+costs <- c(.01, 1, 10)
+gamma <- c(.01, 1, 10)
+parameters <- expand.grid(costs, gamma)
+
+svm_fits <- lapply(seq(nrow(parameters)), function(i) {
+  svm(default~., data=Default, cost=parameters[i,1], kernel="radial", gamma=parameters[i,2], subset=train_indices)
+})
+```
+
+
+```{r, echo=FALSE}
+number_svs <- sapply(svm_fits, function(fit) fit$tot.nSV)
+error_rate <- sapply(svm_fits, function(fit) {
+  yhat <- predict(fit, newdata=Default[train_indices,])
+  train <- mean(yhat != Default$default[train_indices])
+  yhat <- predict(fit, newdata=Default[-train_indices,])
+  test <- mean(yhat != Default$default[-train_indices])
+  c(train=train, test=test)
+})
+
+tab <- data.frame(cost=parameters[,1], gamma=parameters[,2], number_svs=number_svs, train_error=error_rate["train",]*100,test_error=error_rate["test",]*100)
+knitr::kable(tab, format="html")
+```
+
+## The SVM as a regularized estimation method
+
+We can't apply gradient descent yet...
+
+The SVM problem is equivalent to the following optimization problem with $\lambda = 1/C$
+
+$$\mathrm{min}_{b, \mathbf{w}} \; \sum_{i=1}^N (1-y_if_i)_+ + \frac{\lambda}{2} \|\mathbf{w}\|^2$$
+
+- $f_i = b + \mathbf{w}'x_i$
+- $(1-y_if_i)_+$ denoting the _positive part_ of $1-y_if_i$. 
+
+---
+
+## The SVM as a regularized estimation method
+
+$$\mathrm{min}_{b, \mathbf{w}} \; \sum_{i=1}^N (1-y_if_i)_+ + \frac{\lambda}{2} \|\mathbf{w}\|^2$$
+
+If observation $x_i$ is on the proper side of the margin, 
+
+then $y_if_i > 1$ and thus $(1-y_ifi)_+ = 0$. 
+
+--
+
+Otherwise, $(1-y_if_i)_+$ equals the signed distance to the margin for observation $x_i$.
+
+---
+
+## The SVM as a regularized estimation method
+
+$$\mathrm{min}_{b, \mathbf{w}} \; \sum_{i=1}^N (1-y_if_i)_+ + \frac{\lambda}{2} \|\mathbf{w}\|^2$$
+
+This formulation makes the connection to SVMs as regularized estimation procedure much clearer. 
+
+--
+
+The first term corresponds to a "loss function"
+
+--
+
+The second term a regularization term that controls model complexity.
+
+---
+layout: true
+
+## Regularized Loss
+
+---
+
+This is a general framework we will see in many algorithms.
+
+We write the models we are learning as solutions to _optimization_ problems with _regularized_ objective functions
+
+$$f = \arg \max_f L(y, f) + \lambda R(f)$$
+
+- $L(y,f)$ is a loss function, e.g., $\sum_{i=1}^N (1-y_if_i)_+$  
+- $R(f)$ is a _regularizer_, e.g., $\|\mathbf{w}\|^2$
+
+---
+
+Other loss functions:
+
+- Zero/one loss: $L(y,f)=\mathbf{1}[yf \leq 0]$
+- Hinge: $L(y,f)=(1-yf)_+$
+- Logistic: $L(y,f) = \frac{1}{\log 2} \log (1+\exp{-yf})$
+- Exponential: $L(y,f) = \exp{-yf}$
+- Squared: $L(y,f) = (y-f)^2$
+
+---
+
+```{r loss_funcs, echo=FALSE, fig.align="center"}
+curve(1*(x <= 0),from=-3, to=3, col="black", ylim=c(0,3), lwd=1.4,
+      ylab=expression(L(y,f)), xlab=expression(y*f))
+curve(pmax(1-x,0), add=TRUE, col="red", lwd=1.4)
+curve(1/log(2) * log1p(exp(-x)), col="blue", lwd=1.4, add=TRUE)
+curve(exp(-x), col="darkgreen", lwd=1.4, add=TRUE)
+curve((1-x)^2, col="orange", lwd=1.4, add=TRUE)
+legend("topright", lwd=1.4, legend=c("0/1","hinge","logistic","exp.","sq."),
+       col=c("black","red","blue","darkgreen","orange"))
+```
+
+
+---
+
+The reason we like this is that now we have tons of flexibility in learning models
+
+We can apply gradient descent to our loss and regularizer of choice as appropriate to specific application
+
+---
+
+_Quiz_ Derive gradient descent for the SVM!
+
+---
+layout: false
+
+## Support Vector Machines
+
+Different algorithms depending on data size
+
+  - Massive number of examples with few predictors, train with stochastic gradient descent 
+  
+  - Moderate number of examples, use quadratic optimization (later in semester)
+  
+  - For quadratic version, can subset observations that could be support vectors
+
+---
+## Support Vector Machines
+
+State-of-the-art for many applications
+
+We will see later that makign this a non-linear model is very powerful and straightforward
+
+Very elegant formulation serves as springboard to understand many models
+

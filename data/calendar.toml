@@ -66,6 +66,7 @@ date = "9/19"
 
 [[day04.covers]]
 title = "Linear Models"
+notes = "lectures/cmsc643-linear_models.pdf"
 
 [[day04.prep]]
 title = "CIML 7"
@@ -87,16 +88,17 @@ title = "CIML 7"
 date = "9/26"
 
 [[day05.covers]]
+title = "Practial Issues: Feature Construction"
+
+[[day05.covers]]
 title = "Kernel Methods"
 #notes = "lectures/CMSC423_BioProgramming.pdf"
 
-#[[day05.prep]]
-#title = "Ch. 1-2 Biopython tutorial"
-#link = "http://biopython.org/DIST/docs/tutorial/Tutorial.html"
+[[day05.prep]]
+title = "CIML 5.1-5.4"
 
-#[[day05.prep]]
-#title = "Rosalind prep Ex. 12"
-#link = "http://rosalind.info/classes/400"
+[[day05.prep]]
+title = "CIML 11"
 
 #### DAY 6
 [day06]
