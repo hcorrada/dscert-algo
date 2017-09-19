@@ -187,7 +187,52 @@ Minhash estimate of Jaccard similarity. Carry out this experiment on the 1000 do
 
 # Part III: Locality-Sensitive Hashing
 
-COMING SOON
+## Implement LSH
+
+Write a function that implements locality sensitive hashing. Function specifications:
+
+- Input: 
+    - `minash_sigmatrix`: a minhash signature matrix
+    - `numhashes`: number of hash functions used to construct minhash signature matrix
+    - `docids`: list of document ids
+    - `threshold` a minimum Jaccard similarity threshold
+- Output:
+    - a list of hash tables
+    
+```python
+from collections import defaultdict
+
+def do_lsh(minhash_sigmatrix, numhashes, docids, threshold):
+  b, _ = choose_nbands(threshold, numhashes)
+  r = int(numhashes / b)
+  narticles = len(docids)
+  hash_func = _make_vector_hash(r)
+  
+  buckets = []
+  for band in range(b):
+    start_index = int(b * r)
+    end_index = min(start_index + r, numhashes)
+    
+    cur_buckets = defaultdict(list)
+    
+    for j in range(narticles):
+      # THIS IS WHAT YOU NEED TO IMPLEMENT
+    
+    buckets.append(cur_buckets)
+  
+  return buckets
+```
+
+## Find candidate similar article pairs
+
+Write a function that uses the result of your LSH function and returns list of candidate article pairs. Spec:
+
+- Input: the result of `do_lsh`
+- Output: list of tuples `(docid1, docid2)` each a candidate similar article pair according to LSH
+
+## Experiment 2: LSH sensitivity
+
+Use these functions to compute the sensitivity and specificity of LSH as a function of the `threshold`. Use the 10,000 document dataset to perform this experiment.
 
 # Helpers
 
@@ -267,3 +312,35 @@ b = np.random.randint(100, size=50)
 np.mean(a == b)
 ```
 
+## Choosing the number of bands for LSH
+
+Given a similarity threshold, we need to choose the number of bands to use in LSH. Use this function to do this:
+
+```python
+import scipy.optimize as opt
+import math
+
+def _choose_nbands(threshold, nhashes):
+    error_fun = lambda x: (threshold-((1/x[0])**(x[0]/nhashes)))**2
+    res = opt.minimize(error_fun, x0=(10), method='Nelder-Mead')
+    b = int(math.ceil(res['x'][0]))
+    r = int(n / b)
+    final_t = (1/b)**(1/r)
+    return b, final_t
+```
+
+## Hashing a vector
+
+In LSH for each band we hash the r hash values for each document. We can use this function to generate a hash function for vectors
+
+```python
+def _make_vector_hash(num_hashes, m=4294967295):
+    hash_fns = make_hashes(num_hashes)
+    def _f(vec):
+      acc = 0
+      for i in range(len(vec)):
+        h = hash_fns[i]
+        acc += h(vec[i])
+        return acc % m
+    return _f
+```
