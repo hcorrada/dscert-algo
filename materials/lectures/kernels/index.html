@@ -4,7 +4,7 @@
     <title>Kernel Methods</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-08-04" />
+    <meta name="date" content="2017-09-26" />
     <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
@@ -23,7 +23,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: 2017-08-04
+Fannie Mae: 2017-09-26
 ]
 
 .logo[![](img/logo.png)]
@@ -194,7 +194,7 @@ However, a different choice of loss function, similar to hinge loss, can lead to
 Support Vector Regression refers to the "loss + penalty" formulation when `\(\epsilon\)`-insensitive loss is used:
 
 `$$V_{\epsilon}(r) =
-\begin{cases}
+`\begin{cases}
 0 &amp; \mathrm{if } |r| &lt; \epsilon \\
 |r| - \epsilon &amp; \mathrm{otherwise}
 \end{cases}$$`
@@ -291,12 +291,12 @@ In this case, we would use function `\(f\)` to represent a vector as well:
 
 `$$f(x) = 
 \left( 
-\begin{aligned}
+`\begin{aligned}
 \alpha_{01} + \sum_{i=1}^N \alpha_{i1}k(x_i,x) \\\\
 \alpha_{02} + \sum_{i=1}^N \alpha_{i2}k(x_i,x) \\\\
 \vdots \\\\
 \alpha_{0T} + \sum_{i=1}^N \alpha_{iT}k(x_i,x)
-\end{aligned}
+\end{aligned}`
 \right)$$`
 
 ---
@@ -349,7 +349,8 @@ Structured output formulations are applicable to learn multivariate outcomes wit
 <script>var slideshow = remark.create({
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
   var url = this;
