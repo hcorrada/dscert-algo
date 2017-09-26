@@ -92,7 +92,7 @@ title = "Practial Issues: Feature Construction"
 
 [[day05.covers]]
 title = "Kernel Methods"
-#notes = "lectures/CMSC423_BioProgramming.pdf"
+notes = "lectures/cmsc643-kernels.pdf"
 
 [[day05.prep]]
 title = "CIML 5.1-5.4"
@@ -108,8 +108,8 @@ date = "10/3"
 title = "Practical Issues; Model Selection and Assessment"
 #notes = "lectures/CMSC423_BioResources.pdf"
 
-#[[day06.prep]]
-#title = "Pevsner, Ch. 2"
+[[day06.prep]]
+title = "CIML 5"
 #link = "https://myelms.umd.edu/courses/1218381/modules/items/8853435"
 
 #[[day06.prep]]
