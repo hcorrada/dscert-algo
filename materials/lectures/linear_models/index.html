@@ -4,7 +4,7 @@
     <title>Linear Models</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-09-19" />
+    <meta name="date" content="2017-09-25" />
     <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
@@ -23,7 +23,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC643: 2017-09-19
+CMSC643: 2017-09-25
 ]
 
 .logo[![](img/logo.png)]
@@ -615,19 +615,19 @@ class: split-30
 The solution is to penalize observations on the **wrong side of the margin** by introducing _slack variables_ to the optimization problem.
 
 
-`$$\mathrm{min}_{\beta_0,\beta,\xi} \; C\sum_{i=1}^N \xi_i + \frac{1}{2} \|\beta\|^2 \\\\
-\mathrm{s.t} \; y_i(\beta_0 + \beta'x_i) \geq 1 - \xi_i \, \forall i \\\\
+`$$\mathrm{min}_{b,\mathbf{w},\xi} \; \sum_{i=1}^N \xi_i + \frac{\lambda}{2} \|\mathbf{w}\|^2 \\\\
+\mathrm{s.t} \; y_i(b + \mathbf{w}'x_i) \geq 1 - \xi_i \, \forall i \\\\
 \xi_i \geq 0 \, \forall i$$`
 
 ---
 
 ## Non-separable data
 
-`$$\mathrm{min}_{b,\mathbf{w},\xi} \; C\sum_{i=1}^N \xi_i + \frac{1}{2} \|\mathbf{w}\|^2 \\\\
+`$$\mathrm{min}_{b,\mathbf{w},\xi} \; \sum_{i=1}^N \xi_i + \frac{\lambda}{2} \|\mathbf{w}\|^2 \\\\
 \mathrm{s.t} \; y_i(b + \mathbf{w}'x_i) \geq 1 - \xi_i \, \forall i \\\\
 \xi_i \geq 0 \, \forall i$$`
 
-`\(C\)` is a parameter that tradeoffs the width of the margin vs. the penalty on observations on the _wrong_ side of the margin. 
+`\(\lambda\)` is a parameter that tradeoffs the width of the margin vs. the penalty on observations on the _wrong_ side of the margin. 
 
 --
 
@@ -639,7 +639,7 @@ class: split-30
 ## Non-separable data
 
 .column[ 
-`\(C\)` is a hyper-parameter to be selected by the user or via cross-validation model selection methods.]
+`\(\lambda\)` is a hyper-parameter to be selected by the user or via cross-validation model selection methods.]
 
 .column[
 .image-50[![](images/9_7.png)]
@@ -870,8 +870,6 @@ exclude: true
 ## The SVM as a regularized estimation method
 
 We can't apply gradient descent yet...
-
-The SVM problem is equivalent to the following optimization problem with `\(\lambda = 1/C\)`
 
 `$$\mathrm{min}_{b, \mathbf{w}} \; \sum_{i=1}^N (1-y_if_i)_+ + \frac{\lambda}{2} \|\mathbf{w}\|^2$$`
 
