@@ -3,9 +3,9 @@ date: 2017-02-07
 title: "Project 1: Similar document searching via MinHash and Locality Sensitive Hashing" 
 ---
 
-**Due: Monday Oct 3, 2017**  
+**Due: Monday Oct 9, 2017**  
 **Posted: Sept. 12, 2017**   
-**Last Update:  Sept. 18, 2017** 
+**Last Update:  Oct. 2, 2017** 
 
 In this first project we will implement the system described in the lecture notes for similar document searching.
 This project is inspired by http://mccormickml.com/2015/06/12/minhash-tutorial-with-python-code/ (Note: you can look at code there
