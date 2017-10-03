@@ -25,7 +25,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: `r Sys.Date()`
+CMSC 643: `r Sys.Date()`
 ]
 
 .logo[![](img/logo.png)]
@@ -62,15 +62,15 @@ Decide what kind, and how complex of a model we should fit.
 
 --
 
-Consider a regression example: I will fit a linear regression model, what predictors should be included?, interactions?, data transformations? 
+Consider an SVM example: what predictors should be included?, interactions?, data transformations? Use a kernel? Which kernel? 
 
 --
 
-Another example is what classification tree depth to use.
+Another example is the value of hyper-parameters to use when training.
 
 --
 
-Which kind of algorithm to use, linear regression vs. decision tree vs. random forest
+Which kind of algorithm to use, linear regression vs. K-nearest neighbors vs. SVM
 
 ---
 
@@ -82,11 +82,11 @@ Determine how well does our selected model performs as a **general** model.
 
 --
 
-Ex. I've built a linear regression model with a specific set predictors. How well will it perform on unseen data? 
+Ex. I've built an SVM with a specific set predictors. How well will it perform on unseen data? 
 
 --
 
-The same question can be asked of a classification tree of specific depth.
+The same question can be asked of a kernel parameter in an SVM.
 
 ---
 
@@ -113,10 +113,10 @@ class: split-50
 
 ## Validation Set
 
-Let's look at our running example using automobile data, where we want to build a
+Let's look at an example using automobile data, where we want to build a
 regression model to predict miles per gallon given other auto attributes.
 
-.column[A linear regression model was not appropriate for this dataset. Use _polynomial_ regression as an illustrative example.
+.column[A linear regression model is not appropriate for this dataset. Use _polynomial_ regression as an illustrative example.
 ]
 
 .column[
@@ -135,7 +135,7 @@ ggplot(Auto, aes(x=horsepower, y=mpg)) + geom_point() + geom_smooth()
 
 For polynomial regression, our regression model (for a single predictor $X$) is given as a $d$ degree polynomial.
 
-$$\mathbb{E}[Y|X=x] = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_d x^d$$
+$$ Y = b + w_1 x + w_2 x^2 + \cdots + w_d x^d$$
 
 
 For _model selection_, we want to decide what degree $d$ we should use to model this data. 
@@ -304,6 +304,7 @@ plot(degrees, error_rates, pch=19, cex=1.4, lwd=1.4, xlab="Polynomial Degree", y
 ```
 
 ---
+exclude: true
 
 ## Leave-one-out Cross-validation
 
