@@ -149,7 +149,7 @@ date = "10/17"
 [[day08.covers]]
 title = "Ensemble Methods"
 
-#[[day08.prep]]
+[[day08.prep]]
 title = "CIML 13"
 
 #[[day08.prep]]
