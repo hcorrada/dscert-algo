@@ -28,17 +28,17 @@ To get code you will be using for this project using git:</description>
     </item>
     
     <item>
-      <title>Project 2: Gibbs Sampling, EM and evolution</title>
+      <title>Project 2: Classification with Health Records</title>
       <link>http://www.hcbravo.org/dscert-mldm/projects/project_2/</link>
       <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.hcbravo.org/dscert-mldm/projects/project_2/</guid>
-      <description>Due Monday March 6
-Posted: 2/23/2017
-Last Update: 2/23/2017
-Programming Questions Submit your answers to Problems 4 and 5 in the Rosalind final submission page.
-Question 1. (5 pts) Write three or four sentences as a postmortem on the implementation of the two algorithms. What was the biggest challenge in implementing and testing these algorithms?
-Note: Postmortem refers to short reviews usually done after completion of a project to set down lessons learned through the project.</description>
+      <description>Due October 30
+Posted: 10/10/2017
+Last Update: 10/10/2017
+Task We will use data from the following Kaggle dataset: https://www.kaggle.com/joniarroba/noshowappointments.
+The goal here is to predict patients that will not show up for medical appointments based on their medical records. You should read the dataset and task prediction in Kaggle to familiarize yourself as much as possible with the task and data.
+Part I: Data prep  Fork my project skeleton github repo on github Download the dataset from http://www.</description>
     </item>
     
     <item>
@@ -75,7 +75,8 @@ http://cbcb.umd.edu/~hcorrada/CMSC423/downloads/hw3data.zip</description>
       <pubDate>Mon, 29 Aug 2016 08:54:44 -0400</pubDate>
       
       <guid>http://www.hcbravo.org/dscert-mldm/projects/</guid>
-      <description> Similar document search with MinHash and LSH  </description>
+      <description> Similar document search with MinHash and LSH
+ Medical Record Classification  </description>
     </item>
     
   </channel>
