@@ -4,7 +4,7 @@
     <title>Tree-based Methods</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-07-14" />
+    <meta name="date" content="2017-10-09" />
     <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
@@ -25,7 +25,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: 2017-07-14
+CMSC 643: 2017-10-09
 ]
 
 .logo[![](img/logo.png)]
@@ -154,7 +154,7 @@ In general, the regression tree model:
 
 --
 
-The important observation is that **Regression Trees create partition recursively**
+The important observation is that **Regression Trees create partitions recursively**
 
 
 ---
@@ -227,6 +227,21 @@ This is what a decision tree would look like for these two predictors:
 &lt;img src="index_files/figure-html/unnamed-chunk-14-1.png" width="480" /&gt;
 ]
 
+---
+class: split-50
+
+## Regression Trees
+
+.column[
+&lt;img src="index_files/figure-html/unnamed-chunk-15-1.png" width="672" /&gt;
+]
+
+.column[
+_Quiz_ What would this tree predict as `mpg` for an instance with variable values
+
+- `horsepower=85`
+- `weight=2800`
+]
 
 ---
 
@@ -259,13 +274,13 @@ Let's look at how a classification tree performs on a credit card default datase
 
 
 .column[
-&lt;img src="index_files/figure-html/unnamed-chunk-16-1.png" width="480" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-17-1.png" width="480" /&gt;
 ]
 
 
 
 .column[
-&lt;img src="index_files/figure-html/unnamed-chunk-18-1.png" width="480" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-19-1.png" width="480" /&gt;
 ]
 
 ---
@@ -376,6 +391,18 @@ Select splits that improve deviance `\(D\)`
 
 ## Specifics of the partitioning algorithm
 
+### Deviance as a measure of impurity
+
+_Quiz_ Compute deviance for the following cases
+
+a) `\(n_{i1}=6, \, n_{i2}=1, \, n_{i3}=1\)`  
+b) `\(n_{i1}=9, \, n_{i2}=1, \, n_{i3}=0\)`  
+c) `\(n_{i1}=90, \, n_{i2}=10, \, n_{i3}=0\)`  
+
+---
+
+## Specifics of the partitioning algorithm
+
 ### Other measures of impurity
 
 Other commonly used measures of impurity at a node `\(i\)` of a
@@ -433,7 +460,7 @@ We can prune the tree sequentially
 
 Given tree `\(T\)`, 
 - for every node `\(R_j\)` in tree, compute `\(D_{\alpha}\)` after removing subtree rooted at `\(R_j\)`  
-- select node `\(R_j\)` that minimizes $D_{\alpha}
+- select node `\(R_j\)` that minimizes `\(D_{\alpha}\)`
 - Remote subtree rooted at `\(R_j\)` from `\(T\)`
 - Continue until `\(D_{\alpha}\)` increases
 
@@ -598,11 +625,13 @@ This reduces correlation between trees in forest, improving prediction accuracy.
 
 
 
+
+
 Let's look at the same car dataset again and plot predicted vs. true miles per gallon given by a random forest and a regression tree.
 
 
 
-&lt;img src="index_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -612,7 +641,7 @@ Now let's look at the same plot on a _testing_ dataset.
 
 
 
-&lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -698,7 +727,7 @@ Here is a table of _variable importance_ for the random forest we just construct
 
 And a plot of variable importance
 
-&lt;img src="index_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -724,7 +753,8 @@ Random Forests often perform at state-of-the-art for many tasks.
 <script>var slideshow = remark.create({
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
   var url = this;

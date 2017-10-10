@@ -29,7 +29,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: `r Sys.Date()`
+CMSC 643: `r Sys.Date()`
 ]
 
 .logo[![](img/logo.png)]
@@ -199,7 +199,7 @@ In general, the regression tree model:
 
 --
 
-The important observation is that **Regression Trees create partition recursively**
+The important observation is that **Regression Trees create partitions recursively**
 
 
 ---
@@ -334,6 +334,24 @@ with(region_dat, {
 ```
 ]
 
+---
+class: split-50
+
+## Regression Trees
+
+.column[
+```{r, echo=FALSE}
+plot(tree)
+text(tree, pretty=0)
+```
+]
+
+.column[
+_Quiz_ What would this tree predict as `mpg` for an instance with variable values
+
+- `horsepower=85`
+- `weight=2800`
+]
 
 ---
 
@@ -498,6 +516,18 @@ Select splits that improve deviance $D$
 
 ## Specifics of the partitioning algorithm
 
+### Deviance as a measure of impurity
+
+_Quiz_ Compute deviance for the following cases
+
+a) $n_{i1}=6, \, n_{i2}=1, \, n_{i3}=1$  
+b) $n_{i1}=9, \, n_{i2}=1, \, n_{i3}=0$  
+c) $n_{i1}=90, \, n_{i2}=10, \, n_{i3}=0$  
+
+---
+
+## Specifics of the partitioning algorithm
+
 ### Other measures of impurity
 
 Other commonly used measures of impurity at a node $i$ of a
@@ -555,7 +585,7 @@ We can prune the tree sequentially
 
 Given tree $T$, 
 - for every node $R_j$ in tree, compute $D_{\alpha}$ after removing subtree rooted at $R_j$  
-- select node $R_j$ that minimizes $D_{\alpha}
+- select node $R_j$ that minimizes $D_{\alpha}$
 - Remote subtree rooted at $R_j$ from $T$
 - Continue until $D_{\alpha}$ increases
 
@@ -718,13 +748,15 @@ This reduces correlation between trees in forest, improving prediction accuracy.
 
 ## Random Forests
 
+```{r, echo=FALSE, messages=FALSE, cache=FALSE}
+library(randomForest)
+```
+
 ```{r, echo=FALSE, messages=FALSE}
 set.seed(1234)
 train_indices <- sample(nrow(Auto), nrow(Auto)/2)
 train_set <- Auto[train_indices,]
 test_set <- Auto[-train_indices,]
-
-library(randomForest)
 
 auto_rf <- randomForest(mpg~cylinders+displacement+horsepower+weight+acceleration+year+origin, importance=TRUE, mtry=3, data=train_set)
 

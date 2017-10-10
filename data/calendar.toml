@@ -27,11 +27,6 @@ notes = "lectures/cmsc643_itemsets.pdf"
 
 [[day02.prep]]
 title = "MMD, Ch. 3 and 6"
-#link = "https://myelms.umd.edu/courses/1218381/modules/items/8829692"
-
-#[[day02.prep]]
-#title = "Newman, Ch. 5 and 6"
-#link = "https://myelms.umd.edu/courses/1218381/modules/items/8829693"
 
 #[[day02.workdue]]
 #title = "Survey"
@@ -48,18 +43,6 @@ notes = "lectures/cmsc643-preliminaries.pdf"
 [[day03.prep]]
 title = "CIML 3 and 4"
 
-#[[day03.prep]]
-#title = "Compeau & Pevzner, playlist 1, videos 1 and 2"
-#link = "https://www.youtube.com/playlist?list=PLQ-85lQlPqFNFDlaNMZ1JVN73rO1a0dpn"
-
-#[[day03.prep]]
-#title = "Reading Quiz no. 2"
-#link = "https://myelms.umd.edu/courses/1152063/quizzes/1119894"
-
-#[[day03.prep]]
-#title =  "Rosalind prep Ex. 10"
-#link = "http://rosalind.info/classes/400/"
-
 #### DAY 4
 [day04]
 date = "9/19"
@@ -70,18 +53,6 @@ notes = "lectures/cmsc643-linear_models.pdf"
 
 [[day04.prep]]
 title = "CIML 7"
-
-#[[day04.prep]]
-#title = "Compeau & Pevzner, Ch. 1, playlist 1, videos 3-5"
-#link = "https://www.youtube.com/playlist?list=PLQ-85lQlPqFNFDlaNMZ1JVN73rO1a0dpn"
-
-#[[day04.prep]]
-#title = "Reading Quiz no. 3"
-#link = "https://myelms.umd.edu/courses/1218381/assignments/4362566"
-
-#[[day04.prep]]
-#title = "Rosalind prep Ex. 11"
-#link = "http://rosalind.info/classes/400/"
 
 #### DAY 5
 [day05]
@@ -110,16 +81,6 @@ notes = "lectures/cmsc643-model_selection.pdf"
 
 [[day06.prep]]
 title = "CIML 5"
-#link = "https://myelms.umd.edu/courses/1218381/modules/items/8853435"
-
-#[[day06.prep]]
-#title = "Rosalind prep Exs. 13-14"
-#link = "http://rosalind.info/classes/400"
-
-#[[day06.prep]]
-#title = "Reading Quiz No. 4"
-#link = "https://myelms.umd.edu/courses/1218381/modules/items/8829703"
-
 
 #### DAY 7
 [day07]
@@ -127,19 +88,10 @@ date = "10/10"
 
 [[day07.covers]]
 title = "Decision Trees; Random Forests"
-#notes = "lectures/Motif_finding.pdf"
+notes = "lectures/cmsc643-trees.pdf"
 
 [[day07.prep]]
 title = "CIML 1; 13"
-
-#[[day07.prep]]
-#title = "Compeau & Pevzner, playlist 3, videos 1-3"
-#link = "https://www.youtube.com/playlist?list=PLQ-85lQlPqFMEcdAi0yF015RgmowtsvwT"
-
-
-#[[day07.prep]]
-#title = "Rosalind prep Ex. 15"
-#link = "http://rosalind.info/classes/400"
 
 #### DAY 8
 
@@ -152,18 +104,6 @@ title = "Ensemble Methods"
 [[day08.prep]]
 title = "CIML 13"
 
-#[[day08.prep]]
-#title = "Compeau & Pevzner, playlist 3, videos 4-6"
-#link = "https://www.youtube.com/playlist?list=PLQ-85lQlPqFMEcdAi0yF015RgmowtsvwT"
-
-#[[day08.prep]]
-#title = "Rosalind prep Ex. 16-17"
-#link = "http://rosalind.info/classes/400"
-
-#[[day08.prep]]
-#title = "Reading quiz no. 5"
-#link = "https://myelms.umd.edu/courses/1218381/modules/items/8829708"
-
 #### DAY 9
 
 [day09]
@@ -171,6 +111,9 @@ date = "10/24"
 
 [[day09.covers]]
 title = "Neural Networks"
+
+#[[day09.prep]]
+#title = "Something here"
 
 #### DAY 10
 [day10]
