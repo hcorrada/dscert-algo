@@ -35,7 +35,7 @@ To get code you will be using for this project using git:</description>
       <guid>http://www.hcbravo.org/dscert-mldm/projects/project_2/</guid>
       <description>Due October 30
 Posted: 10/10/2017
-Last Update: 10/10/2017
+Last Update: 10/13/2017
 Task We will use data from the following Kaggle dataset: https://www.kaggle.com/joniarroba/noshowappointments.
 The goal here is to predict patients that will not show up for medical appointments based on their medical records. You should read the dataset and task prediction in Kaggle to familiarize yourself as much as possible with the task and data.
 Part I: Data prep  Fork my project skeleton github repo on github https://github.</description>
