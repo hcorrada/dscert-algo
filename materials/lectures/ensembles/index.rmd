@@ -25,7 +25,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: `r Sys.Date()`
+CMSC 643: `r Sys.Date()`
 ]
 
 .logo[![](img/logo.png)]

@@ -100,6 +100,7 @@ date = "10/17"
 
 [[day08.covers]]
 title = "Ensemble Methods"
+notes = "lectures/cmsc643-ensembles.pdf"
 
 [[day08.prep]]
 title = "CIML 13"
