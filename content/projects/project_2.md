@@ -46,4 +46,15 @@ The submission on ELMS is just writing the URL to your github repository
 
 # Part II: Classification Methods
 
+- Using sklearn fit a DecisionTree, a RandomForest, a linear SVM and an SVM with a radial basis kernel to the transformed data.
+For now, use default parameters for each method.
+
+- Use 10 fold cross validation to estimate performance of each of the above methods using both accuracy and AUC as metrics
+Report your estimated performances. Should you use accuracy or AUC as a metric for this task?
+
+- Based on the above choose two of the ML methods and fit a model using 5 fold cross validation for model selection
+and 10 fold cross validation for model assessment. Report estimated performance for the tuned classifiers.
+
+- Implement gradient descent for a linear svm and test it on the training set. How did its performance compare to the above?
+
 # Part III: Ensembles and Final Result
