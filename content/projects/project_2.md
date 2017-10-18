@@ -57,4 +57,11 @@ and 10 fold cross validation for model assessment. Report estimated performance 
 
 - Implement gradient descent for a linear svm and test it on the training set. How did its performance compare to the above?
 
+To update your repository with new code for Part II do the following on your command shell:
+
+```shell
+git remote add upstream https://github.com/hcorrada/mldm_project2
+git pull upstream
+```
+
 # Part III: Ensembles and Final Result
