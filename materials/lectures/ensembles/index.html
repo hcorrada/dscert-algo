@@ -4,7 +4,7 @@
     <title>Ensemble Methods</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-10-17" />
+    <meta name="date" content="2017-10-24" />
     <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
@@ -23,7 +23,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC 643: 2017-10-17
+CMSC 643: 2017-10-24
 ]
 
 .logo[![](img/logo.png)]
@@ -314,6 +314,26 @@ This is specially notable in decision trees.
 For some models, like linear regression models, we can show anatically that this strategy decreases variance without increasing bias.
 
 ---
+layout: true
+
+## Stacking
+
+---
+
+A related idea is stacking (also known as blending)
+
+This is what the Netflix teams did as they combined predictors near the end of the challenge.
+
+---
+
+The basic idea is to train a set of diverse predictors as done in bagging with some differences:
+
+- If the set of predictors are very differnt types of models e.g., SVM, Decision Tree, KNN, train each on the entire set of training observations instead of bootstrapped samples
+
+- Train a simple model (e.g., linear regression or logistic regression) using the _predictions_ made by the predictors as _features_
+
+---
+layout: false
 
 ## Boosting
 
