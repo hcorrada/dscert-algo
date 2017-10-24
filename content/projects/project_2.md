@@ -65,3 +65,22 @@ git pull upstream
 ```
 
 # Part III: Ensembles and Final Result
+
+## Ensembles
+
+- Train an AdaBoost classifier using Decision Tree stubs as weak learners. Compare its performance to the results obtained in Part II
+using 10 fold cross validation as before
+
+- Choose a set of 5 or so classifiers, e.g., Decision Trees of diverse depths, linear SVMs over diverse subsets of features, RBF kernels with diverse bandwidths, Random Forests with diverse number of trees in their ensemble, be creative!. Write a function that given a training set does the following:
+
+1. Creates a validation set using 20% of the training set
+2. Trains each of your chosen classifiers on the training set
+3. Using the validation set creates a new dataset where features are predictions made by each of your chosen classifiers
+4. Trains a logistic regression classifier to blend the predictions 
+
+Compare its performance to the results obtained in Part II using 10 fold cross validation.
+
+## Final Result
+
+Choose a single model based on all previous project steps that you think will perform best on our prediction task. Training this model on your complete training set. Measure the model's performance on the held out test set and compare to the 10 fold cross validation performance estimate you derived previously. 
+
