@@ -130,6 +130,7 @@ date = "10/31"
 
 [[day10.covers]]
 title = "Neural Networks"
+notes = "lectures/cmsc643-neural_nets.pdf"
 
 #[[day10.prep]]
 #title = "Compeau & Pevzner, Ch. 8" 
@@ -148,6 +149,10 @@ date = "11/7"
 
 [[day11.covers]]
 title = "Deep Learning"
+
+[[day11.prep]]
+title = "Deep Learning Book, Ch. 6"
+link = "http://www.deeplearningbook.org/"
 
 #### DAY 12
 [day12]
