@@ -25,7 +25,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: `r Sys.Date()`
+CMSC 643: `r Sys.Date()`
 ]
 
 .logo[![](img/logo.png)]
@@ -395,6 +395,7 @@ There is current research on interpreting these to support some notion of statis
 Excellent textbook: http://deeplearningbook.org
 
 ---
+exclude: true
 
 ## Conclusion
 
