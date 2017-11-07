@@ -149,6 +149,11 @@ date = "11/7"
 
 [[day11.covers]]
 title = "Deep Learning"
+notes = "lectures/cmsc643-deep_learning.pdf"
+
+[[day11.covers]]
+title = "Intro to Tensor Flow"
+notes = "notebooks/tensor_flow.html"
 
 [[day11.prep]]
 title = "Deep Learning Book, Ch. 6"
