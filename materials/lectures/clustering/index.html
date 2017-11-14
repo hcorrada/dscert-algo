@@ -4,7 +4,7 @@
     <title>Unsupervised Learning: Clustering Analysis</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-08-18" />
+    <meta name="date" content="2017-11-14" />
     <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
@@ -24,7 +24,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: 2017-08-18
+CMSC 643: 2017-11-14
 ]
 
 .logo[![](img/logo.png)]
@@ -563,6 +563,7 @@ and
 The name "soft" K-means refers to the fact that parameter estimates for each cluster are obtained by weighted averages across all observations.
 
 ---
+exclude: true
 
 ## General Model-based clustering
 
@@ -572,6 +573,7 @@ For instance, we can expand the multivariate normal model used in each cluster s
 `\(f_k(X) \approx N(\mu_k,\Sigma_k)\)` where `\(\Sigma_k\)` is covariance matrix. 
 
 ---
+exclude: true
 
 ## General Model-based Clustering
 
@@ -581,6 +583,7 @@ This permits selection of the number of mixture components, and covariance param
 
 ---
 class: split-60
+exclude: true
 
 ## General Model-based Clustering
 
@@ -595,6 +598,7 @@ class: split-60
 ]
 
 ---
+exclude: true
 
 ## General Model-based Clustering
 
@@ -603,6 +607,7 @@ class: split-60
 &lt;img src="index_files/figure-html/mclust_clusters-1.png" width="672" style="display: block; margin: auto;" /&gt;
 
 ---
+exclude: true
 
 ## General Model-based Clustering
 
@@ -618,7 +623,7 @@ Clustering methods are intuitive methods useful to understand structure within u
 
 Model-based methods, using the EM algorithm, provide a large amount of flexibililty over simpler methods like the K-means algorithm.
 
-Kernel-based methods permit the clustering of observations based on non-linear similarity functions.
+Kernel-based clustering methods (Kernel K-means) permit the clustering of observations based on non-linear similarity functions.
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

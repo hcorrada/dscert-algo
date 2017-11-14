@@ -28,7 +28,7 @@ library(cowplot)
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: `r Sys.Date()`
+CMSC 643: `r Sys.Date()`
 ]
 
 .logo[![](img/logo.png)]
@@ -714,6 +714,7 @@ $$\hat{\pi}_k = \frac{\sum_{i=1}^N\gamma_{ik}(\theta)}{N}$$
 The name "soft" K-means refers to the fact that parameter estimates for each cluster are obtained by weighted averages across all observations.
 
 ---
+exclude: true
 
 ## General Model-based clustering
 
@@ -723,6 +724,7 @@ For instance, we can expand the multivariate normal model used in each cluster s
 $f_k(X) \approx N(\mu_k,\Sigma_k)$ where $\Sigma_k$ is covariance matrix. 
 
 ---
+exclude: true
 
 ## General Model-based Clustering
 
@@ -732,6 +734,7 @@ This permits selection of the number of mixture components, and covariance param
 
 ---
 class: split-60
+exclude: true
 
 ## General Model-based Clustering
 
@@ -753,6 +756,7 @@ plot(mc_res, what="BIC")
 ]
 
 ---
+exclude: true
 
 ## General Model-based Clustering
 
@@ -781,6 +785,7 @@ mc_augmented_df %>%
 ```
 
 ---
+exclude: true
 
 ## General Model-based Clustering
 
@@ -796,4 +801,4 @@ Clustering methods are intuitive methods useful to understand structure within u
 
 Model-based methods, using the EM algorithm, provide a large amount of flexibililty over simpler methods like the K-means algorithm.
 
-Kernel-based methods permit the clustering of observations based on non-linear similarity functions.
+Kernel-based clustering methods (Kernel K-means) permit the clustering of observations based on non-linear similarity functions.
