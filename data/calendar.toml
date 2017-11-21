@@ -180,6 +180,7 @@ date = "11/21"
 
 [[day13.covers]]
 title = "Bias and Fairness"
+notes = "lectures/cmsc643-bias.pdf"
 
 [[day13.prep]]
 title = "CIML Ch. 8"
