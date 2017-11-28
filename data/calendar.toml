@@ -198,9 +198,12 @@ title = "CIML Ch. 8"
 [day14]
 date = "11/28"
 
+[[day14.prep]]
+title = "CIML Ch. 14"
+
 [[day14.covers]]
 title = "Efficient Learning; Large-Scale Machine Learning"
-#title = "Structured Prediction"
+notes = "lectures/cmsc643-large_scale.pdf"
 
 #[[day14.prep]]
 #title = "Compeau & Pevzner, Ch. 4, p. 197-221"
