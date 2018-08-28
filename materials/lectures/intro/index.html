@@ -4,8 +4,9 @@
     <title>Machine Learning and Data Mining</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-08-29" />
-    <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
+    <meta name="date" content="2018-08-23" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
@@ -23,7 +24,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC643: 2017-08-29
+CMSC643: 2018-08-23
 ]
 
 .logo[![](img/logo.png)]
@@ -51,6 +52,28 @@ CMSC643: 2017-08-29
 - CMSC 644: Algorithms for Data Science
 
 ---
+class: split-50
+
+## Machine Learning in the modern world
+
+
+.column[
+**Self-driving cars**
+![](img/tesla.jpeg)
+
+**Image processing**
+![](img/face_recognition.jpeg)
+]
+
+.column[
+**Medical Diagnosis**
+.image-30[![](img/pathology.png)]
+
+**Smart Cities**
+![](img/chicago-skyline.jpg)
+]
+
+---
 
 ## Introduction and Preliminaries
 
@@ -62,15 +85,13 @@ CMSC643: 2017-08-29
 
 ---
 
-## Machine Learning in the modern world
+## Structure
 
-- Self-Driving Cars: http://www.kdnuggets.com/2017/06/machine-learning-algorithms-used-self-driving-cars.html
+- Project-based (scikit-learn, Keras)
+- Problem sets
+- Oral examination final (tech interview)
 
-- Speech Recognition: https://cloud.google.com/speech/
-
-- Precision Medicine: https://www.ibm.com/blogs/think/2017/07/ai-schizophrenia-research/
-
-- Smart Cities: http://artandseek.org/2017/03/13/ai-machine-learning-and-smart-cities-trends-from-sxsw-interactive/
+- Tuesdays 7:00-9:30pm CSIC 2118
 
 ---
 class: inverse, middle, center
@@ -1079,8 +1100,15 @@ We will use Python to experiment with algorithms and datasets in the course. Fol
 <script>var slideshow = remark.create({
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
   var url = this;

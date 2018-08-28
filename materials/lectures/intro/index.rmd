@@ -53,6 +53,28 @@ CMSC643: `r Sys.Date()`
 - CMSC 644: Algorithms for Data Science
 
 ---
+class: split-50
+
+## Machine Learning in the modern world
+
+
+.column[
+**Self-driving cars**
+![](img/tesla.jpeg)
+
+**Image processing**
+![](img/face_recognition.jpeg)
+]
+
+.column[
+**Medical Diagnosis**
+.image-30[![](img/pathology.png)]
+
+**Smart Cities**
+![](img/chicago-skyline.jpg)
+]
+
+---
 
 ## Introduction and Preliminaries
 
@@ -64,15 +86,13 @@ CMSC643: `r Sys.Date()`
 
 ---
 
-## Machine Learning in the modern world
+## Structure
 
-- Self-Driving Cars: http://www.kdnuggets.com/2017/06/machine-learning-algorithms-used-self-driving-cars.html
+- Project-based (scikit-learn, Keras)
+- Problem sets
+- Oral examination final (tech interview)
 
-- Speech Recognition: https://cloud.google.com/speech/
-
-- Precision Medicine: https://www.ibm.com/blogs/think/2017/07/ai-schizophrenia-research/
-
-- Smart Cities: http://artandseek.org/2017/03/13/ai-machine-learning-and-smart-cities-trends-from-sxsw-interactive/
+- Tuesdays 7:00-9:30pm CSIC 2118
 
 ---
 class: inverse, middle, center
@@ -283,7 +303,7 @@ clean_df <- Wage %>%
   mutate(age_group=cut(age, breaks=3),
          wage_group=cut(logwage, breaks=3)) %>%
   mutate(health_ins=fct_rev(health_ins)) %>%
-  select(-year,-region,-sex,-logwage,-wage,-age)
+  select(-year,-region,-logwage,-wage,-age)
 
 plot_df <- clean_df %>%
   gather(attr,val,-health_ins) %>%
