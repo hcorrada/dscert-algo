@@ -9,7 +9,7 @@ type: index
 ## Course Information
 
 **CMSC643: Machine Learning and Data Mining**  
-**Spring 2017**
+**Fall 2018** 
 
 *	Instructor:  
     [H&eacute;ctor Corrada Bravo](http://www.cbcb.umd.edu/~hcorrada)  
