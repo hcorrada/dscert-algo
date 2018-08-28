@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Logistics on CMSC643: Machine Learning and Data Mining</title>
+    <link>http://www.hcbravo.org/dscert-mldm/logistics/</link>
+    <description>Recent content in Logistics on CMSC643: Machine Learning and Data Mining</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Released under the MIT license</copyright>
+    <lastBuildDate>Mon, 29 Aug 2016 05:41:03 -0400</lastBuildDate>
+    
+	<atom:link href="http://www.hcbravo.org/dscert-mldm/logistics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Logistics</title>
+      <link>http://www.hcbravo.org/dscert-mldm/logistics/</link>
+      <pubDate>Mon, 29 Aug 2016 05:41:03 -0400</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/logistics/</guid>
+      <description>This page and the Course Calendar constitute the official syllabus for this class.
+Course Information Machine Learning and Data Mining
+CMSC643 Fall 2018
+ Lecture Meeting Times
+Tuesdays 7:00pm-9:30pm CSI 2118
+ Instructor:
+H&amp;eacute;ctor Corrada Bravo
+Center for Bioinformatics and Computational Biology
+Department of Computer Science
+hcorrada@umiacs.umd.edu
+Office: 3114F Biomolecular Sciences Building
+Phone Number: 301-405-2481
+Office Hours: before and after class or by appointment
+ Communication:
+ For course related questions, use Piazza as indicated below.</description>
+    </item>
+    
+  </channel>
+</rss>

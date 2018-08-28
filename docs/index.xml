@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CMSC643: Machine Learning and Data Mining</title>
+    <link>http://www.hcbravo.org/dscert-mldm/</link>
+    <description>Recent content on CMSC643: Machine Learning and Data Mining</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Released under the MIT license</copyright>
+    <lastBuildDate>Tue, 02 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.hcbravo.org/dscert-mldm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Project 4: SNP finding</title>
+      <link>http://www.hcbravo.org/dscert-mldm/projects/project_4/</link>
+      <pubDate>Tue, 02 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_4/</guid>
+      <description>Due: Thursday May 11, 2017
+Posted: May 2, 2017
+Last Update: May 2, 2017
+You will implement approximate string matching using a seed-and-check strategy based on exact matching using the Burrows-Wheeler transform. We are providing starter code to get you going. Instructions on implementation and code are here:
+https://gitlab.umiacs.umd.edu/hcorrada/cmsc423_project4
+I highly, highly recommend that you use git
+To get code you will be using for this project using git:</description>
+    </item>
+    
+    <item>
+      <title>Project 2: Classification with Health Records</title>
+      <link>http://www.hcbravo.org/dscert-mldm/projects/project_2/</link>
+      <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_2/</guid>
+      <description>Due October 30
+Posted: 10/10/2017
+Last Update: 10/13/2017
+Task We will use data from the following Kaggle dataset: https://www.kaggle.com/joniarroba/noshowappointments.
+The goal here is to predict patients that will not show up for medical appointments based on their medical records. You should read the dataset and task prediction in Kaggle to familiarize yourself as much as possible with the task and data.
+Part I: Data prep  Fork my project skeleton github repo on github https://github.</description>
+    </item>
+    
+    <item>
+      <title>Project 3: Time Series Forecasting with Recurrent Neural Nets</title>
+      <link>http://www.hcbravo.org/dscert-mldm/projects/project_3/</link>
+      <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_3/</guid>
+      <description>Repository The github repository for this project is at https://github.com/hcorrada/mldm_project3. You should have received an email from github to access the repository.
+Part I: Introduction to Tensor Flow Follow the Introduction to Tensor Flow provided in the partI_shell.ipynb IPython notebook. Your task is to re-implement your linear SVM algorithm using gradient descent using tensor flow. You don&amp;rsquo;t need to run it on a specific dataset, as I will only look at the implementation.</description>
+    </item>
+    
+    <item>
+      <title>Project 1: Similar document searching via MinHash and Locality Sensitive Hashing</title>
+      <link>http://www.hcbravo.org/dscert-mldm/projects/project_1/</link>
+      <pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_1/</guid>
+      <description>Due: Monday Oct 9, 2017
+Posted: Sept. 12, 2017
+Last Update: Oct. 2, 2017
+In this first project we will implement the system described in the lecture notes for similar document searching. This project is inspired by http://mccormickml.com/2015/06/12/minhash-tutorial-with-python-code/ (Note: you can look at code there for inspiration but implement your own).
+The Task We will use documents from this repository http://www.inf.ed.ac.uk/teaching/courses/tts/assessed/assessment3.html. This is a dataset of documents for which we want to find possible plagiarism.</description>
+    </item>
+    
+    <item>
+      <title>CMSC Resources</title>
+      <link>http://www.hcbravo.org/dscert-mldm/resources/howto-biopython/</link>
+      <pubDate>Wed, 25 Jan 2017 08:54:37 -0800</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/resources/howto-biopython/</guid>
+      <description> Install Biopython  Download and install Python 2.7
+ Download and install Anaconda
+ Use the following commad to install biopython:
+conda install -c anaconda biopython=1.68  </description>
+    </item>
+    
+    <item>
+      <title>CMSC643: Machine Learning and Data Mining -  Calendar</title>
+      <link>http://www.hcbravo.org/dscert-mldm/calendar/</link>
+      <pubDate>Tue, 30 Aug 2016 10:13:51 -0400</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/calendar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CMSC643 Projects</title>
+      <link>http://www.hcbravo.org/dscert-mldm/projects/</link>
+      <pubDate>Mon, 29 Aug 2016 08:54:44 -0400</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/projects/</guid>
+      <description> Similar document search with MinHash and LSH
+ Medical Record Classification
+ Time-series forecasting with recurrent neural nets  </description>
+    </item>
+    
+    <item>
+      <title>Resources</title>
+      <link>http://www.hcbravo.org/dscert-mldm/resources/</link>
+      <pubDate>Mon, 29 Aug 2016 08:54:37 -0400</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/resources/</guid>
+      <description>Setting up your learning system We will use Python to experiment with algorithms and datasets in the course. Follow these instructions to set it up
+ Download and install Python 3: https://www.python.org/downloads/
+ Download and install the Anaconda scientific python distribution: https://www.continuum.io/downloads/
+ You can use anaconda to manage your python environment from the terminal or using the Anaconda Navigator graphical interface. For the latter, here is a quick guide: https://docs.</description>
+    </item>
+    
+    <item>
+      <title>Logistics</title>
+      <link>http://www.hcbravo.org/dscert-mldm/logistics/</link>
+      <pubDate>Mon, 29 Aug 2016 05:41:03 -0400</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/logistics/</guid>
+      <description>This page and the Course Calendar constitute the official syllabus for this class.
+Course Information Machine Learning and Data Mining
+CMSC643 Fall 2018
+ Lecture Meeting Times
+Tuesdays 7:00pm-9:30pm CSI 2118
+ Instructor:
+H&amp;eacute;ctor Corrada Bravo
+Center for Bioinformatics and Computational Biology
+Department of Computer Science
+hcorrada@umiacs.umd.edu
+Office: 3114F Biomolecular Sciences Building
+Phone Number: 301-405-2481
+Office Hours: before and after class or by appointment
+ Communication:
+ For course related questions, use Piazza as indicated below.</description>
+    </item>
+    
+    <item>
+      <title>CMSC643: Machine Learning and Data Mining</title>
+      <link>http://www.hcbravo.org/dscert-mldm/</link>
+      <pubDate>Sun, 28 Aug 2016 17:13:09 -0400</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/</guid>
+      <description>Course Information CMSC643: Machine Learning and Data Mining
+Spring 2017
+ Instructor:
+H&amp;eacute;ctor Corrada Bravo
+Center for Bioinformatics and Computational Biology
+Department of Computer Science
+hcorrada@umiacs.umd.edu
+Office: 3114F Biomolecular Sciences Building
+ Lecture Meeting Times
+Tuesdays 7:00-9:30pm CSI 2118
+  Links Check the calendar page for up-to-date course calendar.
+Check the logistics page for more information, including the official syllabus.
+Grades and assignments posted in ELMS.
+Discussion and questions in Piazza.</description>
+    </item>
+    
+  </channel>
+</rss>

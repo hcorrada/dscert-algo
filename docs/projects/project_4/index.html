@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Project 4: SNP finding - CMSC643: Machine Learning and Data Mining</title>
+    <meta name="generator" content="Hugo 0.24" />
+
+    
+    <meta name="description" content="Machine Learning and Data Mining course. Part of the Department of Computer Science of the University of Maryland&#39;s Graduate Certificate in Data Science">
+    
+    <link rel="canonical" href="http://www.hcbravo.org/dscert-mldm/projects/project_4/">
+    
+    <meta name="author" content="Héctor Corrada Bravo">
+    
+
+    <meta property="og:url" content="http://www.hcbravo.org/dscert-mldm/projects/project_4/">
+    <meta property="og:title" content="CMSC643: Machine Learning and Data Mining">
+    <meta property="og:image" content="http://www.hcbravo.org/dscert-mldm/images/logo.png">
+    <meta name="apple-mobile-web-app-title" content="CMSC643: Machine Learning and Data Mining">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="http://www.hcbravo.org/dscert-mldm/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="http://www.hcbravo.org/dscert-mldm/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('http://www.hcbravo.org/dscert-mldm/fonts/icon.eot');
+        src: url('http://www.hcbravo.org/dscert-mldm/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('http://www.hcbravo.org/dscert-mldm/fonts/icon.woff')
+               format('woff'),
+             url('http://www.hcbravo.org/dscert-mldm/fonts/icon.ttf')
+               format('truetype'),
+             url('http://www.hcbravo.org/dscert-mldm/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://www.hcbravo.org/dscert-mldm/stylesheets/application.css">
+    <link rel="stylesheet" href="http://www.hcbravo.org/dscert-mldm/stylesheets/temporary.css">
+    <link rel="stylesheet" href="http://www.hcbravo.org/dscert-mldm/stylesheets/palettes.css">
+    <link rel="stylesheet" href="http://www.hcbravo.org/dscert-mldm/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700|Roboto&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Roboto', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Roboto Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="http://www.hcbravo.org/dscert-mldm/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-red palette-accent-blue">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Project 4: SNP finding
+      </div>
+    </div>
+
+    
+    <div class="button button-twitter" role="button" aria-label="Twitter">
+       <a href="https://twitter.com/hcorrada" title="@hcorrada on Twitter" target="_blank" class="toggle-button icon icon-twitter"></a>
+    </div>
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/hcorrada" title="@hcorrada on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="http://www.hcbravo.org/dscert-mldm/" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="http://www.hcbravo.org/dscert-mldm/images/logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>CMSC643: Machine Learning and Data Mining </strong>
+        
+          <br>
+          hcorrada/dscert-mldm.git
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Calendar" href="http://www.hcbravo.org/dscert-mldm/calendar/">
+	
+	Calendar
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Logistics" href="http://www.hcbravo.org/dscert-mldm/logistics/">
+	
+	Logistics
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Resources" href="http://www.hcbravo.org/dscert-mldm/resources/">
+	
+	Resources
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Projects" href="http://www.hcbravo.org/dscert-mldm/projects/">
+	
+	Projects
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+          <li>
+            <a href="https://twitter.com/hcorrada" target="_blank" title="@hcorrada on Twitter">
+              @hcorrada on Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/hcorrada" target="_blank" title="@hcorrada on GitHub">
+              @hcorrada on GitHub
+            </a>
+          </li>
+          
+        </ul>
+        
+
+        <hr>
+        <a href="https://www.umd.edu/web-accessibility" target="_blank" title="UMD Web Accessibility">Web Accessibility</a>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Project 4: SNP finding </h1>
+
+			
+
+<p><strong>Due: Thursday May 11, 2017</strong><br />
+<strong>Posted: May 2, 2017</strong><br />
+<strong>Last Update: May 2, 2017</strong></p>
+
+<p>You will implement approximate string matching using a
+seed-and-check strategy based on exact matching using the
+Burrows-Wheeler transform. We are providing starter code
+to get you going. Instructions on implementation and code are here:</p>
+
+<p><a href="https://gitlab.umiacs.umd.edu/hcorrada/cmsc423_project4">https://gitlab.umiacs.umd.edu/hcorrada/cmsc423_project4</a></p>
+
+<p>I highly, highly recommend that you use <a href="https://git-scm.com/book/en/v1/Getting-Started"><code>git</code></a></p>
+
+<p>To get code you will be using for this project using git:</p>
+
+<pre><code class="language-bash">git clone https://gitlab.umiacs.umd.edu/hcorrada/cmsc423_project4.git
+</code></pre>
+
+<p>This will create a <code>project4</code> directory with all code and data required for this project.</p>
+
+<h2 id="programming-questions">Programming Questions</h2>
+
+<p>Check and submit your solution to Final Rosalind Problem 8
+<a href="http://rosalind.info/classes/401/">Rosalind final submission page</a>.</p>
+
+<p>Instructions on how to prepare your solution are given in
+<a href="https://gitlab.umiacs.umd.edu/hcorrada/cmsc423_project4">project code repository</a>.</p>
+
+<h2 id="snp-finding">SNP Finding</h2>
+
+<p>Use your code  to analyze sequences for the <a href="http://en.wikipedia.org/wiki/Influenza_neuraminidase">neuraminidase Influenza gene (NA)</a> of
+two H1N1 Human Influenza strains.</p>
+
+<p>There are two FASTA files in directory <code>data</code> of the project repository. The <code>reference.fa</code> file contains a reference sequence you will use as the target string for approximate exact matching. The <code>reads.fa</code> file contains 50 bp reads you will use as queries. Use your approximate matching BWT solution to align reads to reference allowing up to 3 mismatches.</p>
+
+<p><strong>Question 1</strong>. A specific mutation (H275Y) in the NA gene confers resistance to <a href="http://en.wikipedia.org/wiki/Neuraminidase_inhibitors">Oseltamivir</a>, making
+the drug <a href="http://www.ncbi.nlm.nih.gov/pubmed/22837199">less effective</a>. A note about nomenclature: the code H275Y
+encodes a substitution in position 275 (1-based indexing), changing aminoacid H (Histidine) to Y (Tyrosine).</p>
+
+<p>Do the reads correspond to a gene sequence with this mutation? How can you tell?</p>
+
+<h3 id="notes">Notes:</h3>
+
+<ol>
+<li>As we&rsquo;ve done so far use the <code>Biopython</code> to read and import <code>fasta</code> files.</li>
+<li>The <code>pileup.py</code> script in the project repository can help you answer this question.
+You can get a list of mismatches found in reads, and the number of times each kind of mismatch is observed in each position as follows:</li>
+</ol>
+
+<pre><code class="language-python">from pileup import PileUp
+from approximate_matcher import ApproximateMatcher
+
+# initialize object
+am = ApproximateMatcher(reference)
+pileup = PileUp(reference)
+d = 3
+
+for read in reads:
+	# find approximate matching positions for a given read
+	# assumes positions is a list (even if only a single match is found)
+	# with matching positions
+	positions = am.get_matches(read, d)
+	if len(positions) &gt; 0:
+		# add to pileup object
+		pileup.insert(positions, read)
+
+# next statement prints out mismatching positions
+# output is:
+# (&lt;position&gt;, &lt;reference_character&gt;, [(&lt;variant_character&gt;,
+# &lt;num_times_aligned&gt;)])
+# argument filters mismatch by frequency in which variant character
+# is observed, e.g., .01 means variant character has to be seen at least
+# once for every 100 aligned nucleotides
+pileup.print_mismatches(.01)
+</code></pre>
+
+<p>where positions are indices in the reference string where an approximate match for <code>read</code> was found.</p>
+
+<h2 id="how-to-submit">How to submit</h2>
+
+<p>On ELMS you will submit two things</p>
+
+<p>(1) A <code>diff</code> of your solution and the original code posted by us. Using git you can do this as follows
+once you have committed all your code changes in directory <code>approximate_matcher</code>. Note that you do not need to change code outside of this directory to solve the Rosalind problem:</p>
+
+<pre><code class="language-bash">git diff origin/master approximate_matcher &gt; project4_bwt_code.patch
+</code></pre>
+
+<p>Submit file <code>project4_bwt_code.patch</code> on ELMS</p>
+
+<p>(2) An IPython notebook exported as pdf or html containing your answer to Question 1 above along with code used to answer it. You have to use your approximate matching code from part I to match reads to the reference, otherwise, you are free to use Biopython as needed to answer this question. E.g., to do DNA-&gt;aminoacid translation.</p>
+
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2018 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'http:\/\/www.hcbravo.org\/dscert-mldm\/';
+      var repo_id  = 'hcorrada\/dscert-mldm.git';
+    
+    </script>
+
+    <script src="http://www.hcbravo.org/dscert-mldm/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+
