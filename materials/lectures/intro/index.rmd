@@ -40,8 +40,10 @@ CMSC643: `r Sys.Date()`
 
 ### Other Sites
 
-- **ELMS**: Grades, assignments, etc. https://myelms.umd.edu/courses/1231846  
-- **Piazza**: Discussion, questions, etc. https://piazza.com/class/j6xvux50f544kb
+- **ELMS**: Grades, assignments, etc. 
+- **Piazza**: Discussion, questions, etc. 
+
+Links in course webpage
 
 ---
 
@@ -495,6 +497,7 @@ In general, the task of predicting a categorical outcome is called _classificati
 _Regression_ problems are those tasks where the outcome we are trying to predict is numerical.
 
 ---
+exclude: true
 
 | Method | Task | Session |
 |--------|------|---------|
