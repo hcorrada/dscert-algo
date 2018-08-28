@@ -37,7 +37,7 @@ We will use the following textbooks:
 - Daume (2017) _A Course in Machine Learning_ [Book Site](http://ciml.info/) 
 - Leskovec, et al. (2016). _Mining of Massive Datasets_. [Book Site](http://www.mmds.org/)  
 - Geron (2017) _Hands-On Machine Learning wiht Scikit-Learn and TensorFlow_. [Safari](https://www.safaribooksonline.com/library/view/hands-on-machine-learning/9781491962282/)
-
+- Chollet (2018) _Deep Learning with Python_. [Manning](https://www.manning.com/books/deep-learning-with-python)
 
 Other readings will be posted in the [Course Calendar]({{< baseurl >}}/calendar/index.html).
 
@@ -87,9 +87,8 @@ announcements. Please use the [Piazza page]({{< piazzaurl >}}) for
 ### Grading Procedures 
 
 * Data analysis projects (50%)  
-* Written exercises (25%)  
-* Final data project submission (15%)  
-* Participation and discussion (10%)  
+* Written exercises (30%)  
+* Final oral examination (20%) 
 
 ## University Policies and Resources
 
