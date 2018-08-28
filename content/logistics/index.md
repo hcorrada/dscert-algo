@@ -8,11 +8,11 @@ This page and the [Course Calendar]({{< baseurl >}}/calendar/index.html) constit
 ## Course Information
 
 **Machine Learning and Data Mining**  
-**CMSC643 Fall 2017**
+**CMSC643 Fall 2018**
 
 
 *	Lecture Meeting Times    
-    Tuesdays 7:00pm-9:30pm CSI 2120
+    Tuesdays 7:00pm-9:30pm CSI 2118
     
 *	Instructor:  
     [H&eacute;ctor Corrada Bravo](http://www.cbcb.umd.edu/~hcorrada)  

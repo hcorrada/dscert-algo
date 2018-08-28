@@ -19,7 +19,7 @@ type: index
     Office: [3114F Biomolecular Sciences Building](https://www.cbcb.umd.edu/about-us/directions)  
 
 *	Lecture Meeting Times    
-    Tuesdays 7:00-9:30pm CSI 2120
+    Tuesdays 7:00-9:30pm CSI 2118
 
 ## Links
 

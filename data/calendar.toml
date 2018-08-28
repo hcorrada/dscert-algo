@@ -14,7 +14,7 @@ title = "An example ML application (HTML)"
 notes = "notebooks/intro_lab.html"
 
 [[day01.covers]]
-title = "An example ML applications (IPython Notebook)"
+title = "An example ML application (IPython Notebook)"
 notes = "notebooks/intro_lab.ipynb"
 
 #### DAY 2
