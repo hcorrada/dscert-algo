@@ -1,19 +1,5 @@
 {{ partial "head" . }}
 
-<style>
-    .calendar_anchor {
-    display: block;
-    position: relative;
-    top: 1000px;
-    visibility: hidden;
-    }
-</style>
-
-{{ if (eq (trim .Site.Params.provider " " | lower) "github") | and (isset .Site.Params "repo_url") }}
-	{{ $repo_id := replace .Site.Params.repo_url "https://github.com/" ""}}
-	{{ .Scratch.Set "repo_id" $repo_id }}
-{{ end }}
-
 <div class="backdrop">
 	<div class="backdrop-paper"></div>
 </div>
@@ -33,25 +19,28 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>{{ .Title }} {{ if .IsDraft }} (Draft){{ end }}</h1>
+			<h1>Pages in {{ .Title | singularize }}</h1>
 
-			{{ .Content }}
+			{{ range .Data.Pages.ByDate.Reverse }}
+			<a href="{{ .Permalink }}" title="{{ .Title }}">
+				<h2>{{ .Title }}</h2>
+			</a>
 
-      {{ partial "calendar" .Site.Data.calendar }}
+			<br>
+			{{ printf "%s" .Summary | markdownify }}
+
+			<hr>
+			{{ end }}
 
 			<aside class="copyright" role="note">
 				{{ with .Site.Params.copyright }}
-				&copy; {{ $.Now.Format "2006" }} {{ . }} &ndash;
+				&copy; {{ now.Format "2006" }} {{ . }} &ndash;
 				{{ end }}
 				Documentation built with
 				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
 				using the
 				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
 			</aside>
-
-			<footer class="footer">
-				{{ partial "footer" . }}
-			</footer>
 		</div>
 	</article>
 
