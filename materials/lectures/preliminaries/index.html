@@ -4,8 +4,9 @@
     <title>Mathematical Background and the Perceptron</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-09-12" />
-    <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
+    <meta name="date" content="2018-08-29" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
@@ -23,7 +24,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC643: 2017-09-12
+CMSC643: 2018-08-29
 ]
 
 .logo[![](img/logo.png)]
@@ -189,40 +190,40 @@ Here is the same credit data represented as a matrix of feature vectors
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1991.6491 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 42133.37 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2461.5070 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 11878.56 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; -1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1357.4235 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 25733.31 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 748.2362 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11613.22 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; -1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 135.9982 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 59369.65 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1630.4830 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54323.42 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1753.0844 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 48965.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1751.3471 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 38381.59 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; -1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 657.5321 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19395.74 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1926.3716 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17012.44 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1143.4314 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 35773.40 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1800.6417 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 48708.96 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -642,8 +643,15 @@ When the training data is *not* separable, the algorithm will not converge.
 <script>var slideshow = remark.create({
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
   var url = this;
