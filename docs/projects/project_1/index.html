@@ -280,9 +280,9 @@
 
 			
 
-<p><strong>Due: Monday Oct 9, 2017</strong><br />
-<strong>Posted: Sept. 12, 2017</strong><br />
-<strong>Last Update:  Oct. 2, 2017</strong></p>
+<p><strong>Due: Multiple due dates, see below</strong><br />
+<strong>Posted: Sept. 1, 2018</strong><br />
+<strong>Last Update:  Sept. 1, 2018</strong></p>
 
 <p>In this first project we will implement the system described in the lecture notes for similar document searching.
 This project is inspired by <a href="http://mccormickml.com/2015/06/12/minhash-tutorial-with-python-code/">http://mccormickml.com/2015/06/12/minhash-tutorial-with-python-code/</a> (Note: you can look at code there
@@ -300,9 +300,11 @@ a minhash and LSH system can identify these instances.</p>
 
 <h1 id="part-i-preliminaries">Part I: Preliminaries</h1>
 
+<p><strong>DUE: Monday Sept. 10</strong></p>
+
 <h2 id="part-ia-dataset-parsing">Part IA: Dataset parsing</h2>
 
-<p>Write a function <code>parse_data</code>that given the path to a filename, reads in the article data and returns an array of tuples. With</p>
+<p>Write a function <code>parse_data</code> that given the path to a filename, reads in the article data and returns an array of tuples. With</p>
 
 <ul>
 <li>One tuple per article (there is one article per line)<br /></li>
@@ -368,9 +370,13 @@ a minhash and LSH system can identify these instances.</p>
 
 <h2 id="part-ie-experiment-0">Part IE: Experiment 0</h2>
 
-<p>Use your function to carry out the following experiment:</p>
+<p>Use your function to answer the following question:</p>
 
-<p>What is the effect of sharding length <code>k</code> on the Jaccard similarity of plagiarism instances versus instances that are not plagiarized. Carry out this experiment using the 1000 document dataset.</p>
+<p>What is the effect of sharding length `k** on the Jaccard similarity of plagiarism instances versus instances that are not plagiarized?</p>
+
+<p>To answer this question, make a plot with $k$ in the x-axis and average Jaccard similarity in the y-axis. Plot two lines,
+one line for plagiarism instances, one line for instances that are not plagiarized.
+Use the 1000 document dataset for this.</p>
 
 <h1 id="part-ii-minhash">Part II: MinHash</h1>
 
