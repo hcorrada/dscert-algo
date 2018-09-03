@@ -3,9 +3,9 @@ date: 2017-02-07
 title: "Project 1: Similar document searching via MinHash and Locality Sensitive Hashing" 
 ---
 
-**Due: Monday Oct 9, 2017**  
-**Posted: Sept. 12, 2017**   
-**Last Update:  Oct. 2, 2017** 
+**Due: Multiple due dates, see below**  
+**Posted: Sept. 1, 2018**   
+**Last Update:  Sept. 1, 2018** 
 
 In this first project we will implement the system described in the lecture notes for similar document searching.
 This project is inspired by http://mccormickml.com/2015/06/12/minhash-tutorial-with-python-code/ (Note: you can look at code there
@@ -23,9 +23,11 @@ https://github.com/chrisjmccormick/MinHash/tree/master/data
 
 # Part I: Preliminaries
 
+**DUE: Monday Sept. 10**
+
 ## Part IA: Dataset parsing
 
-Write a function `parse_data`that given the path to a filename, reads in the article data and returns an array of tuples. With
+Write a function `parse_data` that given the path to a filename, reads in the article data and returns an array of tuples. With
 
 - One tuple per article (there is one article per line)  
 - For each article tuples will contain `(id, string)` where `id` is the article id and `string` is the article text as described next
@@ -84,9 +86,14 @@ Write a function that uses the above to do the following:
 
 ## Part IE: Experiment 0
 
-Use your function to carry out the following experiment:
+Use your function to answer the following question:
 
-What is the effect of sharding length `k` on the Jaccard similarity of plagiarism instances versus instances that are not plagiarized. Carry out this experiment using the 1000 document dataset.
+What is the effect of sharding length `k** on the Jaccard similarity of plagiarism instances versus instances that are not plagiarized?
+
+To answer this question, make a plot with $k$ in the x-axis and average Jaccard similarity in the y-axis. Plot two lines,
+one line for plagiarism instances, one line for instances that are not plagiarized.
+Use the 1000 document dataset for this.
+
 
 # Part II: MinHash
 
