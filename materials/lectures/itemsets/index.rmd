@@ -363,7 +363,7 @@ Part II: Minhash
 Part III: LSH
 
 - Choose threshold $t$ for how similar documents have to be to consider as a similar pair
-- Choose number of bands $b$ and number of rows $r$ such that $br=n$ and threshold $t$ is approximately $(1/b)^(1/r)$
+- Choose number of bands $b$ and number of rows $r$ such that $br=n$ and threshold $t$ is approximately $(1/b)^{(1/r)}$
 - Construct candidate pairs using LSH
 
 ---
