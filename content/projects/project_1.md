@@ -5,7 +5,7 @@ title: "Project 1: Similar document searching via MinHash and Locality Sensitive
 
 **Due: Multiple due dates, see below**  
 **Posted: Sept. 1, 2018**   
-**Last Update:  Sept. 1, 2018** 
+**Last Update:  Sept. 19, 2018** 
 
 In this first project we will implement the system described in the lecture notes for similar document searching.
 This project is inspired by http://mccormickml.com/2015/06/12/minhash-tutorial-with-python-code/ (Note: you can look at code there
@@ -96,6 +96,8 @@ Use the 1000 document dataset for this.
 
 
 # Part II: MinHash
+
+**DUE: Tuesday Sept. 18**
 
 In this section you will implement the MinHash algorithm and perform an experiment to see how well it estimates Jaccard similarity.
 
@@ -194,6 +196,8 @@ Minhash estimate of Jaccard similarity. Carry out this experiment on the 1000 do
 
 # Part III: Locality-Sensitive Hashing
 
+**DUE: Tuesday Sept. 25**
+
 ## Implement LSH
 
 Write a function that implements locality sensitive hashing. Function specifications:
@@ -217,7 +221,7 @@ def do_lsh(minhash_sigmatrix, numhashes, docids, threshold):
   
   buckets = []
   for band in range(b):
-    start_index = int(b * r)
+    start_index = int(band * r)
     end_index = min(start_index + r, numhashes)
     
     cur_buckets = defaultdict(list)
@@ -331,7 +335,7 @@ def _choose_nbands(threshold, nhashes):
     error_fun = lambda x: (threshold-((1/x[0])**(x[0]/nhashes)))**2
     res = opt.minimize(error_fun, x0=(10), method='Nelder-Mead')
     b = int(math.ceil(res['x'][0]))
-    r = int(n / b)
+    r = int(nhashes / b)
     final_t = (1/b)**(1/r)
     return b, final_t
 ```

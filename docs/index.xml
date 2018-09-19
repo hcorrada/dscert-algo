@@ -59,7 +59,7 @@ Part I: Introduction to Tensor Flow Follow the Introduction to Tensor Flow provi
       <guid>http://www.hcbravo.org/dscert-mldm/projects/project_1/</guid>
       <description>Due: Multiple due dates, see below
 Posted: Sept. 1, 2018
-Last Update: Sept. 1, 2018
+Last Update: Sept. 19, 2018
 In this first project we will implement the system described in the lecture notes for similar document searching. This project is inspired by http://mccormickml.com/2015/06/12/minhash-tutorial-with-python-code/ (Note: you can look at code there for inspiration but implement your own).
 The Task We will use documents from this repository http://www.inf.ed.ac.uk/teaching/courses/tts/assessed/assessment3.html. This is a dataset of documents for which we want to find possible plagiarism.</description>
     </item>
