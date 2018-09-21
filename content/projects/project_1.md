@@ -214,23 +214,33 @@ Write a function that implements locality sensitive hashing. Function specificat
 from collections import defaultdict
 
 def do_lsh(minhash_sigmatrix, numhashes, docids, threshold):
+  # choose the number of bands, and rows per band to use in LSH
   b, _ = choose_nbands(threshold, numhashes)
   r = int(numhashes / b)
+
   narticles = len(docids)
+
+  # generate a random hash function that takes vectors of lenght r as input
   hash_func = _make_vector_hash(r)
-  
+
+  # setup the list of hashtables, will be populated with one hashtable per band
   buckets = []
+
+  # fill hash tables for each band
   for band in range(b):
+    # figure out which rows of minhash signature matrix to hash for this band
     start_index = int(band * r)
     end_index = min(start_index + r, numhashes)
-    
+
+    # initialize hashtable for this band
     cur_buckets = defaultdict(list)
     
     for j in range(narticles):
       # THIS IS WHAT YOU NEED TO IMPLEMENT
-    
+
+    # add this hashtable to the list of hashtables
     buckets.append(cur_buckets)
-  
+
   return buckets
 ```
 
@@ -331,11 +341,14 @@ Given a similarity threshold, we need to choose the number of bands to use in LS
 import scipy.optimize as opt
 import math
 
-def _choose_nbands(threshold, nhashes):
-    error_fun = lambda x: (threshold-((1/x[0])**(x[0]/nhashes)))**2
-    res = opt.minimize(error_fun, x0=(10), method='Nelder-Mead')
+def _choose_nbands(t, n):
+    def _error_fun(x):
+        cur_t = (1/x[0])**(x[0]/n)
+        return (t-cur_t)**2
+
+    opt_res = opt.minimize(error_fun, x0=(10), method='Nelder-Mead')
     b = int(math.ceil(res['x'][0]))
-    r = int(nhashes / b)
+    r = int(n / b)
     final_t = (1/b)**(1/r)
     return b, final_t
 ```
@@ -352,6 +365,6 @@ def _make_vector_hash(num_hashes, m=4294967295):
       for i in range(len(vec)):
         h = hash_fns[i]
         acc += h(vec[i])
-        return acc % m
+      return acc % m
     return _f
 ```
