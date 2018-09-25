@@ -82,6 +82,10 @@ notes = "lectures/cmsc643-model_selection.pdf"
 [[day06.prep]]
 title = "CIML 5"
 
+[[day06.workdue]]
+title = "Gradient Descent Exercise"
+link = "homeworks/gradient_descent.pdf"
+
 #### DAY 7
 # I am out in Colombia
 [day07]
