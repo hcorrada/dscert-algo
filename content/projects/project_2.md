@@ -3,10 +3,10 @@ date: 2017-02-23
 title: "Project 2: Classification with Health Records"
 ---
 
-**Due October 30**
+**Multiple due dates**
 
-Posted: 10/10/2017  
-Last Update: 10/13/2017  
+Posted: 10/2/2018
+Last Update: 10/2/2018
 
 # Task
 
@@ -17,7 +17,9 @@ the dataset and task prediction in Kaggle to familiarize yourself as much as pos
 
 # Part I: Data prep
 
-- Fork my project skeleton github repo on github https://github.com/hcorrada/mldm_project2:
+**Due Oct 9, 2018**
+
+- Fork my project skeleton github repo on github https://github.com/hcorrada/cmsc643_noshow.git
 
   - Click the 'Fork' button on the upper right
   - Go to your forked repository e.g., https://github.com/<your_github_id>/mldm_project2
@@ -41,7 +43,7 @@ test set and training set class proportions are the same. Save the train and tes
 A lot of what you will do here is covered in the introduction notebook posted earlier this semester [{{< baseurl >}}/notebooks/intro_lab.html]({{< baseurl >}}/notebooks/intro_lab.html). Feel free to use that code for inspiration.
 
 Commit your changes to your local repository (you should do this often as you work on this)  
-Push your changes to your repository on github and submit part I on ELMS on Monday Oct. 16 11:59pm.
+Push your changes to your repository on github and submit part I on ELMS by the due date.
 The submission on ELMS is just writing the URL to your github repository
 
 # Part II: Classification Methods
@@ -60,7 +62,7 @@ and 10 fold cross validation for model assessment. Report estimated performance 
 To update your repository with new code for Part II do the following on your command shell:
 
 ```shell
-git remote add upstream https://github.com/hcorrada/mldm_project2
+git remote add upstream https://github.com/hcorrada/cmsc643_noshow
 git pull upstream
 ```
 
