@@ -748,7 +748,7 @@ This reduces correlation between trees in forest, improving prediction accuracy.
 
 ## Random Forests
 
-```{r, echo=FALSE, messages=FALSE, cache=FALSE}
+```{r, echo=FALSE, messages=FALSE, cache=FALSE, warning=FALSE}
 library(randomForest)
 ```
 
