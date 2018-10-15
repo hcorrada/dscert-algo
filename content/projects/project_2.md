@@ -5,8 +5,8 @@ title: "Project 2: Classification with Health Records"
 
 **Multiple due dates**
 
-Posted: 10/2/2018
-Last Update: 10/2/2018
+Posted: 10/2/2018  
+Last Update: 10/9/2018
 
 # Task
 
@@ -22,7 +22,7 @@ the dataset and task prediction in Kaggle to familiarize yourself as much as pos
 - Fork my project skeleton github repo on github https://github.com/hcorrada/cmsc643_noshow.git
 
   - Click the 'Fork' button on the upper right
-  - Go to your forked repository e.g., https://github.com/<your_github_id>/mldm_project2
+  - Go to your forked repository e.g., https://github.com/<your_github_id>/cmsc643_noshow
   - Follow instructions there to clone the repository to your computer
   - See this for a quick overview of git: https://swcarpentry.github.io/git-novice/
   
@@ -42,11 +42,13 @@ test set and training set class proportions are the same. Save the train and tes
 
 A lot of what you will do here is covered in the introduction notebook posted earlier this semester [{{< baseurl >}}/notebooks/intro_lab.html]({{< baseurl >}}/notebooks/intro_lab.html). Feel free to use that code for inspiration.
 
-Commit your changes to your local repository (you should do this often as you work on this)  
+Commit your changes to your local repository (you should do this often as you work on this**  
 Push your changes to your repository on github and submit part I on ELMS by the due date.
 The submission on ELMS is just writing the URL to your github repository
 
 # Part II: Classification Methods
+
+**Due Oct 23**
 
 - Using sklearn fit a DecisionTree, a RandomForest, a linear SVM and an SVM with a radial basis kernel to the transformed data.
 For now, use default parameters for each method.

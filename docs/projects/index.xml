@@ -34,7 +34,8 @@ To get code you will be using for this project using git:</description>
       
       <guid>http://www.hcbravo.org/dscert-mldm/projects/project_2/</guid>
       <description>Multiple due dates
-Posted: 10/2/2018 Last Update: 10/2/2018
+Posted: 10/2/2018
+Last Update: 10/9/2018
 Task We will use data from the following Kaggle dataset: https://www.kaggle.com/joniarroba/noshowappointments.
 The goal here is to predict patients that will not show up for medical appointments based on their medical records. You should read the dataset and task prediction in Kaggle to familiarize yourself as much as possible with the task and data.
 Part I: Data prep Due Oct 9, 2018</description>
