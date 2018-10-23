@@ -4,8 +4,9 @@
     <title>Ensemble Methods</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-10-24" />
-    <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
+    <meta name="date" content="2018-10-23" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
@@ -23,7 +24,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC 643: 2017-10-24
+CMSC 643: 2018-10-23
 ]
 
 .logo[![](img/logo.png)]
@@ -46,11 +47,15 @@ At a high level, _Ensemble Learning_ is _the aggregation of predictions of multi
 
 ## Ensemble Learning
 
-We will see two general approaches to this methodology: 
+We will see three general approaches to this methodology: 
 
 --
 
 **bagging**: uses ensembles to reduce the variability of single ML models, 
+
+--
+
+**stacking**: uses ensembles to capture different characteristics of task, learning how to combine them
 
 --
 
@@ -231,7 +236,7 @@ In this case, we would reach 99% accuracy with about 40 classifiers.]
 
 ## Ensemble Models
 
-We will look at two strategies for building ensembles.
+We will look at three strategies for building ensembles.
 
 Bagging: The goal is to construct diverse models. 
 
@@ -244,7 +249,19 @@ Use different samples of instances and/or attributes to independently train dive
 Then, aggregate the classifiers using majority vote (classification) or averaging (regression).
 
 ---
+## Ensemble Models
 
+Stacking: Build ensembles in parallel
+
+--
+
+Different model types, different features, lots of diversity
+
+--
+
+Learn how to combine models via a simple blending model
+
+---
 ## Ensemble Models
 
 Boosting: Build the ensemble sequentially, using the performance of the ensemble to train the next classifier in the ensmeble.
@@ -325,12 +342,139 @@ A related idea is stacking (also known as blending)
 This is what the Netflix teams did as they combined predictors near the end of the challenge.
 
 ---
+class: split-50
 
 The basic idea is to train a set of diverse predictors as done in bagging with some differences:
 
-- If the set of predictors are very differnt types of models e.g., SVM, Decision Tree, KNN, train each on the entire set of training observations instead of bootstrapped samples
+.column[
+Train each model (e.g. SVM, Decision Tree, KNN) on the entire set of training observations (instead of bootstrapped samples)
 
-- Train a simple model (e.g., linear regression or logistic regression) using the _predictions_ made by the predictors as _features_
+Train a simple model (e.g., linear regression or logistic regression) using the _predictions_ made by the predictors as _features_
+
+]
+
+.column[
+.image-50[![](images/stacking.png)]
+]
+
+---
+layout: false
+
+## Geometric Representation of Classification Problems
+
+Let's consider again little bit how we think of training data. For each instance `\(i\)`:
+
+- predictors (covariates) `\(x_i\)`, 
+- *qualitative* outcomes (or classes) `\(g_i\)`, which can take
+values from a discrete set `\(G\)`.
+
+--
+
+We can always divide the input space into a
+collection of regions taking the same predicted values.
+
+---
+class: split-50
+
+
+.column[
+Boundaries can be linear or non-linear depending
+on the _decision_ function. 
+]
+
+.column[![decision boundaries](images/classification-plots-01.png)]
+
+---
+
+### Linear expansions
+
+It will be helpful throughout our discussion to represent classification in terms of decision functions
+
+`$$f(\mathbf{x}_i) = \sum_{m=1}^M h_m(\mathbf{x}_i)$$`
+
+For binary classification a single decision function is needed, the sign of `\(f(\mathbf{x}_i)\)` is used to choose **positive** or **negative**
+
+---
+exclude: true
+layout: false
+class: split-50
+
+## Generalized Additive Model (GAM)
+
+.column[
+Make each term `\(h_m(\mathbf{x}_i)\)` a non-linear function (spline) of 1 or 2 predictors
+
+- Still interpretable (easy to plot outcome vs. term)
+- Still probability
+- Which interactions?
+]
+
+.column[
+.image-50[![](images/gams.pdf)]
+]
+
+---
+class: split-50
+
+## MARS (multivariate adaptive regression spline)
+
+.column[
+Make each term a simple form:
+
+`$$h_m(\mathbf{x}_i) = \beta_m (x_{im}-t_{m})_+$$`
+(and products of pairs these)
+
+- Still (somewhat interpretable)
+- Which terms to add? **Algorithmic Search**
+]
+
+.column[
+.center[.image-120[![](images/mars.pdf)]]
+]
+
+---
+
+## Forward Stagewise Additive Modeling
+
+**Algorithm**
+
+(1) Initialize `\(f_0(\mathbf{x})=0\)`  
+(2) For `\(m=1,\ldots,M\)`:  
+  (a) Compute
+  
+  `$$(\beta_m, t_m) = \arg \min_{\beta,t} \sum_{i=1}^N L(y_i, f_{m-1}(x_i) + \beta b(x_i; t))$$`
+  
+  (b) Set `\(f_m = f_{m-1}(x) + \beta_m b_m(x; t_m)\)`
+  
+---
+
+## Forward Stagewise Additive Modeling
+
+Computing the next term:
+
+Suppose we use _least squares_ as the loss function:
+
+`$$L(y_i,f_{m-1}(x_i) + \beta b(x_i; t)) = (y_i - (f_{m-1}(x_i) + \beta b(x_i; t)))^2$$`
+
+Then we are minimizing 
+
+`$$\sum_{i=1}^N (r_i - \beta b(x_i; t))^2$$`
+
+where `\(r_i\)` is the **residual** of the model at stage `\(m-1\)`.
+
+---
+
+## Forward Stagewise Additive Modeling
+
+For other loss functions (e.g., negative log binomial likelihood, i.e., logistic regression)
+
+Minimize
+
+`$$\sum_{i=1}^N (-g_i - \beta b(x_i; t))^2$$`
+
+where `\(g_i\)` is the _gradient_ of the loss function for instance `\(i\)`
+
+`$$g_i = \left[ \frac{\partial L(y_i, f(x_i))}{\partial f(x_i)} \right]_{f(x_i) = f_{m-1}(x_i)}$$`
 
 ---
 layout: false
@@ -339,11 +483,11 @@ layout: false
 
 Create an ensemble of classifiers sequentially. 
 
-At each iteration of the sequence we use a _weighted_ version of the training instances so that instances that are incorrectly classified by the current set of classifiers are given higher weight. 
+At each iteration of the sequence we modify the loss function so that instances that are incorrectly classified by the current set of classifiers are given higher weight. 
 
 --
 
-Here diversity is injected into the ensemble by re-weighting training instances. 
+Here diversity is injected into the ensemble by sequentially "re-weighting" training instances. 
 
 ---
 
@@ -412,20 +556,93 @@ Unlike bagging it is sensitive to noise and outliers.
 
 ---
 
+## Gradient Boosted Trees
+
+Uses the sequential additive modeling idea we saw previously. At each iteration learn a regression tree `\(T(x)\)` to minimize 
+
+`$$\sum_{i=1}^N (-g_i - T(x_i))^2$$`
+
+Very close to Adaboost if loss is "exponential": `\(L(y_i,f_i)=\exp\{-y_if_i\}\)`.
+
+Not a robust loss function to use, prefer binomial deviance (i.e., logistic regression negative log likelihood)
+
+---
+
+## Gradient Boosted Trees
+
+Excellent software XGBoost: most commonly generally
+
+Actually minimizes a regularized loss function: no need to prune trees
+
+Can still compute variable importance: 
+  - compute variable importance for each tree
+  - add variable importance across trees
+  
+No simple interpretation by inspection, but there are options...
+
+---
+layout: false
+
+## Model explanation 
+
+.center[.image-120[![](images/explanation.png)]]
+
+- Surrogate models
+- Local explanatory models
+
+---
+class: split-50
+
+## Model explanation
+
+.column[
+Use a _sparse_ simple model (e.g., logistic regression)
+to explain the prediction of a complicated model for a specific instance `\(i\)`
+
+LIME: https://github.com/marcotcr/lime  
+ELI5: http://eli5.readthedocs.io/en/latest/index.html
+]
+
+.column[
+.center[![](images/lime.png)]
+]
+
+---
+
+## Model explanation
+
+![](images/lime2.png)
+
+LIME: https://github.com/marcotcr/lime  
+ELI5: http://eli5.readthedocs.io/en/latest/index.html
+
+---
+
 ## Summary
 
-Ensemble methods seek to reduce variance of individual weak learners by aggregating their predictions. 
+Ensemble methods seek to 
+
+1. reduce variance of individual weak learners by aggregating their predictions. 
+
+2. improve performance by exploiting prediction diversity
 
 --
 
-Bagging and boosting are alternative methods of training ensembles while providing diversity to each of the trained weak learners.
+Bagging, boosting and stacking are alternative methods of training ensembles while providing diversity to each of the trained weak learners.
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
   var url = this;
@@ -433,12 +650,23 @@ remark.macros['scale'] = function (percentage) {
 };
 </script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
