@@ -48,7 +48,7 @@ The submission on ELMS is just writing the URL to your github repository
 
 # Part II: Classification Methods
 
-**Due Oct 30**
+**Due Oct 23**
 
 - Using sklearn fit a DecisionTree, a RandomForest, a linear SVM and an SVM with a radial basis kernel to the transformed data.
 For now, use default parameters for each method.
@@ -66,10 +66,11 @@ To update your repository with new code for Part II do the following on your com
 ```shell
 git remote add upstream https://github.com/hcorrada/cmsc643_noshow
 git pull upstream
-```
+`
 
 # Part III: Ensembles and Final Result
 
+**Due Oct 30**
 ## Ensembles
 
 - Train an AdaBoost classifier using Decision Tree stubs as weak learners. Compare its performance to the results obtained in Part II
