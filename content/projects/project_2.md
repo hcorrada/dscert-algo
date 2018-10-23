@@ -73,8 +73,10 @@ git pull upstream
 **Due Oct 30**
 ## Ensembles
 
-- Train an AdaBoost classifier using Decision Tree stubs as weak learners. Compare its performance to the results obtained in Part II
+- Train an AdaBoost classifier and compare its performance to the results obtained in Part II
 using 10 fold cross validation as before
+
+- Train an xgBoost classifier and compare its performance to the results obtained in Part II
 
 - Choose a set of 5 or so classifiers, e.g., Decision Trees of diverse depths, linear SVMs over diverse subsets of features, RBF kernels with diverse bandwidths, Random Forests with diverse number of trees in their ensemble, be creative!. Write a function that given a training set does the following:
 
