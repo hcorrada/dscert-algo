@@ -4,8 +4,9 @@
     <title>Unsupervised Learning: Dimensionality Reduction</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-11-14" />
-    <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
+    <meta name="date" content="2018-10-29" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
@@ -23,7 +24,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC 643: 2017-11-14
+CMSC 643: 2018-10-29
 ]
 
 .logo[![](img/logo.png)]
@@ -146,9 +147,6 @@ Conversely, if they are all measured in the same units, they should be scaled.
 
 
 
-```
-## Warning: package 'dplyr' was built under R version 3.4.2
-```
 
 
 
@@ -584,8 +582,15 @@ Embedding methods seek to capture local properties of observations. A popular re
 <script>var slideshow = remark.create({
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
   var url = this;
@@ -593,12 +598,23 @@ remark.macros['scale'] = function (percentage) {
 };
 </script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

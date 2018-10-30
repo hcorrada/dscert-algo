@@ -134,50 +134,40 @@ title = "CIML 13"
 date = "10/30"
 
 [[day10.covers]]
-title = "Neural Networks"
-notes = "lectures/cmsc643-neural_nets.pdf"
+title = "Unsupervised Learning: Clustering"
+notes = "lectures/cmsc643-clustering.pdf"
 
-#[[day10.prep]]
-#title = "Compeau & Pevzner, Ch. 8" 
+[[day10.covers]]
+title = "Unsupervised Learning: Dimensionality Reduction"
+notes = "lectures/cmsc643-dimensionality_reduction.pdf"
 
-#[[day10.prep]]
-#title = "Compeau & Pevzner, playlist 8, 5-8"
-#link = "https://www.youtube.com/playlist?list=PLQ-85lQlPqFMcC2d2CkvmdcJt2v-Np7Cz"
+[[day10.prep]]
+title = "CIML Ch. 15, 16"
 
-#[[day10.prep]]
-#title = "Rosalind prep Ex. 18"
-#link = "http://rosalind.info/classes/400"
 
 #### DAY 11
 [day11]
 date = "11/6"
 
 [[day11.covers]]
-title = "Deep Learning"
-notes = "lectures/cmsc643-deep_learning.pdf"
-
-[[day11.covers]]
-title = "Intro to Tensor Flow"
-notes = "notebooks/tensor_flow.html"
-
-[[day11.prep]]
-title = "Deep Learning Book, Ch. 6"
-link = "http://www.deeplearningbook.org/"
+title = "Neural Networks"
+notes = "lectures/cmsc643-neural_nets.pdf"
 
 #### DAY 12
 [day12]
 date = "11/13"
 
 [[day12.covers]]
-title = "Unsupervised Learning: Clustering"
-notes = "lectures/cmsc643-clustering.pdf"
+title = "Deep Learning"
+notes = "lectures/cmsc643-deep_learning.pdf"
 
 [[day12.covers]]
-title = "Unsupervised Learning: Dimensionality Reduction"
-notes = "lectures/cmsc643-dimensionality_reduction.pdf"
+title = "Intro to Tensor Flow"
+notes = "notebooks/tensor_flow.html"
 
 [[day12.prep]]
-title = "CIML Ch. 15, 16"
+title = "Deep Learning Book, Ch. 6"
+link = "http://www.deeplearningbook.org/"
 
 #### DAY 13
 # Out for PR
