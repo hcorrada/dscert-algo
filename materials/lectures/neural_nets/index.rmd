@@ -224,7 +224,7 @@ Our prediction function is a linear function (with $M$ terms).
 Each term $g_m(\mathbf{w}_m'X)$ is the result of applying a non-linear function to, what we can think of as, a _derived feature_ (or derived predictor) $V_m = \mathbf{w}_m'X$.
 
 ---
-exclude: true
+exclude: false
 
 ## Projection-Pursuit Regression
 
@@ -238,7 +238,7 @@ Return:
   - Matrix $\left[ \phi_1, \phi_2, \ldots, \phi_p \right]$ of _linear transformations_ that retain _maximal variance_.
 
 ---
-exclude: true
+exclude: false
 
 ## Projection-Pursuit Regression
 
@@ -361,7 +361,7 @@ v <- train_mat %*% fit$alpha
 colnames(v) <- c("v1","v2")
 
 cbind(v, affordability=y[train_indices]) %>%
-  as_data_frame() %>%
+  tibble::as_data_frame() %>%
   gather(var,val,starts_with("v")) %>%
   ggplot(aes(x=val,y=affordability)) +
     geom_point() +
