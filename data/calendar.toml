@@ -162,15 +162,18 @@ title = "Deep Learning"
 notes = "lectures/cmsc643-deep_learning.pdf"
 
 [[day12.covers]]
-title = "Intro to Tensor Flow"
-notes = "notebooks/tensor_flow.html"
+title = "Recurrent Neural Nets (from Stanford group)"
+notes = "lectures/rnn.pdf"
+
+#[[day12.covers]]
+#title = "Intro to Tensor Flow"
+#notes = "notebooks/tensor_flow.html"
 
 [[day12.prep]]
 title = "Deep Learning Book, Ch. 6"
 link = "http://www.deeplearningbook.org/"
 
 #### DAY 13
-# Out for PR
 [day13]
 date = "11/20"
 
@@ -180,15 +183,6 @@ notes = "lectures/cmsc643-bias.pdf"
 
 [[day13.prep]]
 title = "CIML Ch. 8"
-
-
-#[[day13.prep]]
-#title = "Compeau & Pevzner, playlist 4, videos 1-5"
-#link = "https://www.youtube.com/playlist?list=PLQ-85lQlPqFPdIS_5qv_Q3XWieobVPLlc"
-
-#[[day13.prep]]
-#title = "Rosalind prep Ex. 19"
-#link = "http://rosalind.info/classes/400"
 
 #### DAY 14
 [day14]
@@ -200,17 +194,6 @@ title = "CIML Ch. 14"
 [[day14.covers]]
 title = "Efficient Learning; Large-Scale Machine Learning"
 notes = "lectures/cmsc643-large_scale.pdf"
-
-#[[day14.prep]]
-#title = "Compeau & Pevzner, Ch. 4, p. 197-221"
-
-#[[day14.prep]]
-#title = "Compeau & Pevzner, playlist 4, videos 6-10"
-#link = "https://www.youtube.com/playlist?list=PLQ-85lQlPqFPdIS_5qv_Q3XWieobVPLlc"
-
-#[[day14.prep]]
-#title = "Rosalind prep Ex. 20 (extra credit)"
-#link = "http://rosalind.info/classes/400"
 
 #### DAY 15
 [day15]

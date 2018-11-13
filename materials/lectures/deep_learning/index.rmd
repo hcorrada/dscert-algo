@@ -359,6 +359,9 @@ Parameters are shared across a time lag.
 
 The _long short-term memory_ (LSTM) model is very popular in time series analysis
 
+```{r, child="rnn.rmd"}
+```
+
 ---
 layout: false
 
