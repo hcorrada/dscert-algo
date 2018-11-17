@@ -165,9 +165,13 @@ notes = "lectures/cmsc643-deep_learning.pdf"
 title = "Recurrent Neural Nets (from Stanford group)"
 notes = "lectures/rnn.pdf"
 
-#[[day12.covers]]
-#title = "Intro to Tensor Flow"
-#notes = "notebooks/tensor_flow.html"
+[[day12.covers]]
+title = "Intro to Keras (.ipynb)"
+notes = "notebooks/intro_keras.ipynb"
+
+[[day12.covers]]
+title = "Intro to Keras (.html)"
+notes = "notebooks/intro_keras.html"
 
 [[day12.prep]]
 title = "Deep Learning Book, Ch. 6"
