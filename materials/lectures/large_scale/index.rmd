@@ -258,9 +258,9 @@ Let's use linear regression with one predictor, no intercept as a case study.
 
 **Given**: Training set $\{(x_1, y_1), \ldots, (x_n, y_n)\}$, with continuous response $y_i$ and single predictor $x_i$ for the $i$-th observation.
 
-**Do**: Estimate parameter $\beta_1$ in model $y=\beta_1 x$ to solve
+**Do**: Estimate parameter $w$ in model $y=wx$ to solve
 
-$$\min_{\beta_1} L(\beta_1) = \frac{1}{2} \sum_{i=1}^n (y_i - \beta_1 x_i)^2$$
+$$\min_{w} L(w) = \frac{1}{2} \sum_{i=1}^n (y_i - w x_i)^2$$
 
 ---
 class: split-50
@@ -281,16 +281,16 @@ abline(a=0, b=true_beta, col="red", lwd= 2)
 ---
 class: split-50
 
-.column[Our goal is then to find the value of $\beta_1$ that minimizes mean squared error. This corresponds to finding one of these many possible lines:]
+.column[Our goal is then to find the value of $w$ that minimizes mean squared error. This corresponds to finding one of these many possible lines.]
 
 .column[
-```{r, echo=FALSE, fig.height=10, fig.width=15}
+```{r, echo=FALSE, fig.height=15, fig.width=15}
 plot(x,y,pch=19,cex=1.4,main="Simulated Data", cex.lab=1.5, cex.main=2)
 abline(a=0, b=true_beta, col="red", lwd= 2)
 for (b in seq(-6,6, len=5)) {
   abline(a=0,b=b,col="blue", lwd=2, lty=2)
 }
-legend("bottom", legend=paste("beta=", seq(-6,6,len=5)), lwd=2, lty=2, cex=1.5)
+legend("bottom", legend=paste("w=", seq(-6,6,len=5)), lwd=2, lty=2, cex=1.5)
 ```
 ]
 
@@ -301,13 +301,13 @@ class: split-50
 
 
 .column[
-```{r, echo=FALSE, fig.height=10, fig.width=15}
+```{r, echo=FALSE, fig.height=12, fig.width=15}
 n <- length(y)
 compute_loss <- function(beta, x, y) {
   0.5 * mean((y-x*beta)^2)
 }
 beta <- seq(-20, 20, len=100)
-plot(beta, sapply(beta, compute_loss, x=x, y=y), type="l", lwd=2, ylab=expression(L(beta[1])),cex.lab=1.5,xlab=expression(beta[1]))
+plot(beta, sapply(beta, compute_loss, x=x, y=y), type="l", lwd=2, ylab=expression(L(w)),cex.lab=1.5,xlab=expression(w))
 abline(v=true_beta, col="red", lwd=2)
 abline(v=seq(-6,6,len=5), col="blue", lwd=2, lty=2)
 ```
@@ -319,16 +319,16 @@ Insights:
 
 1) As we saw before in class, loss is minimized when the derivative of the loss function is 0
 
-2) and, the derivative of the loss (with respect to $\beta_1$ ) at a given estimate $\beta_1$ suggests new values of $\beta_1$ with smaller loss!
+2) and, the derivative of the loss (with respect to $w$ ) at a given estimate $w$ suggests new values of $w$ with smaller loss!
 
 ---
 class: split-40
 
 .column[Let's take a look at the derivative:
 
-$$\frac{\partial}{\partial \beta_{1}} L(\beta_1) = \\
-\frac{\partial}{\partial \beta_{1}} \frac{1}{2} \sum_{i=1}^n (y_i - \beta_1 x_i)^2 \\
-{} = \sum_{i=1}^n (y_i - \beta_1 x_i) (-x_i)$$
+$$\frac{\partial}{\partial w} L(w) = \\
+\frac{\partial}{\partial w} \frac{1}{2} \sum_{i=1}^n (y_i - w x_i)^2 \\
+{} = \sum_{i=1}^n (y_i - w x_i) (-x_i)$$
 
 
 ]
@@ -342,7 +342,7 @@ loss_derivative <- function(beta, x, y) {
   sum(resid * (-x))
 }
 
-plot(beta, sapply(beta, loss_derivative, x=x, y=y), type="l", lwd=1.5, xlab=expression(beta[1]), ylab=expression(partialdiff * L(beta[1]) / partialdiff * beta[1]),cex.lab=1.7)
+plot(beta, sapply(beta, loss_derivative, x=x, y=y), type="l", lwd=1.5, xlab=expression(w), ylab=expression(partialdiff * L(w) / partialdiff * w),cex.lab=1.7)
 
 abline(v=true_beta, col="red", lwd=2)
 abline(v=seq(-6,6,len=5), col="blue", lwd=2, lty=2)
@@ -359,14 +359,14 @@ layout: true
 
 This is what motivates the Gradient Descent algorithm
 
-1. Initialize $\beta_1=0$
+1. Initialize $w=\mathrm{normal(0,1)}$
 2. Repeat until convergence
-  - Set $\beta_1 = \beta_1 + \alpha \sum_{i=1}^n (y_i - f(x_i)) x_i$
+  - Set $w = w + \eta \sum_{i=1}^n (y_i - f(x_i)) x_i$
   
 
 ---
 
-The basic idea is to move the current estimate of $\beta_1$ in the direction that minimizes loss the *fastest*. Another way of calling this algorithm is **Steepest Descent**.
+The basic idea is to move the current estimate of $w$ in the direction that minimizes loss the *fastest*. 
 
 ---
 class: split-50
@@ -374,8 +374,63 @@ class: split-50
 .column[Let's run GD and track what it does:]
 
 .column[
+```{r, echo=FALSE}
+# Implementation of gradient descent for least squares regression
+# for a single predictor (x)
+#
+# There is some code here that is only used to generate illustrative plots and would not be part of real solver
+gradient_descent <- function(x, y, tol=1e-6, maxit=50, plot=FALSE) {
+  # initialize estimate
+  beta_1 <- 0; old_beta_1 <- Inf; i <- 0; beta_keep <- NA
+  
+  # compute loss at first estimate
+  loss <- compute_loss(beta_1, x, y); loss_keep <- NA
+  
+  # starting step size
+  alpha <- 1e-3
+  difference <- Inf
+  
+  # check for convergence
+  # (in practice, we do include a limit on the number of iterations)
+  while ((difference > tol) && (i < maxit)) {
+    cat("it: ", i, " beta: ", round(beta_1, 2), "loss: ", round(loss, 2), " alpha: ", round(alpha, 6), "\n")
+    
+    # this piece of code just adds steps to an existing plot
+    if (plot && !is.na(beta_keep) && !is.na(loss_keep)) {
+      suppressWarnings(arrows(beta_keep, loss_keep, beta_1, loss, lty=2, col="blue"))
+    }
+    
+    # store the last estimate for plotting
+    beta_keep <- beta_1; loss_keep <- loss;
+    
+    # store the last estimate to check convergence
+    old_beta_1 <- beta_1
+    
+    # update estimate
+    f <- beta_1 * x
+    resid <- y - f    
+    beta_1 <- beta_1 + alpha * sum(resid * x)
+    
+    # compute difference after taking step
+    # to check convergence
+    difference <- (beta_1 - old_beta_1)^2 / (old_beta_1)^2
+  
+    # compute loss and derivative for updated estimate
+    loss <- compute_loss(beta_1, x, y)
+
+    i <- i+1
+    
+    # shorten the step size
+    if ((i %% 3) == 0) alpha <- alpha / 2
+  }
+  if (plot) {
+    suppressWarnings(arrows(beta_keep, loss_keep, beta_1, loss, lty=2, col="blue"))
+  }
+  beta_1
+}
+```
 ```{r, echo=FALSE, fig.width=15, fig.height=10, cache=FALSE, results='hide'}
-plot(beta, sapply(beta, compute_loss, x=x, y=y), type="l", lwd=2, ylab=expression(L(beta[1])),cex.lab=1.5,xlab=expression(beta[1]), xlim=c(-20,20), main="Gradient Descent")
+plot(beta, sapply(beta, compute_loss, x=x, y=y), type="l", lwd=2, ylab=expression(L(w)),cex.lab=1.5,xlab=expression(w), xlim=c(-20,20), main="Gradient Descent")
 
 estimate <- gradient_descent(x, y, plot=TRUE)
 ```
@@ -383,12 +438,12 @@ estimate <- gradient_descent(x, y, plot=TRUE)
 
 ---
 
-"Batch" gradient descent: take a step (update $\beta_1$) by calculating derivative with respect to _all_ $n$ observations in our dataset. 
+"Batch" gradient descent: take a step (update $w$) by calculating derivative with respect to _all_ $n$ observations in our dataset. 
 
 
-$$\beta_1 = \beta_1 + \alpha \sum_{i=1}^n (y_i - f(x_i, \beta_1)) x_i$$
+$$w = w + \eta \sum_{i=1}^n (y_i - f(x_i, w)) x_i$$
 
-where $f(x_i) = \beta_1 x_i$.
+where $f(x_i) = w x_i$.
 
 ---
 
@@ -396,10 +451,10 @@ For multiple predictors (e.g., adding an intercept), this generalizes to the _gr
 
 
 $$
-\mathbf{\beta} = \mathbf{\beta} + \alpha \sum_{i=1}^n (y_i - f(\mathbf{x}_i, \beta)) \mathbf{x}_i
+\mathbf{w} = \mathbf{w} + \eta \sum_{i=1}^n (y_i - f(\mathbf{x}_i, \mathbf{w})) \mathbf{x}_i
 $$
 
-where $f(\mathbf{x}_i, \mathbf{\beta}) = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}$
+where $f(\mathbf{x}_i, \mathbf{w}) = w_0 + w_1 x_{i1} + \cdots + w_p x_{ip}$
 
 ---
 
@@ -421,10 +476,10 @@ layout: true
 
 **Key Idea**: Update parameters using update equation _one observation at a time_:
 
-1. Initialize $\beta=\mathbf{0}$, $i=1$
+1. Initialize $\beta=\mathrm{normal}(0,\sqrt{p})$, $i=1$
 2. Repeat until convergence
   - For $i=1$ to $n$
-    - Set $\beta = \beta + \alpha (y_i - f(\mathbf{x}_i, \beta)) \mathbf{x}_i$
+    - Set $w = w + \eta (y_i - f(\mathbf{x}_i, \mathbf{w})) \mathbf{x}_i$
 
 ---
 class: split-50
@@ -533,8 +588,8 @@ SGD then uses updates provided by a different _estimate_ of the gradient based o
 
 In practice
 
-- Mini-batches: use 10 or so examples at a time to estimate gradients
-- Shuffle data order every pass
+- Mini-batches: use ~100 or so examples at a time to estimate gradients
+- Shuffle data order every pass (epoch)
 
 ---
 
@@ -554,7 +609,7 @@ Gradient descent algorithms are easily parallelizable:
 - Split observations across computing units  
 - For each step, compute partial sum for each partition (map), compute final update (reduce)  
 
-$$\beta = \beta + \alpha * \sum_{\mathrm{partition}\; p} \sum_{i \in p} (y_i - f(\mathbf{x_i}, \beta)) \mathbf{x}_i$$
+$$\mathbf{w} = \mathbf{w} + \eta * \sum_{\mathrm{partition}\; q} \sum_{i \in q} (y_i - f(\mathbf{x_i}, \mathbf{w})) \mathbf{x}_i$$
 
 ---
 
@@ -563,7 +618,7 @@ This observation has resulted in their implementation if systems for large-scale
 1. [Vowpal Wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki)
   - Implements general framework of (sparse) stochastic gradient descent for many optimization problems
 
----
+--
 
 2. [Spark MLlib](https://spark.apache.org/docs/1.2.1/mllib-guide.html)
   - Implements many learning algorithms using Spark framework we saw previously

@@ -4,8 +4,9 @@
     <title>Large Scale Learning</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-11-28" />
-    <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
+    <meta name="date" content="2018-11-27" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
@@ -25,7 +26,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC 643: 2017-11-28
+CMSC 643: 2018-11-27
 ]
 
 .logo[![](img/logo.png)]
@@ -189,7 +190,7 @@ cached_text %&gt;%
 ---
 exclude: true
 
-&lt;img src="index_files/figure-html/unnamed-chunk-3-1.png" width="3072" /&gt;
+![](index_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -245,9 +246,9 @@ Let's use linear regression with one predictor, no intercept as a case study.
 
 **Given**: Training set `\(\{(x_1, y_1), \ldots, (x_n, y_n)\}\)`, with continuous response `\(y_i\)` and single predictor `\(x_i\)` for the `\(i\)`-th observation.
 
-**Do**: Estimate parameter `\(\beta_1\)` in model `\(y=\beta_1 x\)` to solve
+**Do**: Estimate parameter `\(w\)` in model `\(y=wx\)` to solve
 
-`$$\min_{\beta_1} L(\beta_1) = \frac{1}{2} \sum_{i=1}^n (y_i - \beta_1 x_i)^2$$`
+`$$\min_{w} L(w) = \frac{1}{2} \sum_{i=1}^n (y_i - w x_i)^2$$`
 
 ---
 class: split-50
@@ -255,16 +256,16 @@ class: split-50
 .column[Suppose we want to fit this model to the following (simulated) data:]
 
 .column[
-&lt;img src="index_files/figure-html/unnamed-chunk-5-1.png" width="672" /&gt;
+![](index_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 ]
 
 ---
 class: split-50
 
-.column[Our goal is then to find the value of `\(\beta_1\)` that minimizes mean squared error. This corresponds to finding one of these many possible lines:]
+.column[Our goal is then to find the value of `\(w\)` that minimizes mean squared error. This corresponds to finding one of these many possible lines.]
 
 .column[
-&lt;img src="index_files/figure-html/unnamed-chunk-6-1.png" width="1440" /&gt;
+![](index_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -274,7 +275,7 @@ class: split-50
 
 
 .column[
-&lt;img src="index_files/figure-html/unnamed-chunk-7-1.png" width="1440" /&gt;
+![](index_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -283,23 +284,23 @@ Insights:
 
 1) As we saw before in class, loss is minimized when the derivative of the loss function is 0
 
-2) and, the derivative of the loss (with respect to `\(\beta_1\)` ) at a given estimate `\(\beta_1\)` suggests new values of `\(\beta_1\)` with smaller loss!
+2) and, the derivative of the loss (with respect to `\(w\)` ) at a given estimate `\(w\)` suggests new values of `\(w\)` with smaller loss!
 
 ---
 class: split-40
 
 .column[Let's take a look at the derivative:
 
-`$$\frac{\partial}{\partial \beta_{1}} L(\beta_1) = \\
-\frac{\partial}{\partial \beta_{1}} \frac{1}{2} \sum_{i=1}^n (y_i - \beta_1 x_i)^2 \\
-{} = \sum_{i=1}^n (y_i - \beta_1 x_i) (-x_i)$$`
+`$$\frac{\partial}{\partial w} L(w) = \\
+\frac{\partial}{\partial w} \frac{1}{2} \sum_{i=1}^n (y_i - w x_i)^2 \\
+{} = \sum_{i=1}^n (y_i - w x_i) (-x_i)$$`
 
 
 ]
 
 
 .column[
-&lt;img src="index_files/figure-html/unnamed-chunk-8-1.png" width="480" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -311,14 +312,14 @@ layout: true
 
 This is what motivates the Gradient Descent algorithm
 
-1. Initialize `\(\beta_1=0\)`
+1. Initialize `\(w=\mathrm{normal(0,1)}\)`
 2. Repeat until convergence
-  - Set `\(\beta_1 = \beta_1 + \alpha \sum_{i=1}^n (y_i - f(x_i)) x_i\)`
+  - Set `\(w = w + \eta \sum_{i=1}^n (y_i - f(x_i)) x_i\)`
   
 
 ---
 
-The basic idea is to move the current estimate of `\(\beta_1\)` in the direction that minimizes loss the *fastest*. Another way of calling this algorithm is **Steepest Descent**.
+The basic idea is to move the current estimate of `\(w\)` in the direction that minimizes loss the *fastest*. 
 
 ---
 class: split-50
@@ -326,17 +327,18 @@ class: split-50
 .column[Let's run GD and track what it does:]
 
 .column[
-&lt;img src="index_files/figure-html/unnamed-chunk-9-1.png" width="1440" /&gt;
+
+![](index_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
 ]
 
 ---
 
-"Batch" gradient descent: take a step (update `\(\beta_1\)`) by calculating derivative with respect to _all_ `\(n\)` observations in our dataset. 
+"Batch" gradient descent: take a step (update `\(w\)`) by calculating derivative with respect to _all_ `\(n\)` observations in our dataset. 
 
 
-`$$\beta_1 = \beta_1 + \alpha \sum_{i=1}^n (y_i - f(x_i, \beta_1)) x_i$$`
+`$$w = w + \eta \sum_{i=1}^n (y_i - f(x_i, w)) x_i$$`
 
-where `\(f(x_i) = \beta_1 x_i\)`.
+where `\(f(x_i) = w x_i\)`.
 
 ---
 
@@ -344,10 +346,10 @@ For multiple predictors (e.g., adding an intercept), this generalizes to the _gr
 
 
 $$
-\mathbf{\beta} = \mathbf{\beta} + \alpha \sum_{i=1}^n (y_i - f(\mathbf{x}_i, \beta)) \mathbf{x}_i
+\mathbf{w} = \mathbf{w} + \eta \sum_{i=1}^n (y_i - f(\mathbf{x}_i, \mathbf{w})) \mathbf{x}_i
 $$
 
-where `\(f(\mathbf{x}_i, \mathbf{\beta}) = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}\)`
+where `\(f(\mathbf{x}_i, \mathbf{w}) = w_0 + w_1 x_{i1} + \cdots + w_p x_{ip}\)`
 
 ---
 
@@ -369,10 +371,10 @@ layout: true
 
 **Key Idea**: Update parameters using update equation _one observation at a time_:
 
-1. Initialize `\(\beta=\mathbf{0}\)`, `\(i=1\)`
+1. Initialize `\(\beta=\mathrm{normal}(0,\sqrt{p})\)`, `\(i=1\)`
 2. Repeat until convergence
   - For `\(i=1\)` to `\(n\)`
-    - Set `\(\beta = \beta + \alpha (y_i - f(\mathbf{x}_i, \beta)) \mathbf{x}_i\)`
+    - Set `\(w = w + \eta (y_i - f(\mathbf{x}_i, \mathbf{w})) \mathbf{x}_i\)`
 
 ---
 class: split-50
@@ -383,7 +385,7 @@ class: split-50
 .column[Let's run this and see what it does:]
 
 .column[
-&lt;img src="index_files/figure-html/unnamed-chunk-11-1.png" width="1440" /&gt;
+![](index_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -417,8 +419,8 @@ SGD then uses updates provided by a different _estimate_ of the gradient based o
 
 In practice
 
-- Mini-batches: use 10 or so examples at a time to estimate gradients
-- Shuffle data order every pass
+- Mini-batches: use ~100 or so examples at a time to estimate gradients
+- Shuffle data order every pass (epoch)
 
 ---
 
@@ -438,7 +440,7 @@ Gradient descent algorithms are easily parallelizable:
 - Split observations across computing units  
 - For each step, compute partial sum for each partition (map), compute final update (reduce)  
 
-`$$\beta = \beta + \alpha * \sum_{\mathrm{partition}\; p} \sum_{i \in p} (y_i - f(\mathbf{x_i}, \beta)) \mathbf{x}_i$$`
+`$$\mathbf{w} = \mathbf{w} + \eta * \sum_{\mathrm{partition}\; q} \sum_{i \in q} (y_i - f(\mathbf{x_i}, \mathbf{w})) \mathbf{x}_i$$`
 
 ---
 
@@ -447,7 +449,7 @@ This observation has resulted in their implementation if systems for large-scale
 1. [Vowpal Wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki)
   - Implements general framework of (sparse) stochastic gradient descent for many optimization problems
 
----
+--
 
 2. [Spark MLlib](https://spark.apache.org/docs/1.2.1/mllib-guide.html)
   - Implements many learning algorithms using Spark framework we saw previously
@@ -563,8 +565,15 @@ layout: false
 <script>var slideshow = remark.create({
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
   var url = this;
@@ -572,19 +581,30 @@ remark.macros['scale'] = function (percentage) {
 };
 </script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
