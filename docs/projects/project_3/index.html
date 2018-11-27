@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Project 3: Time Series Forecasting with Recurrent Neural Nets - CMSC643: Machine Learning and Data Mining</title>
+    <title>Project 4: Time Series Forecasting with Recurrent Neural Nets - CMSC643: Machine Learning and Data Mining</title>
     <meta name="generator" content="Hugo 0.24" />
 
     
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Project 3: Time Series Forecasting with Recurrent Neural Nets
+        Project 4: Time Series Forecasting with Recurrent Neural Nets
       </div>
     </div>
 
@@ -276,51 +276,19 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Project 3: Time Series Forecasting with Recurrent Neural Nets </h1>
+			<h1>Project 4: Time Series Forecasting with Recurrent Neural Nets </h1>
 
 			
 
 <h2 id="repository">Repository</h2>
 
-<p>The github repository for this project is at <a href="https://github.com/hcorrada/mldm_project3">https://github.com/hcorrada/mldm_project3</a>. You should have received an email from github to access the repository.</p>
+<p>The github repository for this project is at <a href="https://github.com/hcorrada/cmsc643i_timeseries">https://github.com/hcorrada/cmsc643i_timeseries</a>. You should have received an email from github to access the repository.</p>
 
-<h2 id="part-i-introduction-to-tensor-flow">Part I: Introduction to Tensor Flow</h2>
+<p>You will use Keras for this project, make sure you can follow the introduction posted to the class calendar.</p>
 
-<p>Follow the Introduction to Tensor Flow provided in the <code>partI_shell.ipynb</code> IPython notebook. Your task is to re-implement your linear SVM algorithm using gradient descent
-using tensor flow. You don&rsquo;t need to run it on a specific dataset, as I will only look at the implementation. For debugging, you can try using the iris dataset: <a href="http://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html">http://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html</a></p>
+<p>This project is based on examples in Ch. 6 of the Keras book linked in the course webpage.</p>
 
-<h2 id="part-ii-supervised-methods-for-time-series-forecasting">Part II: Supervised methods for time series forecasting</h2>
-
-<p>We will be using the mortgage affordability provided by Zillow <a href="https://www.zillow.com/research/data/">https://www.zillow.com/research/data/</a>. For this part you will implement a single layer neural net, and a deep neural net for
-time series forecasting. Follow the instructions in <code>partII_shell.ipynb</code>.</p>
-
-<h2 id="part-iii-recurrent-neural-nets">Part III: Recurrent Neural Nets</h2>
-
-<h3 id="rnn">RNN</h3>
-
-<p>Use the <code>tf.nn.dynamic_rnn</code> and <code>tf.nn.rnn_cell.BasicRNNCell</code> functions to build a basic recurrent neural net to solve the affordability prediction problem.
-A couple of notes:</p>
-
-<ul>
-<li><p>Setup input/target pairs as follows: for sequence $x_0, x_1, x_2, x_3, \ldots, x_m$ use targets as $x_1, x_2, x_3, \ldots, x<em>m, x</em>{m+1}$.</p></li>
-
-<li><p>Use truncated back propagation through time (use about 8 timesteps for each backprop), remember to carry state forward between truncated backprop chunks.</p></li>
-
-<li><p>To make predictions for county $j$ over the test set period, you should pass the training sequence (time series) for that county through the RNN so that
-state is used properly.</p></li>
-</ul>
-
-<p>Try a few different architectures and report on performance</p>
-
-<h3 id="lstm">LSTM</h3>
-
-<p>Do the same as above using $tf.nn.rnn_cell.BasicLSTMCell<code>to use the LSTM model. Also look at</code>tf.nn.rnn_cell.MultiLSTMCell` to build deep LSTM network.</p>
-
-<h2 id="part-iv-discussion">Part IV: Discussion</h2>
-
-<p>Discuss the models you have used so far. Which proved to be most effective, and why? What were challenges in using these methods? What would you wish to try if you had more time to work on this?</p>
-
-<p>Bonus question: how would you use these models to make longer-horizon forecasts (e.g., two or more years out)</p>
+<p>There is a <code>shell.ipynb</code> notebook in the github repository. Fill that notebook to complete your project.</p>
 
 
 			<aside class="copyright" role="note">

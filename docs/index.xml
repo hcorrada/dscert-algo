@@ -42,16 +42,6 @@ Part I: Data prep Due Oct 9, 2018</description>
     </item>
     
     <item>
-      <title>Project 3: Time Series Forecasting with Recurrent Neural Nets</title>
-      <link>http://www.hcbravo.org/dscert-mldm/projects/project_3/</link>
-      <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_3/</guid>
-      <description>Repository The github repository for this project is at https://github.com/hcorrada/mldm_project3. You should have received an email from github to access the repository.
-Part I: Introduction to Tensor Flow Follow the Introduction to Tensor Flow provided in the partI_shell.ipynb IPython notebook. Your task is to re-implement your linear SVM algorithm using gradient descent using tensor flow. You don&amp;rsquo;t need to run it on a specific dataset, as I will only look at the implementation.</description>
-    </item>
-    
-    <item>
       <title>Project 3: Unsupervised Learning</title>
       <link>http://www.hcbravo.org/dscert-mldm/projects/project_unsup/</link>
       <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
@@ -63,6 +53,18 @@ Task Due: 11/13/2018
 We will be using the mortgage affordability provided by Zillow https://www.zillow.com/research/data/ to get experience with unsupervised learning methods. In particular you will use K-means clustering and two dimensionality reduction methods, one based on matrix decomposition and one based on manifold learning.
  Fork my project skeleton github repo on github https://github.com/hcorrada/cmsc643_unsup.git
  Click the &amp;lsquo;Fork&amp;rsquo; button on the upper right Go to your forked repository e.</description>
+    </item>
+    
+    <item>
+      <title>Project 4: Time Series Forecasting with Recurrent Neural Nets</title>
+      <link>http://www.hcbravo.org/dscert-mldm/projects/project_3/</link>
+      <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_3/</guid>
+      <description>Repository The github repository for this project is at https://github.com/hcorrada/cmsc643i_timeseries. You should have received an email from github to access the repository.
+You will use Keras for this project, make sure you can follow the introduction posted to the class calendar.
+This project is based on examples in Ch. 6 of the Keras book linked in the course webpage.
+There is a shell.ipynb notebook in the github repository. Fill that notebook to complete your project.</description>
     </item>
     
     <item>
@@ -107,7 +109,7 @@ conda install -c anaconda biopython=1.68  </description>
       <guid>http://www.hcbravo.org/dscert-mldm/projects/</guid>
       <description> Similar document search with MinHash and LSH
  Medical Record Classification
- Unsupervised Learning   </description>
+ Unsupervised Learning Time-series forecasting with recurrent neural nets  </description>
     </item>
     
     <item>
