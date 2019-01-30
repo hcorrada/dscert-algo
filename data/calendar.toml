@@ -3,30 +3,22 @@
 
 #### DAY 1
 [day01]
-date = "8/28"
+date = "1/30 (SK)"
 
 [[day01.covers]]
-title = "Course Introduction"
-notes = "lectures/cmsc643-intro.pdf"
-
-[[day01.covers]]
-title = "An example ML application (HTML)"
-notes = "notebooks/intro_lab.html"
-
-[[day01.covers]]
-title = "An example ML application (IPython Notebook)"
-notes = "notebooks/intro_lab.ipynb"
+title = "Overview, data analysis, algorithms, sampling"
+#notes = "lectures/cmsc643-intro.pdf"
 
 #### DAY 2
 [day02]
-date = "9/4"
+date = "2/6 (SK)"
 
 [[day02.covers]]
-title = "Finding Similar Items / Itemset Mining"
-notes = "lectures/cmsc643_itemsets.pdf"
+title = "Bonferroni Principle, Sampling, Hash function"
+#notes = "lectures/cmsc643_itemsets.pdf"
 
 [[day02.prep]]
-title = "MMD, Ch. 3 and 6"
+title = "Leskovec et al, Ch. 4"
 
 #[[day02.workdue]]
 #title = "Survey"
@@ -34,96 +26,77 @@ title = "MMD, Ch. 3 and 6"
 
 #### DAY 3
 [day03]
-date = "9/11"
+date = "2/13 (SK)"
 
 [[day03.covers]]
-title = "Mathematical Background; Perceptrons"
-notes = "lectures/cmsc643-preliminaries.pdf"
+title = "Streaming, Frequency Estimation, Distinct Element Estimation"
+#notes = "lectures/cmsc643-preliminaries.pdf"
 
 [[day03.prep]]
-title = "CIML 3 and 4"
+title = "Leskovec et al, Ch. 4"
 
 #### DAY 4
 [day04]
-date = "9/18"
+date = "2/20 (SK)"
 
 [[day04.covers]]
-title = "Linear Models"
-notes = "lectures/cmsc643-linear_models.pdf"
+title = "K-center algoritm"
+#notes = "lectures/cmsc643-linear_models.pdf"
 
 [[day04.prep]]
-title = "CIML 7"
+title = "Leskovec et al, Ch. 5"
 
 #### DAY 5
 [day05]
-date = "9/25"
+date = "2/27 (SK)"
 
 [[day05.covers]]
-title = "Practial Issues: Feature Construction"
-
-[[day05.covers]]
-title = "Kernel Methods"
-notes = "lectures/cmsc643-kernels.pdf"
+title = "K-shingles min-hash"
 
 [[day05.prep]]
-title = "CIML 5.1-5.4"
-
-[[day05.prep]]
-title = "CIML 11"
+title = "Leskovec, Ch. 3"
 
 #### DAY 6
 [day06]
-date = "10/2"
+date = "3/6 (HCB)"
 
 [[day06.covers]]
-title = "Practical Issues; Model Selection and Assessment"
-notes = "lectures/cmsc643-model_selection.pdf"
+title = "Convex optimization principles"
+#notes = "lectures/cmsc643-model_selection.pdf"
 
-[[day06.prep]]
-title = "CIML 5"
-
-[[day06.workdue]]
-title = "Gradient Descent Exercise"
-link = "homeworks/gradient_descent.pdf"
+#[[day06.prep]]
+#title = "CIML 5"
 
 #### DAY 7
-# I am out in Colombia
 [day07]
-date = "10/9"
+date = "3/13 (HCB)"
 
 [[day07.covers]]
-title = "Decision Trees"
-notes = "lectures/cmsc643-trees.pdf"
+title = "Linear Programming"
+#notes = "lectures/cmsc643-trees.pdf"
 
-[[day07.prep]]
-title = "CIML 1; 13"
+#[[day07.prep]]
+#title = "CIML 1; 13"
 
 #### DAY 8
 
 [day08]
-date = "10/16"
+date = "3/20"
 
 [[day08.covers]]
-title = "Project 2 review"
-
-[[day08.covers]]
-title = "Random Forests"
-notes = "lectures/cmsc643-trees.pdf"
-
-[[day08.prep]]
-title = "CIML 13"
+title = "NO LECTURE: SPRING BREAK"
 
 #### DAY 9
 
 [day09]
-date = "10/23"
+date = "3/27 (HCB)"
 
 [[day09.covers]]
-title = "Ensemble Methods"
-notes = "lectures/cmsc643-ensembles.pdf"
+title = "Support Vector Machines: Theory and Algorithms"
+#notes = "lectures/cmsc643-ensembles.pdf"
 
-[[day09.prep]]
-title = "CIML 13"
+#[[day09.prep]]
+#title = "CIML 13"
 
 
 #[[day09.prep]]
@@ -131,78 +104,55 @@ title = "CIML 13"
 
 #### DAY 10
 [day10]
-date = "10/30"
+date = "4/3 (HCB)"
 
 [[day10.covers]]
-title = "Unsupervised Learning: Clustering"
-notes = "lectures/cmsc643-clustering.pdf"
+title = "Proximal Algorithms"
+#notes = "lectures/cmsc643-clustering.pdf"
 
-[[day10.covers]]
-title = "Unsupervised Learning: Dimensionality Reduction"
-notes = "lectures/cmsc643-dimensionality_reduction.pdf"
-
-[[day10.prep]]
-title = "CIML Ch. 15, 16"
+#[[day10.prep]]
+#title = "CIML Ch. 15, 16"
 
 
 #### DAY 11
 [day11]
-date = "11/6"
+date = "4/10 (HCB)"
 
 [[day11.covers]]
-title = "Neural Networks"
-notes = "lectures/cmsc643-neural_nets.pdf"
+title = "Graphical Models: Expectation Maximization"
+#notes = "lectures/cmsc643-neural_nets.pdf"
 
 #### DAY 12
 [day12]
-date = "11/13"
+date = "4/17 (HCB)"
 
 [[day12.covers]]
-title = "Deep Learning"
-notes = "lectures/cmsc643-deep_learning.pdf"
-
-[[day12.covers]]
-title = "Recurrent Neural Nets (from Stanford group)"
-notes = "lectures/rnn.pdf"
-
-[[day12.covers]]
-title = "Intro to Keras (.ipynb)"
-notes = "notebooks/intro_keras.ipynb"
-
-[[day12.covers]]
-title = "Intro to Keras (.html)"
-notes = "notebooks/intro_keras.html"
-
-[[day12.prep]]
-title = "Deep Learning Book, Ch. 6"
-link = "http://www.deeplearningbook.org/"
+title = "Graphical Models: Approximate Inference (Variational Methods)"
+#notes = "lectures/cmsc643-deep_learning.pdf"
 
 #### DAY 13
 [day13]
-date = "11/20"
+date = "4/24 (HCB)"
 
 [[day13.covers]]
-title = "Bias and Fairness"
-notes = "lectures/cmsc643-bias.pdf"
-
-[[day13.prep]]
-title = "CIML Ch. 8"
+title = "Graphical Models: Approximate Inference (Sampling Methods)"
+#notes = "lectures/cmsc643-bias.pdf"
 
 #### DAY 14
 [day14]
-date = "11/27"
+date = "5/1 (HCB)"
 
-[[day14.prep]]
-title = "CIML Ch. 14"
+#[[day14.prep]]
+#title = "CIML Ch. 14"
 
 [[day14.covers]]
-title = "Efficient Learning; Large-Scale Machine Learning"
-notes = "lectures/cmsc643-large_scale.pdf"
+title = "Contemporary Stochastic Gradient Descent"
+#notes = "lectures/cmsc643-large_scale.pdf"
 
 #### DAY 15
 [day15]
-date = "12/4"
+date = "5/8 (HCB)"
 
 [[day15.covers]]
-title = "Oral Examinations"
+title = "Take home final discussion"
 
