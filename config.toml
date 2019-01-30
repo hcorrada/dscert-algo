@@ -1,6 +1,6 @@
-baseurl = "http://www.hcbravo.org/dscert-mldm/"
+baseurl = "http://www.hcbravo.org/dscert-algo/"
 languageCode = "en-us"
-title = "CMSC643: Machine Learning and Data Mining"
+title = "CMSC644: Algorithms for Data Science"
 theme = "hugo-material-docs"
 metadataformat = "yaml"
 canonifyurls = true
@@ -10,7 +10,7 @@ googleAnalytics = ""
 [params]
 	# General information
 	author = "Héctor Corrada Bravo"
-	description = "Machine Learning and Data Mining course. Part of the Department of Computer Science of the University of Maryland's Graduate Certificate in Data Science"
+	description = "Course on algorithms for Data Science. Part of the Department of Computer Science of the University of Maryland's Graduate Certificate in Data Science"
 	copyright = "Released under the MIT license"
 
 	# Repository
@@ -54,10 +54,10 @@ googleAnalytics = ""
 	url    = "logistics/"
 	weight = 10
 
-[[menu.main]]
-	name   = "Resources"
-	url    = "resources/"
-	weight = 30
+#[[menu.main]]
+#	name   = "Resources"
+#	url    = "resources/"
+#	weight = 30
 
 [[menu.main]]
 	name   = "Projects"
