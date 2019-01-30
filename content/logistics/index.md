@@ -7,24 +7,32 @@ This page and the [Course Calendar]({{< baseurl >}}/calendar/index.html) constit
 
 ## Course Information
 
-**Machine Learning and Data Mining**  
-**CMSC643 Fall 2018**
+**Algorithms for Data Science**
+**CMSC644 Spring 2019**
 
 
 *	Lecture Meeting Times    
-    Tuesdays 7:00pm-9:30pm CSI 2118
+    Wednesdays 7:00pm-9:30pm CSI 3120
     
 *	Instructor:  
-    [H&eacute;ctor Corrada Bravo](http://www.cbcb.umd.edu/~hcorrada)  
+    - [Samir Khuller](http://www.cs.umd.edu/~samir)  
+    Department of Computer Science  
+    <samir@cs.umd.edu>  
+    Office: 4175 AV Williams     
+   
+   
+    - [H&eacute;ctor Corrada Bravo](http://www.cbcb.umd.edu/~hcorrada)  
     Center for Bioinformatics and Computational Biology  
     Department of Computer Science  
     <hcorrada@umiacs.umd.edu>  
-    Office: 3114F Biomolecular Sciences Building  
-    Phone Number: 301-405-2481  
-    **Office Hours:** before and after class or by appointment
+    Office: [3114F Biomolecular Sciences Building](https://www.cbcb.umd.edu/about-us/directions)  
+
+
+**Office Hours:** before and after class or by appointment
+
 * Communication:  
     - For course related questions, use [Piazza]({{< piazzaurl >}}) as indicated below.  
-    - For any other communication (e.g., absences accomodations etc.) email me including `[CMSC643]` in the message subject.  
+    - For any other communication (e.g., absences accomodations etc.) email me including `[CMSC644]` in the message subject.  
 
 We will use the class Piazza site [{{< piazzaurl >}}]({{< piazzaurl >}}) for questions, discussion and announcements. Assignments and grades for the class will be posted to the class ELMS site: [{{< elmurl >}}]({{< elmurl >}}).
 In case of an extended emergency closure, announcements on policy and procedures will be posted to Piazza.
@@ -32,32 +40,19 @@ In case of an extended emergency closure, announcements on policy and procedures
 ## Textbook and Resources:
 
 
-We will use the following textbooks:
+We will refer to the following textbooks
 
-- Daume (2017) _A Course in Machine Learning_ [Book Site](http://ciml.info/) 
 - Leskovec, et al. (2016). _Mining of Massive Datasets_. [Book Site](http://www.mmds.org/)  
-- Geron (2017) _Hands-On Machine Learning wiht Scikit-Learn and TensorFlow_. [Safari](https://www.safaribooksonline.com/library/view/hands-on-machine-learning/9781491962282/)
-- Chollet (2018) _Deep Learning with Python_. [Manning](https://www.manning.com/books/deep-learning-with-python)
+- Boyd and Vandenberghe (2004). _Convex Optimization_. [Book Site](https://web.stanford.edu/~boyd/cvxbook/)
+- Murphy (2012). _Machine Learning, a probabilistic perspective_. [Book Site](https://www.cs.ubc.ca/~murphyk/MLbook/)
 
 Other readings will be posted in the [Course Calendar]({{< baseurl >}}/calendar/index.html).
 
 ## Expected outcomes and topics covered
 
-Machine Learning methods have found their way into the modern data
-analyst's toolbox. This course introduces popular methods with an
-emphasis on their practical usage for data analysis. Coverage
-of their statistical and computational theoretical underpinnings acquaints students with methods to evaluate statistical machine learning models
-defined in terms of algorithms or function approximations.
+As large amounts of data are being created it is important to understand how to analyse the data to extract interesting trends and patterns. Since the volume of data is large, it may not be feasible to make more than a single pass over the data. Stream processing methods provide effective ways to extract useful information from large data sets by making very few passes on the data. Surprisingly, a lot of information can be gleaned by making a single pass over the data, or a small number of passes over the data. The first part of the course will cover random sampling and stream processing methods. We will also consider privacy issues in data bases and how these should be handled.
 
-Topics covered include: regression and prediction, tree-based methods,
-overview of supervised learning theory, support vector machines,
-kernel methods, ensemble methods, clustering,
-visualization of large datasets, graphical models among others.
-
-At the end of this course, students will be able to describe,
-implement and analyze algorithms that solve fundamental problems in
-Machine Learning. They will also be able to apply these methods to data in  variety of applications.
-
+CMSC 351. I expect familiarity with basic algorithms. This course is an algorithmic oriented course, with proofs of correctness etc.
 
 ## Expectations for Students
 
@@ -86,13 +81,12 @@ announcements. Please use the [Piazza page]({{< piazzaurl >}}) for
 
 ### Grading Procedures 
 
-* Data analysis projects (50%)  
-* Written exercises (30%)  
-* Final oral examination (20%) 
+* Homeworks and written exercises (70%)
+* Final take home exam (30%)
 
 ## University Policies and Resources
 
-Policies relevant to Undergraduate Courses are found here: http://ugst.umd.edu/courserelatedpolicies.html. Topics that are addressed in these various policies include academic integrity, student and instructor conduct, accessibility and accommodations, attendance and excused absences, grades and appeals, copyright and intellectual property.
+Policies relevant to courses are found here: http://ugst.umd.edu/courserelatedpolicies.html. Topics that are addressed in these various policies include academic integrity, student and instructor conduct, accessibility and accommodations, attendance and excused absences, grades and appeals, copyright and intellectual property.
 
 
 ## Course evaluations
