@@ -3,97 +3,72 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/projects/project_4/</loc>
-    <lastmod>2017-05-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/projects/project_2/</loc>
-    <lastmod>2017-02-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/projects/project_unsup/</loc>
-    <lastmod>2017-02-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/projects/project_3/</loc>
-    <lastmod>2017-02-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/projects/project_1/</loc>
-    <lastmod>2017-02-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/resources/howto-biopython/</loc>
+    <loc>http://www.hcbravo.org/dscert-algo/resources/howto-biopython/</loc>
     <lastmod>2017-01-25T08:54:37-08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/calendar/</loc>
+    <loc>http://www.hcbravo.org/dscert-algo/calendar/</loc>
     <lastmod>2016-08-30T10:13:51-04:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/projects/</loc>
+    <loc>http://www.hcbravo.org/dscert-algo/homeworks/</loc>
     <lastmod>2016-08-29T08:54:44-04:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/resources/</loc>
+    <loc>http://www.hcbravo.org/dscert-algo/resources/</loc>
     <lastmod>2016-08-29T08:54:37-04:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/logistics/</loc>
+    <loc>http://www.hcbravo.org/dscert-algo/logistics/</loc>
     <lastmod>2016-08-29T05:41:03-04:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/</loc>
+    <loc>http://www.hcbravo.org/dscert-algo/</loc>
     <lastmod>2016-08-28T17:13:09-04:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/</loc>
-    <lastmod>2017-05-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/calendar/</loc>
-    <lastmod>2016-08-30T10:13:51-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/logistics/</loc>
-    <lastmod>2016-08-29T05:41:03-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/projects/</loc>
-    <lastmod>2017-05-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/resources/</loc>
+    <loc>http://www.hcbravo.org/dscert-algo/</loc>
     <lastmod>2017-01-25T08:54:37-08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.hcbravo.org/dscert-mldm/tags/</loc>
+    <loc>http://www.hcbravo.org/dscert-algo/calendar/</loc>
+    <lastmod>2016-08-30T10:13:51-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.hcbravo.org/dscert-algo/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.hcbravo.org/dscert-algo/homeworks/</loc>
+    <lastmod>2016-08-29T08:54:44-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.hcbravo.org/dscert-algo/logistics/</loc>
+    <lastmod>2016-08-29T05:41:03-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.hcbravo.org/dscert-algo/resources/</loc>
+    <lastmod>2017-01-25T08:54:37-08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.hcbravo.org/dscert-algo/tags/</loc>
     <priority>0</priority>
   </url>
   

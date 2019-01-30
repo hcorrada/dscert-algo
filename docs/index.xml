@@ -1,91 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>CMSC643: Machine Learning and Data Mining</title>
-    <link>http://www.hcbravo.org/dscert-mldm/</link>
-    <description>Recent content on CMSC643: Machine Learning and Data Mining</description>
+    <title>CMSC644: Algorithms for Data Science</title>
+    <link>http://www.hcbravo.org/dscert-algo/</link>
+    <description>Recent content on CMSC644: Algorithms for Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license</copyright>
-    <lastBuildDate>Tue, 02 May 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Jan 2017 08:54:37 -0800</lastBuildDate>
     
-	<atom:link href="http://www.hcbravo.org/dscert-mldm/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.hcbravo.org/dscert-algo/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Project 4: SNP finding</title>
-      <link>http://www.hcbravo.org/dscert-mldm/projects/project_4/</link>
-      <pubDate>Tue, 02 May 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_4/</guid>
-      <description>Due: Thursday May 11, 2017
-Posted: May 2, 2017
-Last Update: May 2, 2017
-You will implement approximate string matching using a seed-and-check strategy based on exact matching using the Burrows-Wheeler transform. We are providing starter code to get you going. Instructions on implementation and code are here:
-https://gitlab.umiacs.umd.edu/hcorrada/cmsc423_project4
-I highly, highly recommend that you use git
-To get code you will be using for this project using git:</description>
-    </item>
-    
-    <item>
-      <title>Project 2: Classification with Health Records</title>
-      <link>http://www.hcbravo.org/dscert-mldm/projects/project_2/</link>
-      <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_2/</guid>
-      <description>Multiple due dates
-Posted: 10/2/2018
-Last Update: 10/9/2018
-Task We will use data from the following Kaggle dataset: https://www.kaggle.com/joniarroba/noshowappointments.
-The goal here is to predict patients that will not show up for medical appointments based on their medical records. You should read the dataset and task prediction in Kaggle to familiarize yourself as much as possible with the task and data.
-Part I: Data prep Due Oct 9, 2018</description>
-    </item>
-    
-    <item>
-      <title>Project 3: Unsupervised Learning</title>
-      <link>http://www.hcbravo.org/dscert-mldm/projects/project_unsup/</link>
-      <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_unsup/</guid>
-      <description>Posted: 11/6/2018
-Last Update: 11/6/2018
-Task Due: 11/13/2018
-We will be using the mortgage affordability provided by Zillow https://www.zillow.com/research/data/ to get experience with unsupervised learning methods. In particular you will use K-means clustering and two dimensionality reduction methods, one based on matrix decomposition and one based on manifold learning.
- Fork my project skeleton github repo on github https://github.com/hcorrada/cmsc643_unsup.git
- Click the &amp;lsquo;Fork&amp;rsquo; button on the upper right Go to your forked repository e.</description>
-    </item>
-    
-    <item>
-      <title>Project 4: Time Series Forecasting with Recurrent Neural Nets</title>
-      <link>http://www.hcbravo.org/dscert-mldm/projects/project_3/</link>
-      <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_3/</guid>
-      <description>Repository The github repository for this project is at https://github.com/hcorrada/cmsc643i_timeseries. You should have received an email from github to access the repository.
-You will use Keras for this project, make sure you can follow the introduction posted to the class calendar.
-This project is based on examples in Ch. 6 of the Keras book linked in the course webpage.
-There is a shell.ipynb notebook in the github repository. Fill that notebook to complete your project.</description>
-    </item>
-    
-    <item>
-      <title>Project 1: Similar document searching via MinHash and Locality Sensitive Hashing</title>
-      <link>http://www.hcbravo.org/dscert-mldm/projects/project_1/</link>
-      <pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.hcbravo.org/dscert-mldm/projects/project_1/</guid>
-      <description>Due: Multiple due dates, see below
-Posted: Sept. 1, 2018
-Last Update: Sept. 19, 2018
-In this first project we will implement the system described in the lecture notes for similar document searching. This project is inspired by http://mccormickml.com/2015/06/12/minhash-tutorial-with-python-code/ (Note: you can look at code there for inspiration but implement your own).
-The Task We will use documents from this repository http://www.inf.ed.ac.uk/teaching/courses/tts/assessed/assessment3.html. This is a dataset of documents for which we want to find possible plagiarism.</description>
-    </item>
     
     <item>
       <title>CMSC Resources</title>
-      <link>http://www.hcbravo.org/dscert-mldm/resources/howto-biopython/</link>
+      <link>http://www.hcbravo.org/dscert-algo/resources/howto-biopython/</link>
       <pubDate>Wed, 25 Jan 2017 08:54:37 -0800</pubDate>
       
-      <guid>http://www.hcbravo.org/dscert-mldm/resources/howto-biopython/</guid>
+      <guid>http://www.hcbravo.org/dscert-algo/resources/howto-biopython/</guid>
       <description> Install Biopython  Download and install Python 2.7
  Download and install Anaconda
  Use the following commad to install biopython:
@@ -94,30 +26,28 @@ conda install -c anaconda biopython=1.68  </description>
     
     <item>
       <title>CMSC643: Machine Learning and Data Mining -  Calendar</title>
-      <link>http://www.hcbravo.org/dscert-mldm/calendar/</link>
+      <link>http://www.hcbravo.org/dscert-algo/calendar/</link>
       <pubDate>Tue, 30 Aug 2016 10:13:51 -0400</pubDate>
       
-      <guid>http://www.hcbravo.org/dscert-mldm/calendar/</guid>
+      <guid>http://www.hcbravo.org/dscert-algo/calendar/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>CMSC643 Projects</title>
-      <link>http://www.hcbravo.org/dscert-mldm/projects/</link>
+      <title>CMSC644 Homeworks</title>
+      <link>http://www.hcbravo.org/dscert-algo/homeworks/</link>
       <pubDate>Mon, 29 Aug 2016 08:54:44 -0400</pubDate>
       
-      <guid>http://www.hcbravo.org/dscert-mldm/projects/</guid>
-      <description> Similar document search with MinHash and LSH
- Medical Record Classification
- Unsupervised Learning Time-series forecasting with recurrent neural nets  </description>
+      <guid>http://www.hcbravo.org/dscert-algo/homeworks/</guid>
+      <description>COMING SOON</description>
     </item>
     
     <item>
       <title>Resources</title>
-      <link>http://www.hcbravo.org/dscert-mldm/resources/</link>
+      <link>http://www.hcbravo.org/dscert-algo/resources/</link>
       <pubDate>Mon, 29 Aug 2016 08:54:37 -0400</pubDate>
       
-      <guid>http://www.hcbravo.org/dscert-mldm/resources/</guid>
+      <guid>http://www.hcbravo.org/dscert-algo/resources/</guid>
       <description>Setting up your learning system We will use Python to experiment with algorithms and datasets in the course. Follow these instructions to set it up
  Download and install Python 3: https://www.python.org/downloads/
  Download and install the Anaconda scientific python distribution: https://www.continuum.io/downloads/
@@ -126,47 +56,49 @@ conda install -c anaconda biopython=1.68  </description>
     
     <item>
       <title>Logistics</title>
-      <link>http://www.hcbravo.org/dscert-mldm/logistics/</link>
+      <link>http://www.hcbravo.org/dscert-algo/logistics/</link>
       <pubDate>Mon, 29 Aug 2016 05:41:03 -0400</pubDate>
       
-      <guid>http://www.hcbravo.org/dscert-mldm/logistics/</guid>
+      <guid>http://www.hcbravo.org/dscert-algo/logistics/</guid>
       <description>This page and the Course Calendar constitute the official syllabus for this class.
-Course Information Machine Learning and Data Mining
-CMSC643 Fall 2018
+Course Information Algorithms for Data Science CMSC644 Spring 2019
  Lecture Meeting Times
-Tuesdays 7:00pm-9:30pm CSI 2118
+Wednesdays 7:00pm-9:30pm CSI 3120
  Instructor:
-H&amp;eacute;ctor Corrada Bravo
+ Samir Khuller
+Department of Computer Science
+samir@cs.umd.edu
+Office: 4175 AV Williams
+ H&amp;eacute;ctor Corrada Bravo
 Center for Bioinformatics and Computational Biology
 Department of Computer Science
 hcorrada@umiacs.umd.edu
 Office: 3114F Biomolecular Sciences Building
-Phone Number: 301-405-2481
-Office Hours: before and after class or by appointment
- Communication:
- For course related questions, use Piazza as indicated below.</description>
+   Office Hours: before and after class or by appointment</description>
     </item>
     
     <item>
-      <title>CMSC643: Machine Learning and Data Mining</title>
-      <link>http://www.hcbravo.org/dscert-mldm/</link>
+      <title>CMSC644: Algorithms for Data Science</title>
+      <link>http://www.hcbravo.org/dscert-algo/</link>
       <pubDate>Sun, 28 Aug 2016 17:13:09 -0400</pubDate>
       
-      <guid>http://www.hcbravo.org/dscert-mldm/</guid>
-      <description>Course Information CMSC643: Machine Learning and Data Mining
-Fall 2018
+      <guid>http://www.hcbravo.org/dscert-algo/</guid>
+      <description>Course Information CMSC644: Algorithms for Data Science
+Spring 2019
  Instructor:
-H&amp;eacute;ctor Corrada Bravo
+ Samir Khuller
+Department of Computer Science
+samir@cs.umd.edu
+Office: 4175 AV Williams
+ H&amp;eacute;ctor Corrada Bravo
 Center for Bioinformatics and Computational Biology
 Department of Computer Science
 hcorrada@umiacs.umd.edu
 Office: 3114F Biomolecular Sciences Building
- Lecture Meeting Times
+  Lecture Meeting Times
 Tuesdays 7:00-9:30pm CSI 2118
   Links Check the calendar page for up-to-date course calendar.
-Check the logistics page for more information, including the official syllabus.
-Grades and assignments posted in ELMS.
-Discussion and questions in Piazza.</description>
+Check the logistics page for more information, including the official syllabus.</description>
     </item>
     
   </channel>
