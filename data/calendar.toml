@@ -40,18 +40,18 @@ title = "Leskovec et al, Ch. 4"
 date = "2/20 (SK)"
 
 [[day04.covers]]
-title = "K-center algoritm"
+title = "Similarity, MinHash"
 #notes = "lectures/cmsc643-linear_models.pdf"
 
 [[day04.prep]]
-title = "Leskovec et al, Ch. 5"
+title = "Leskovec et al, Ch. 3"
 
 #### DAY 5
 [day05]
 date = "2/27 (SK)"
 
 [[day05.covers]]
-title = "K-shingles min-hash"
+title = "Locality Sensitive Hashing"
 
 [[day05.prep]]
 title = "Leskovec, Ch. 3"
