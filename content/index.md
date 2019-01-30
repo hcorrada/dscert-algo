@@ -1,6 +1,6 @@
 ---
 date: 2016-08-28T17:13:09-04:00
-title: "CMSC643: Machine Learning and Data Mining"
+title: "CMSC644: Algorithms for Data Science"
 
 
 type: index
@@ -8,11 +8,17 @@ type: index
 
 ## Course Information
 
-**CMSC643: Machine Learning and Data Mining**  
-**Fall 2018** 
+**CMSC644: Algorithms for Data Science**  
+**Spring 2019** 
 
 *	Instructor:  
-    [H&eacute;ctor Corrada Bravo](http://www.cbcb.umd.edu/~hcorrada)  
+    - [Samir Khuller](http://www.cs.umd.edu/~samir)  
+    Department of Computer Science  
+    <samir@cs.umd.edu>  
+    Office: 4175 AV Williams     
+   
+   
+    - [H&eacute;ctor Corrada Bravo](http://www.cbcb.umd.edu/~hcorrada)  
     Center for Bioinformatics and Computational Biology  
     Department of Computer Science  
     <hcorrada@umiacs.umd.edu>  
