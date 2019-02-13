@@ -18,7 +18,7 @@ This page and the [Course Calendar]({{< baseurl >}}/calendar/index.html) constit
     - [Samir Khuller](http://www.cs.umd.edu/~samir)  
     Department of Computer Science  
     <samir@cs.umd.edu>  
-    Office: 4175 AV Williams     
+    Office: 3369 AV Williams     
    
    
     - [H&eacute;ctor Corrada Bravo](http://www.cbcb.umd.edu/~hcorrada)  

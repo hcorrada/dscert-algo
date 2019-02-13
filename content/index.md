@@ -15,7 +15,7 @@ type: index
     - [Samir Khuller](http://www.cs.umd.edu/~samir)  
     Department of Computer Science  
     <samir@cs.umd.edu>  
-    Office: 4175 AV Williams     
+    Office: 3369 AV Williams     
    
    
     - [H&eacute;ctor Corrada Bravo](http://www.cbcb.umd.edu/~hcorrada)  
@@ -25,7 +25,7 @@ type: index
     Office: [3114F Biomolecular Sciences Building](https://www.cbcb.umd.edu/about-us/directions)  
 
 *	Lecture Meeting Times    
-    Tuesdays 7:00-9:30pm CSI 2118
+    Wednesdays 7:00-9:30pm CSIC 3120
 
 ## Links
 
