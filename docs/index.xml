@@ -39,7 +39,7 @@ conda install -c anaconda biopython=1.68  </description>
       <pubDate>Mon, 29 Aug 2016 08:54:44 -0400</pubDate>
       
       <guid>http://www.hcbravo.org/dscert-algo/homeworks/</guid>
-      <description>COMING SOON</description>
+      <description></description>
     </item>
     
     <item>
@@ -99,6 +99,30 @@ Office: 3114F Biomolecular Sciences Building
 Wednesdays 7:00-9:30pm CSIC 3120
   Links Check the calendar page for up-to-date course calendar.
 Check the logistics page for more information, including the official syllabus.</description>
+    </item>
+    
+    <item>
+      <title>Homework 1</title>
+      <link>http://www.hcbravo.org/dscert-algo/homeworks/hw1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-algo/homeworks/hw1/</guid>
+      <description>&lt;p&gt;Bonferroni principle and hashing.&lt;br /&gt;
+&lt;strong&gt;Due: February 21&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Homework 2</title>
+      <link>http://www.hcbravo.org/dscert-algo/homeworks/hw2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.hcbravo.org/dscert-algo/homeworks/hw2/</guid>
+      <description>&lt;p&gt;Streams and Shingles&lt;br /&gt;
+&lt;strong&gt;Due March 13&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
