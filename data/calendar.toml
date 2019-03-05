@@ -61,11 +61,11 @@ title = "Leskovec, Ch. 3"
 date = "3/6 (HCB)"
 
 [[day06.covers]]
-title = "Convex optimization principles"
+title = "Clustering"
 #notes = "lectures/cmsc643-model_selection.pdf"
 
-#[[day06.prep]]
-#title = "CIML 5"
+[[day06.prep]]
+title = "Leskovec et al, Ch. 7"
 
 #### DAY 7
 [day07]
