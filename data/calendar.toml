@@ -62,7 +62,7 @@ date = "3/6 (HCB)"
 
 [[day06.covers]]
 title = "Clustering"
-#notes = "lectures/cmsc643-model_selection.pdf"
+notes = "lectures/cmsc644-clustering.pdf"
 
 [[day06.prep]]
 title = "Leskovec et al, Ch. 7"

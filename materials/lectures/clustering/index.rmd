@@ -1,5 +1,5 @@
 ---
-title: "Unsupervised Learning: Clustering Analysis"
+title: "Data Clustering"
 author: "Héctor Corrada Bravo"
 company: "University of Maryland"
 date: "`r Sys.Date()`"
@@ -22,53 +22,16 @@ library(cowplot)
 
 .banner[![](img/epiviz.png)]
 
-.title[Unsupervised Learning: Clustering Analysis]
+.title[Data Clustering]
 
 .author[Héctor Corrada Bravo]
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC 643: `r Sys.Date()`
+CMSC 644: `r Sys.Date()`
 ]
 
 .logo[![](img/logo.png)]
-
----
-
-## Unsupervised Learning
-
-So far we have seen "Supervised Methods" where our goal is to analyze a _response_ (or outcome) based
-on various _predictors_. 
-
-In many cases, especially for Exploratory Data Analysis, we want methods to extract patterns on
-variables without analyzing a specific _response_. 
-
-Methods for the latter case are called "Unsupervised Methods". Examples are _Principal Component Analysis_ and _Clustering_.
-
----
-
-## Unsupervised Learning
-
-Interpretation of these methods is much more _subjective_ than in Supervised Learning. 
-
-For example: 
-if we want to know if a given _predictor_ is related to _response_, we can perform statistical inference using hypothesis testing. 
-
----
-
-## Unsupervised Learning
-
-If we want to know which predictors are useful for prediction: use cross-validation to do model selection. 
-
-Finally, if we want to see how well we can predict a specific response, we can use cross-validation to report on test error. 
-
----
-
-## Unsupervised Learning
-
-In unsupervised methods, there is no similar clean evaluation methodology. 
-
-Nonetheless, they can be very useful methods to understand data at hand.
 
 ---
 
@@ -147,40 +110,6 @@ tidy_afford %>%
 ]
 
 .column[Can we partition counties into groups of counties with similar value trends across time?]
-
----
-
-## Preliminaries
-
-In "Supervised Learning" we were concerned with estimates that minimize some error function relative to the outcome of interest $Y$:
-
-$$\mu(x) = \arg \min_{\theta} E_{Y|X} L(Y, \theta)$$
-
----
-
-## Preliminaries
-
-In order to do this, explicitly or not, the methods we were using would be concerned with properties of the conditional probability distribution $Pr(Y|X)$, 
-
-without concerning itself with probability distribution $Pr(X)$ of the covariates themselves. 
-
----
-
-## Preliminaries
-
-In unsupervised learning, we are interested in properties of $Pr(X)$. 
-
-In our example, what can we say about the distribution of home value time series? 
-
-Since the dimensionality of $Pr(X)$ can be large, unsupervised learning methods seek to find structured representations of $Pr(X)$ that would be possible to estimate. 
-
----
-
-## Preliminaries
-
-In _clustering_ we assume that predictor space is partitioned and that $Pr(X)$ is defined over those partitions. 
-
-In _dimensionality reduction_ we assume that $Pr(X)$ is really defined over a space (manifold) of smaller dimension. We will start studying clustering first.
 
 ---
 
@@ -302,6 +231,54 @@ This may of course lead to a dissimilarity that is not a proper distance.
 
 ---
 
+## Limitations of Distance-based clustering
+
+When working with distances, we are quickly confronted with the _curse of dimensionality_.
+
+One flavor: in high dimensions: all points are equi-distant
+
+---
+layout: true
+
+## The curse of dimensionality
+
+---
+
+Consider the case where we have many covariates. We want to use a distance-based clustering  method.  
+
+--
+
+Basically, we need to define distance and look for small
+multi-dimensional "balls"
+around the data points. With many covariates this becomes
+difficult. 
+
+---
+
+
+Imagine we have equally spaced data and that each
+covariate is in $[0,1]$. We want something that clusters points into _local_ regions, containg some reasonably small amount of data points (say 10%). Let's imagine these are high-dimensional cubes.
+
+--
+
+If we have 
+$p$ covariates and we are forming $p$-dimensional cubes, then each
+side of the cube must have size $l$ determined by $l \times l \times \dots \times l = l^p = .10$. 
+
+---
+
+If the number of covariates is p=10, then $l = .1^{1/10} = .8$. So it
+really isn't local! If we reduce the percent of data we consider to
+1%, $l=0.63$. Still not very local.  
+
+--
+
+If we keep reducing the size of the 
+neighborhoods  we will end up with very small number
+of data points in each cluster and require a large number of clusters.
+
+---
+layout: false
 
 ## K-means Clustering
 
@@ -565,6 +542,121 @@ factoextra::fviz_gap_stat(gap_stat)
 
 ---
 
+## Large-scale clustering
+
+Cost of K-means as presented:
+
+Each iteration: Compute distance for each point to centroid $O(knp)$
+  
+--
+
+This implies we have to do multiple passes over entire dataset.
+
+Not good for massive datasets
+
+--
+
+Can we do this in "almost" a single pass?
+
+---
+layout: true
+
+## Large-scale clustering (BFR Algorithm)
+
+---
+
+1. Select $k$ points as before
+2. Process data file in chunks:
+  - Set chunk size so each can be processed in main memory
+  - Will use memory for workspace so not entire memory available
+  
+---
+
+For each chunk
+
+- All points _sufficiently_ close to the centroid of one of the $k$ clusters is assigned to that cluster (_Discard Set_)
+
+--
+
+- Remaining points are clustered (e.g., using $k$-means with some value of $k$. Two cases
+  - Clusters with more than one point (_Compressed Set_)
+  - Singleton clusters (_Retained Set_)
+
+--
+
+- Try to merge clusters in _Compressed Set_
+
+---
+
+What is sufficiently close?
+
+- "Weighted" distance to centroid below some threshold.
+
+$$
+\sqrt{\sum_{i=1}^d\frac{(p_i - c_i)^2}{\sigma_i}}
+$$
+- $c_i$: cluster mean for feature $i$  
+- $\sigma_i$: cluster standard deviation of feature $i$
+
+---
+
+### Assumption: points are distributed along axis-parallel ellipses
+
+![](img/ok.png)
+
+---
+
+Under this assumption, we only need to store means and variances to calculate distances
+
+--
+
+We can do this by storing for each cluster $j$:
+
+- $N_j$ number of points assigned to cluster  
+- $s_{ij}$ sum of values of feature $i$ in cluster $j$   
+- $s^2_{ij}$ sum of squares of values of feature $i$ in cluster $j$
+
+--
+
+Constant amount of space to represent cluster
+
+--
+
+_Exercise._ show these are sufficient to calculate weighted distance
+
+---
+
+This is used to represent (final) clusters in _Discard Set_ and (partial) clusters in _Compressed Set_
+
+Only points explicitly in memory are those in the _Retained Set_
+
+--
+
+Points outside of _Retained Set_ are never kept in memory (written out along with cluster assignment)
+
+---
+
+### Merging clusters in _Compressed Set_
+
+Example: Merge if the variance of combined clusters is sufficiently close to variance of separate clusters
+
+---
+
+After all data is processed:
+
+- Assign points in _Retained Set_ to cluster with nearest centroid
+
+- Merge partial clusters in _Compressed Set_ with final clusters in _Discarded Set_
+
+--
+
+Or,
+
+Flag all of these as _outliers_
+
+---
+layout: false
+
 ## Soft K-means Clustering
 
 Instead of the combinatorial approach of the $K$-means algorithm, take a more direct probabilistic approach to modeling distribution $Pr(X)$. 
@@ -713,92 +805,6 @@ $$\hat{\pi}_k = \frac{\sum_{i=1}^N\gamma_{ik}(\theta)}{N}$$
 
 The name "soft" K-means refers to the fact that parameter estimates for each cluster are obtained by weighted averages across all observations.
 
----
-exclude: true
+This is an instance of the *Expectation-Maximization Algorithm* which we will see again later this semester.
 
-## General Model-based clustering
 
-Clustering by mixtures can be generalized in many directions. 
-
-For instance, we can expand the multivariate normal model used in each cluster such that
-$f_k(X) \approx N(\mu_k,\Sigma_k)$ where $\Sigma_k$ is covariance matrix. 
-
----
-exclude: true
-
-## General Model-based Clustering
-
-Since estimates based on likelihood, use criteria applicable to likelihood methods for model selection, e.g., Bayesian Information Criterion (BIC). 
-
-This permits selection of the number of mixture components, and covariance parameterization. 
-
----
-class: split-60
-exclude: true
-
-## General Model-based Clustering
-
-.column[For our example data, we obtain a more reasonable result where the optimal number of clusters $K=8$ rather than $K=1$ obtained with the standard K-means algorithm.]
-
-```{r load_mclust, echo=FALSE, message=FALSE, results="hide"}
-library(mclust)
-library(broom)
-```
-
-```{r mclust, echo=FALSE, message=FALSE, cache=TRUE, results="hide"}
-mc_res <- mclust::Mclust(value_mat)
-```
-
-.column[
-```{r mclust_bic, echo=FALSE, message=FALSE, fig.height=6}
-plot(mc_res, what="BIC")
-```
-]
-
----
-exclude: true
-
-## General Model-based Clustering
-
-```{r mclust_broom, echo=FALSE, message=FALSE}
-mc_augmented_df <- mc_res %>%
-  broom::augment(wide_afford_df) %>%
-  dplyr::select(RegionID, cluster=.class, matches("^X[1|2]")) %>%
-  gather(time, affordability, matches("^X[1|2]")) %>%
-  mutate(time = stringr::str_replace(time, "^X","")) %>%
-  type_convert(col_types=cols(time=col_date(format="%Y.%m.%d")))
-
-mc_centers <- mc_res %>%
-  broom::tidy() %>%
-  dplyr::select(cluster=component, starts_with("mean")) %>%
-  gather(time, affordability, matches("^mean")) %>%
-  mutate(time = stringr::str_replace(time, "mean.", "")) %>%
-  type_convert(col_types=cols(time=col_date(format="%Y-%m-%d")))
-```
-
-```{r mclust_clusters, echo=FALSE, message=FALSE, fig.align="center"}
-mc_augmented_df %>%
-  ggplot(aes(x=time, y=affordability)) +
-    geom_line(aes(group=RegionID), color="GRAY", alpha=1/2, size=1/2) +
-    geom_line(data=mc_centers, color="BLACK", alpha=1/2, size=1/2) +
-    facet_wrap(~cluster)
-```
-
----
-exclude: true
-
-## General Model-based Clustering
-
-Applying other cluster conditional distributions, the cluster mixture model can also be used for other datatypes where the normal distribution is not appropriate. 
-
-There are also kernel-based methods, where a kernel function is used to define a dissimilarity measure, that apply clustering algorithms to situations where non-linearity via kernel methods is applicable.
-
----
-
-## Summary 
-
-Clustering methods are intuitive methods useful to understand structure within unlabeled observations. 
-
-Model-based methods, using the EM algorithm, provide a large amount of flexibililty over simpler methods like the K-means algorithm.
-
-Kernel-based clustering methods (Kernel K-means) permit the clustering of observations based on non-linear similarity functions.
