@@ -73,7 +73,7 @@ date = "3/13 (HCB)"
 
 [[day07.covers]]
 title = "The EM algorithm"
-notes = "lectures/cmsc644-em_algrithm.pdf"
+notes = "lectures/cmsc644-em_algorithm.pdf"
 
 #[[day07.prep]]
 #title = "CIML 1; 13"
