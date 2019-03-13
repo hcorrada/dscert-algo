@@ -72,8 +72,8 @@ title = "Leskovec et al, Ch. 7"
 date = "3/13 (HCB)"
 
 [[day07.covers]]
-title = "Linear Programming"
-#notes = "lectures/cmsc643-trees.pdf"
+title = "The EM algorithm"
+notes = "lectures/cmsc644-em_algrithm.pdf"
 
 #[[day07.prep]]
 #title = "CIML 1; 13"
