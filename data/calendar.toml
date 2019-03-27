@@ -92,8 +92,8 @@ title = "NO LECTURE: SPRING BREAK"
 date = "3/27 (HCB)"
 
 [[day09.covers]]
-title = "Support Vector Machines: Theory and Algorithms"
-#notes = "lectures/cmsc643-ensembles.pdf"
+title = "Approximate Inference, Sampling Methods"
+notes = "lectures/cmsc645-gibbs_sampling.pdf"
 
 #[[day09.prep]]
 #title = "CIML 13"
@@ -107,8 +107,8 @@ title = "Support Vector Machines: Theory and Algorithms"
 date = "4/3 (HCB)"
 
 [[day10.covers]]
-title = "Proximal Algorithms"
-#notes = "lectures/cmsc643-clustering.pdf"
+title = "Approximate Inference, Variational Methods"
+#notes = "lectures/cmsc643-deep_learning.pdf"
 
 #[[day10.prep]]
 #title = "CIML Ch. 15, 16"
@@ -119,24 +119,26 @@ title = "Proximal Algorithms"
 date = "4/10 (HCB)"
 
 [[day11.covers]]
-title = "Graphical Models: Expectation Maximization"
-#notes = "lectures/cmsc643-neural_nets.pdf"
+title = "Support Vector Machines: Theory and Algorithms"
+#notes = "lectures/cmsc643-ensembles.pdf"
 
 #### DAY 12
 [day12]
 date = "4/17 (HCB)"
 
 [[day12.covers]]
-title = "Graphical Models: Approximate Inference (Variational Methods)"
-#notes = "lectures/cmsc643-deep_learning.pdf"
+title = "Proximal Algorithms"
+#notes = "lectures/cmsc643-clustering.pdf"
+
 
 #### DAY 13
 [day13]
 date = "4/24 (HCB)"
 
 [[day13.covers]]
-title = "Graphical Models: Approximate Inference (Sampling Methods)"
-#notes = "lectures/cmsc643-bias.pdf"
+title = "Contemporary Stochastic Gradient Descent"
+#notes = "lectures/cmsc643-large_scale.pdf"
+
 
 #### DAY 14
 [day14]
@@ -146,8 +148,7 @@ date = "5/1 (HCB)"
 #title = "CIML Ch. 14"
 
 [[day14.covers]]
-title = "Contemporary Stochastic Gradient Descent"
-#notes = "lectures/cmsc643-large_scale.pdf"
+title = "TBD"
 
 #### DAY 15
 [day15]
