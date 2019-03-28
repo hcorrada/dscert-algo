@@ -93,7 +93,7 @@ date = "3/27 (HCB)"
 
 [[day09.covers]]
 title = "Approximate Inference, Sampling Methods"
-notes = "lectures/cmsc645-gibbs_sampling.pdf"
+notes = "lectures/cmsc644-gibbs_sampling.pdf"
 
 #[[day09.prep]]
 #title = "CIML 13"
