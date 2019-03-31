@@ -110,9 +110,9 @@ date = "4/3 (HCB)"
 title = "Approximate Inference, Variational Methods"
 #notes = "lectures/cmsc643-deep_learning.pdf"
 
-#[[day10.prep]]
-#title = "CIML Ch. 15, 16"
-
+[[day10.prep]]
+title = "Hoffman, et al. (2013). Stochastic Variational Inference"
+link = "https://arxiv.org/abs/1206.7051"
 
 #### DAY 11
 [day11]
