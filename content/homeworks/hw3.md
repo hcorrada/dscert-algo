@@ -9,3 +9,4 @@ Topic Modeling: EM and Gibbs Sampling
 <!--more-->
 
 [HTML](/homeworks/topic_modeling.html)
+[Example Data](/homeworks/data_prep.html)
