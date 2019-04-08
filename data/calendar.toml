@@ -122,6 +122,10 @@ date = "4/10 (HCB)"
 title = "Support Vector Machines: Theory and Algorithms"
 #notes = "lectures/cmsc643-ensembles.pdf"
 
+[[day11.prep]]
+title = "Hastie, Tibshirani and Friedman, ESL Ch. 12.1-12.3"
+link = "https://web.stanford.edu/~hastie/ElemStatLearn/"
+
 #### DAY 12
 [day12]
 date = "4/17 (HCB)"
