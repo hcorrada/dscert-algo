@@ -120,7 +120,7 @@ date = "4/10 (HCB)"
 
 [[day11.covers]]
 title = "Support Vector Machines: Theory and Algorithms"
-#notes = "lectures/cmsc643-ensembles.pdf"
+notes = "lectures/cmsc644-svms.pdf"
 
 [[day11.prep]]
 title = "Hastie, Tibshirani and Friedman, ESL Ch. 12.1-12.3"
@@ -128,10 +128,10 @@ link = "https://web.stanford.edu/~hastie/ElemStatLearn/"
 
 #### DAY 12
 [day12]
-date = "4/17 (HCB)"
+date = "4/17"
 
 [[day12.covers]]
-title = "Proximal Algorithms"
+title = "Guest lecture by Tom Goldstein"
 #notes = "lectures/cmsc643-clustering.pdf"
 
 

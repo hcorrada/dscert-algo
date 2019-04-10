@@ -25,7 +25,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: `r Sys.Date()`
+CMSC644: `r Sys.Date()`
 ]
 
 .logo[![](img/logo.png)]
@@ -38,9 +38,7 @@ State-of-the-art classification and regression method
 
 Flexible and efficient framework to learn classifers. 
 
---
-
-Build upon linear methods we have discussed previously and have a nice geometric interpretation of how they are trained (based maximum margin arguments). 
+Nice geometric interpretation of how they are trained (based maximum margin arguments). 
 
 ---
 
@@ -57,7 +55,7 @@ class: split-60
 
 .column[SVMs follow the "predictor space partition" framework]
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library(MASS)
 
 library(RColorBrewer)
@@ -282,7 +280,7 @@ step.
 
 --
 
-This basic algorithm will form the basis of our work on neural networks and deep learning later on. 
+This is the gradient descent algorithm that forms the basis of neural networks and deep learning. 
 
 ---
 
@@ -381,7 +379,7 @@ $$
 
 ## Maximum margin hyper-planes
 
-Rewrite optimization problem setting $M=1/\|\beta\|^2$ and using a little bit of algebra (see Section 4.5 of Hastie and Tibshirani):
+Rewrite optimization problem setting $M=1/\|\beta\|^2$ and using a little bit of algebra:
 
 $$
 \mathrm{min}_{\beta_0, \beta} \frac{1}{2} \|\beta\|^2 \\\\
@@ -403,9 +401,93 @@ Minimize the norm of $\beta$ under the constraint that it classifies every obser
 
 ---
 
+## Constrained Optimization
+
+Recall the standard constrained optimization problem we encountered before
+
+$$
+\begin{array}
+{} \min_x & f_0(x) \\
+\mathrm{s.t.} & f_i(x) \leq 0 \; i=1,\ldots,m\\
+{} & h_i(x) = 0 \; i=1,\ldots,p
+\end{array}
+$$
+
+--
+
+And associated Lagrangian
+
+$$L(x,\lambda,\nu) = f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) + \sum_{i=1}^p \nu_i h_i(x)$$
+
+---
+## Constrained Optimization
+
+Let's define the _dual_ equation
+
+$$
+g(\lambda, \nu) = \min_x L(x,\lambda,\nu)
+$$
+--
+
+And the dual problem
+
+$$
+\begin{array}
+{} \max_{\lambda, \nu} & g(\lambda, \nu) \\
+\mathrm{s.t.} & \lambda_i \geq 0 \; i=1,\ldots,m
+\end{array}
+$$
+
+---
+
+## Constrained Optimization
+
+Duality gap: let $\tilde{x}$ be primal optimal, then
+
+$$
+g(\lambda,\nu) \leq f_0(\tilde{x})
+$$
+
+--
+
+If $\tilde{x}$ is _primal optimal_ and $(\tilde{\lambda},\tilde{\nu})$ are _dual optimal_ then
+
+$$
+g(\tilde{\lambda},\tilde{\nu}) = f_0(\tilde{x})
+$$
+---
+
+## Constrained Optimization
+
+Let's restate the optimality conditions (Karush-Kuhn-Tucker) 
+
+$$
+\begin{array}
+{} f_i(\tilde{x}) \leq 0 & (\textrm{primal feasible}) \\
+h_i(\tilde{x}) = 0 & {} \\
+\tilde{\lambda}_i \geq 0 & (\textrm{dual feasible}) \\
+\tilde{\lambda_i}f_i(\tilde{x}) = 0 & (\textrm{complementarity}) \\
+\nabla_x L(\tilde{x},\tilde{\lambda},\tilde{\nu}) = 0 & (\textrm{saddle point})
+\end{array}
+$$
+
+---
+
 ## Maximum-margin hyper-planes
 
-We can switch between equivalent constrained minimization and constrained maximization problems. 
+What does the Lagrangian look like for the maximum-margin hyper-plane problem?
+
+$$
+L(\beta_0, \beta, \alpha) = \frac{1}{2} \|\beta \|^2 + \sum_i -\alpha_i[y_i(\beta_0 + \beta'x_i) - 1)]
+$$
+
+--
+
+You can then find _dual function_ by solving $\min_x L(x,\lambda,\nu)$
+
+---
+
+## Maximum-margin hyper-planes
 
 In the maximum-margin hyper-plane case, the equivalent constrained maximization problem (the _dual_ problem) is:
 
@@ -420,6 +502,10 @@ $$\mathrm{max}_{\alpha} \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k
 \mathrm{s.t.} \alpha_i \geq 0 \, \forall i$$
 
 This quadratic optimization problem is usually easier to optimize than the original problem (notice there is only positivity constraints on $\alpha$).
+
+--
+
+We can still recover original parameters $\beta_0$ and $\beta$ from solution $\alpha$.
 
 ---
 
@@ -639,9 +725,7 @@ $$\mathrm{max}_{\alpha} \; \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum
 
 ## SVM classification example
 
-Let's try fitting SVMs to the credit card default dataset we saw in previous examples. 
-
-Let's start with a linear SVM (where $k$ is the inner product). 
+Let's try fitting SVMs to a credit card default dataset. Let's start with a linear SVM (where $k$ is the inner product). 
 
 ---
 

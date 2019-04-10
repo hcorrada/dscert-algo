@@ -4,8 +4,9 @@
     <title>Support Vector Machines</title>
     <meta charset="utf-8">
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2017-08-04" />
-    <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
+    <meta name="date" content="2019-04-10" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
@@ -23,7 +24,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: 2017-08-04
+CMSC644: 2019-04-10
 ]
 
 .logo[![](img/logo.png)]
@@ -36,9 +37,7 @@ State-of-the-art classification and regression method
 
 Flexible and efficient framework to learn classifers. 
 
---
-
-Build upon linear methods we have discussed previously and have a nice geometric interpretation of how they are trained (based maximum margin arguments). 
+Nice geometric interpretation of how they are trained (based maximum margin arguments). 
 
 ---
 
@@ -58,7 +57,7 @@ class: split-60
 
 
 .column[
-&lt;img src="index_files/figure-html/unnamed-chunk-2-1.png" width="672" /&gt;
+![](index_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -120,10 +119,10 @@ With this we can easily
 describe the two partitions as
 
 $$
-\begin{aligned}
+`\begin{aligned}
 L^+ &amp; =\{x:\beta_0 + \beta'x&gt;0\}, \\\\
 L^{-} &amp; =\{x:\beta_0 + \beta'x&lt;0\}
-\end{aligned}
+\end{aligned}`
 $$
 
 ---
@@ -206,7 +205,7 @@ step.
 
 --
 
-This basic algorithm will form the basis of our work on neural networks and deep learning later on. 
+This is the gradient descent algorithm that forms the basis of neural networks and deep learning. 
 
 ---
 
@@ -305,7 +304,7 @@ $$
 
 ## Maximum margin hyper-planes
 
-Rewrite optimization problem setting `\(M=1/\|\beta\|^2\)` and using a little bit of algebra (see Section 4.5 of Hastie and Tibshirani):
+Rewrite optimization problem setting `\(M=1/\|\beta\|^2\)` and using a little bit of algebra:
 
 $$
 \mathrm{min}_{\beta_0, \beta} \frac{1}{2} \|\beta\|^2 \\\\
@@ -327,9 +326,93 @@ Minimize the norm of `\(\beta\)` under the constraint that it classifies every o
 
 ---
 
+## Constrained Optimization
+
+Recall the standard constrained optimization problem we encountered before
+
+$$
+`\begin{array}
+{} \min_x &amp; f_0(x) \\
+\mathrm{s.t.} &amp; f_i(x) \leq 0 \; i=1,\ldots,m\\
+{} &amp; h_i(x) = 0 \; i=1,\ldots,p
+\end{array}`
+$$
+
+--
+
+And associated Lagrangian
+
+`$$L(x,\lambda,\nu) = f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) + \sum_{i=1}^p \nu_i h_i(x)$$`
+
+---
+## Constrained Optimization
+
+Let's define the _dual_ equation
+
+$$
+g(\lambda, \nu) = \min_x L(x,\lambda,\nu)
+$$
+--
+
+And the dual problem
+
+$$
+`\begin{array}
+{} \max_{\lambda, \nu} &amp; g(\lambda, \nu) \\
+\mathrm{s.t.} &amp; \lambda_i \geq 0 \; i=1,\ldots,m
+\end{array}`
+$$
+
+---
+
+## Constrained Optimization
+
+Duality gap: let `\(\tilde{x}\)` be primal optimal, then
+
+$$
+g(\lambda,\nu) \leq f_0(\tilde{x})
+$$
+
+--
+
+If `\(\tilde{x}\)` is _primal optimal_ and `\((\tilde{\lambda},\tilde{\nu})\)` are _dual optimal_ then
+
+$$
+g(\tilde{\lambda},\tilde{\nu}) = f_0(\tilde{x})
+$$
+---
+
+## Constrained Optimization
+
+Let's restate the optimality conditions (Karush-Kuhn-Tucker) 
+
+$$
+`\begin{array}
+{} f_i(\tilde{x}) \leq 0 &amp; (\textrm{primal feasible}) \\
+h_i(\tilde{x}) = 0 &amp; {} \\
+\tilde{\lambda}_i \geq 0 &amp; (\textrm{dual feasible}) \\
+\tilde{\lambda_i}f_i(\tilde{x}) = 0 &amp; (\textrm{complementarity}) \\
+\nabla_x L(\tilde{x},\tilde{\lambda},\tilde{\nu}) = 0 &amp; (\textrm{saddle point})
+\end{array}`
+$$
+
+---
+
 ## Maximum-margin hyper-planes
 
-We can switch between equivalent constrained minimization and constrained maximization problems. 
+What does the Lagrangian look like for the maximum-margin hyper-plane problem?
+
+$$
+L(\beta_0, \beta, \alpha) = \frac{1}{2} \|\beta \|^2 + \sum_i -\alpha_i[y_i(\beta_0 + \beta'x_i) - 1)]
+$$
+
+--
+
+You can then find _dual function_ by solving `\(\min_x L(x,\lambda,\nu)\)`
+
+---
+
+## Maximum-margin hyper-planes
 
 In the maximum-margin hyper-plane case, the equivalent constrained maximization problem (the _dual_ problem) is:
 
@@ -344,6 +427,10 @@ In the maximum-margin hyper-plane case, the equivalent constrained maximization 
 \mathrm{s.t.} \alpha_i \geq 0 \, \forall i$$`
 
 This quadratic optimization problem is usually easier to optimize than the original problem (notice there is only positivity constraints on `\(\alpha\)`).
+
+--
+
+We can still recover original parameters `\(\beta_0\)` and `\(\beta\)` from solution `\(\alpha\)`.
 
 ---
 
@@ -536,7 +623,7 @@ class: split-50
 
 ## Non-linear Support Vector Machine
 
-&lt;img src="index_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -551,9 +638,7 @@ The optimization problem is very similar
 
 ## SVM classification example
 
-Let's try fitting SVMs to the credit card default dataset we saw in previous examples. 
-
-Let's start with a linear SVM (where `\(k\)` is the inner product). 
+Let's try fitting SVMs to a credit card default dataset. Let's start with a linear SVM (where `\(k\)` is the inner product). 
 
 ---
 
@@ -714,7 +799,15 @@ Kernel trick gives a lot of flexibility
 <script>var slideshow = remark.create({
 "ratio": "16:9"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
   var url = this;
@@ -722,19 +815,30 @@ remark.macros['scale'] = function (percentage) {
 };
 </script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
