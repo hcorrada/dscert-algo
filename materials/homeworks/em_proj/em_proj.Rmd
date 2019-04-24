@@ -142,10 +142,10 @@ def lda_gibbs(doc_mat, num_topics=5, alpha=1, beta=1, total_iter=200, burn_iter=
   i = 0
   while True:
     # overwrite gamma since it can get rather large
-    compute_gamma(doc_mat, gamma, p, theta)
+    compute_gamma(gamma, p, theta)
     
     # overwrite delta since it can get rahter large
-    sample_delta(gamma, delta)
+    sample_delta(doc_mat, gamma, delta)
 
     # keep estimate if past burn_in iterations
     if i >= burn_iter:

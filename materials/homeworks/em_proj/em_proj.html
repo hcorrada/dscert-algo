@@ -1525,9 +1525,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -1558,8 +1556,6 @@ summary {
 </style>
 
 
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -1631,6 +1627,15 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -1750,10 +1755,10 @@ Pr(D|\{p_d\},\{\theta_t\}) =
   i = 0
   while True:
     # overwrite gamma since it can get rather large
-    compute_gamma(doc_mat, gamma, p, theta)
+    compute_gamma(gamma, p, theta)
     
     # overwrite delta since it can get rahter large
-    sample_delta(gamma, delta)
+    sample_delta(doc_mat, gamma, delta)
 
     # keep estimate if past burn_in iterations
     if i &gt;= burn_iter:
