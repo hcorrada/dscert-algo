@@ -1765,8 +1765,8 @@ Pr(D|\{p_d\},\{\theta_t\}) =
       j = i - burn_iter
       delta_estimates[:,:,:,j] = delta
       
-    p = sample_p(gamma, alpha)
-    theta = sample_theta(gamma, beta)
+    p = sample_p(delta, alpha)
+    theta = sample_theta(delta, beta)
     
     if i &gt;= total_iter:
       break
