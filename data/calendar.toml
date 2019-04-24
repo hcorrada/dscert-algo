@@ -143,6 +143,14 @@ link = "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
 date = "4/24 (HCB)"
 
 [[day13.covers]]
+title = "HW3 First part solution (HTML)"
+notes = "notebooks/Part1Solution.html"
+
+[[day13.covers]]
+title = "HW3 First part solution (ipynb)"
+notes = "notebooks/Part1Solution.ipynb"
+
+[[day13.covers]]
 title = "Contemporary Stochastic Gradient Descent"
 notes = "lectures/cmsc644-sgd.pdf"
 
