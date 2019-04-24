@@ -131,9 +131,12 @@ link = "https://web.stanford.edu/~hastie/ElemStatLearn/"
 date = "4/17"
 
 [[day12.covers]]
-title = "Guest lecture by Tom Goldstein"
+title = "Guest lecture by Tom Goldstein: Proximal Algorithms"
 #notes = "lectures/cmsc643-clustering.pdf"
 
+[[day12.prep]]
+title = "Parikh and Boyd (2013). Proximal Algorithms"
+link = "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
 
 #### DAY 13
 [day13]
@@ -143,6 +146,9 @@ date = "4/24 (HCB)"
 title = "Contemporary Stochastic Gradient Descent"
 #notes = "lectures/cmsc643-large_scale.pdf"
 
+[[day13.prep]]
+title = "Ruder (2017). An overview of gradient descent optimization algorithms"
+link = "https://arxiv.org/pdf/1609.04747.pdf"
 
 #### DAY 14
 [day14]
