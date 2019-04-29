@@ -1694,7 +1694,7 @@ Pr(d|\theta_d) \varpropto \prod_{w=1}^{W} \theta_{w,d}^{x_{w,d}}
 <p><strong>Problem 3</strong>: Write out the M-step for the EM algorithm based on the result of Problem 3</p>
 <p><strong>Problem 4</strong>: Show that the E-step for the EM algorithm, i.e., the update <span class="math inline">\(\gamma_{d_j,t}\)</span> given current set of parameters <span class="math inline">\(\{p_d\}\)</span> and <span class="math inline">\(\{\theta_t\}\)</span> is given by</p>
 <p><span class="math display">\[
-\gamma_{w,d,t} = n_{w,d} \times \frac{p_{t,d}\theta_{w,t}}{\sum_{t'=1}^T p_{t',d}\theta_{w,t'}}
+\gamma_{w,d,t} = x_{w,d} \times \frac{p_{t,d}\theta_{w,t}}{\sum_{t'=1}^T p_{t',d}\theta_{w,t'}}
 \]</span></p>
 </div>
 <div id="part-iii-plsa-with-em-implementation" class="section level2">

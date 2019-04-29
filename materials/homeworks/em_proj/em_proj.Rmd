@@ -72,7 +72,7 @@ Denote the _responsibility_ of topic $t$ for the occurences of word $w$ in docum
 **Problem 4**: Show that the E-step for the EM algorithm, i.e., the update $\gamma_{d_j,t}$ given current set of parameters $\{p_d\}$ and $\{\theta_t\}$ is given by
 
 $$
-\gamma_{w,d,t} = n_{w,d} \times \frac{p_{t,d}\theta_{w,t}}{\sum_{t'=1}^T p_{t',d}\theta_{w,t'}}
+\gamma_{w,d,t} = x_{w,d} \times \frac{p_{t,d}\theta_{w,t}}{\sum_{t'=1}^T p_{t',d}\theta_{w,t'}}
 $$
 
 ## Part III: pLSA with EM Implementation 
