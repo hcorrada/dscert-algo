@@ -166,7 +166,8 @@ date = "5/1 (HCB)"
 #title = "CIML Ch. 14"
 
 [[day14.covers]]
-title = "TBD"
+title = "Network Analysis"
+notes = "lectures/cmsc644-networks.pdf"
 
 #### DAY 15
 [day15]
