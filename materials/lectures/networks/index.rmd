@@ -825,7 +825,7 @@ Two phases:
 
 ### Calculating Betweenness
 
-Formally, $\mathrm{betweenness}(e)$: fraction of node pairs $(x,y)$ where shortest path crossess edge $e$
+Formally, $\mathrm{betweenness}(e)$: fraction of node pairs $(x,y)$ where shortest path crosses edge $e$
 
 For each node $x$, use breadth-first-search to count number of shortest paths through each edge in graph
 
