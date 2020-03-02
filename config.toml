@@ -1,4 +1,4 @@
-baseurl = "http://www.hcbravo.org/dscert-algo/"
+baseurl = "https://www.hcbravo.org/dscert-algo/"
 languageCode = "en-us"
 title = "DATA606: Algorithms for Data Science"
 theme = "hugo-material-docs"

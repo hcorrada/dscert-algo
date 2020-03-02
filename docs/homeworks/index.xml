@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homeworks on DATA606: Algorithms for Data Science</title>
-    <link>http://www.hcbravo.org/dscert-algo/homeworks/</link>
+    <link>https://www.hcbravo.org/dscert-algo/homeworks/</link>
     <description>Recent content in Homeworks on DATA606: Algorithms for Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license</copyright>
     <lastBuildDate>Mon, 29 Aug 2016 08:54:44 -0400</lastBuildDate>
     
-	<atom:link href="http://www.hcbravo.org/dscert-algo/homeworks/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.hcbravo.org/dscert-algo/homeworks/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>DATA 606 Homeworks and Projects</title>
-      <link>http://www.hcbravo.org/dscert-algo/homeworks/</link>
+      <link>https://www.hcbravo.org/dscert-algo/homeworks/</link>
       <pubDate>Mon, 29 Aug 2016 08:54:44 -0400</pubDate>
       
-      <guid>http://www.hcbravo.org/dscert-algo/homeworks/</guid>
+      <guid>https://www.hcbravo.org/dscert-algo/homeworks/</guid>
       <description>COMING SOON</description>
     </item>
     

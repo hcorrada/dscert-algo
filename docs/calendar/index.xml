@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Calendars on DATA606: Algorithms for Data Science</title>
-    <link>http://www.hcbravo.org/dscert-algo/calendar/</link>
+    <link>https://www.hcbravo.org/dscert-algo/calendar/</link>
     <description>Recent content in Calendars on DATA606: Algorithms for Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license</copyright>
     <lastBuildDate>Tue, 30 Aug 2016 10:13:51 -0400</lastBuildDate>
     
-	<atom:link href="http://www.hcbravo.org/dscert-algo/calendar/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.hcbravo.org/dscert-algo/calendar/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CMSC644: Algorithms for Data Science - Calendar</title>
-      <link>http://www.hcbravo.org/dscert-algo/calendar/</link>
+      <link>https://www.hcbravo.org/dscert-algo/calendar/</link>
       <pubDate>Tue, 30 Aug 2016 10:13:51 -0400</pubDate>
       
-      <guid>http://www.hcbravo.org/dscert-algo/calendar/</guid>
+      <guid>https://www.hcbravo.org/dscert-algo/calendar/</guid>
       <description></description>
     </item>
     
