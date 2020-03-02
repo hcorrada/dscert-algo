@@ -1,6 +1,6 @@
 baseurl = "http://www.hcbravo.org/dscert-algo/"
 languageCode = "en-us"
-title = "CMSC644: Algorithms for Data Science"
+title = "DATA606: Algorithms for Data Science"
 theme = "hugo-material-docs"
 metadataformat = "yaml"
 canonifyurls = true
@@ -10,12 +10,12 @@ googleAnalytics = ""
 [params]
 	# General information
 	author = "Héctor Corrada Bravo"
-	description = "Course on algorithms for Data Science. Part of the Department of Computer Science of the University of Maryland's Graduate Certificate in Data Science"
+	description = "Course on algorithms for Data Science. Part of the Department of Computer Science of the University of Maryland's Graduate Certificate and Professional Master's in Data Science"
 	copyright = "Released under the MIT license"
 
 	# Repository
 	provider = "GitHub"
-	repo_url = "https://github.com/hcorrada/dscert-mldm.git"
+	repo_url = "https://github.com/hcorrada/dscert-algo.git"
 
 	logo = "images/logo.png"
 	favicon = ""
@@ -38,8 +38,8 @@ googleAnalytics = ""
     	code = "Roboto Mono"
 
  [params.links]
-      elms = "https://umd.instructure.com/courses/1257250"
-      piazza = "https://piazza.com/class/jrjbsqk4ky35ej"
+      elms = "https://umd.instructure.com/courses/1281291"
+      #piazza = "https://piazza.com/class/jrjbsqk4ky35ej"
 
 [social]
 	twitter = "hcorrada"
@@ -55,13 +55,13 @@ googleAnalytics = ""
 	url    = "logistics/"
 	weight = 10
 
-#[[menu.main]]
-#	name   = "Resources"
-#	url    = "resources/"
-#	weight = 30
+[[menu.main]]
+	name   = "Resources"
+	url    = "resources/"
+	weight = 30
 
 [[menu.main]]
-	name   = "Homeworks"
+	name   = "Homeworks and Projects"
 	url    = "homeworks/"
 	weight = 40
 
