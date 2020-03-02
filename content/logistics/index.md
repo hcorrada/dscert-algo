@@ -8,34 +8,27 @@ This page and the [Course Calendar]({{< baseurl >}}/calendar/index.html) constit
 ## Course Information
 
 **Algorithms for Data Science**
-**CMSC644 Spring 2019**
+**DATA 606 Spring 2020**
 
 
 *	Lecture Meeting Times    
-    Wednesdays 7:00pm-9:30pm CSI 3120
+    Tuesdays 6:00pm-9:30pm CSI 3118
     
 *	Instructor:  
-    - [Samir Khuller](http://www.cs.umd.edu/~samir)  
-    Department of Computer Science  
-    <samir@cs.umd.edu>  
-    Office: 3369 AV Williams     
-   
-   
-    - [H&eacute;ctor Corrada Bravo](http://www.cbcb.umd.edu/~hcorrada)  
+    [H&eacute;ctor Corrada Bravo](http://www.hcbravo.org)  
     Center for Bioinformatics and Computational Biology  
     Department of Computer Science  
     <hcorrada@umiacs.umd.edu>  
-    Office: [3114F Biomolecular Sciences Building](https://www.cbcb.umd.edu/about-us/directions)  
+    Office: IRB 3226
 
 
 **Office Hours:** before and after class or by appointment
 
 * Communication:  
-    - For course related questions, use [Piazza]({{< piazzaurl >}}) as indicated below.  
-    - For any other communication (e.g., absences accomodations etc.) email me including `[CMSC644]` in the message subject.  
+    All communication will done through ELMS at [{{< elmurl >}}]({{< elmurl >}}). Use the discussion board on ELMS for class discussion, use ELMS message to communicate with instructor.
 
-We will use the class Piazza site [{{< piazzaurl >}}]({{< piazzaurl >}}) for questions, discussion and announcements. Assignments and grades for the class will be posted to the class ELMS site: [{{< elmurl >}}]({{< elmurl >}}).
-In case of an extended emergency closure, announcements on policy and procedures will be posted to Piazza.
+Assignments and grades for the class will be posted to the class ELMS site: [{{< elmurl >}}]({{< elmurl >}}).
+In case of an extended emergency closure, announcements on policy and procedures will be announced through ELMS.
 
 ## Textbook and Resources:
 
@@ -44,15 +37,14 @@ We will refer to the following textbooks
 
 - Leskovec, et al. (2016). _Mining of Massive Datasets_. [Book Site](http://www.mmds.org/)  
 - Boyd and Vandenberghe (2004). _Convex Optimization_. [Book Site](https://web.stanford.edu/~boyd/cvxbook/)
-- Murphy (2012). _Machine Learning, a probabilistic perspective_. [Book Site](https://www.cs.ubc.ca/~murphyk/MLbook/)
 
 Other readings will be posted in the [Course Calendar]({{< baseurl >}}/calendar/index.html).
 
 ## Expected outcomes and topics covered
 
-As large amounts of data are being created it is important to understand how to analyse the data to extract interesting trends and patterns. Since the volume of data is large, it may not be feasible to make more than a single pass over the data. Stream processing methods provide effective ways to extract useful information from large data sets by making very few passes on the data. Surprisingly, a lot of information can be gleaned by making a single pass over the data, or a small number of passes over the data. The first part of the course will cover random sampling and stream processing methods. We will also consider privacy issues in data bases and how these should be handled.
+As large amounts of data are being created it is important to understand how to analyse the data to extract interesting trends and patterns. Since the volume of data is large, it may not be feasible to make more than a single pass over the data. Stream processing methods provide effective ways to extract useful information from large data sets by making very few passes on the data. Surprisingly, a lot of information can be gleaned by making a single pass over the data, or a small number of passes over the data. The first part of the course will cover random sampling and stream processing methods. We will also cover modern optimization methods for large datasets as used in Machine Learning.
 
-CMSC 351. I expect familiarity with basic algorithms. This course is an algorithmic oriented course, with proofs of correctness etc.
+We expect familiarity with basic algorithms, there will be programming assignments in Python. 
 
 ## Expectations for Students
 
@@ -65,9 +57,7 @@ required to read this material before lecture**
 
 ### Announcements and discussion
 
-We will use the [Piazza page]({{< piazzaurl >}}) for class
-announcements. Please use the [Piazza page]({{< piazzaurl >}}) for
-*all discussion*.
+We will use ELMS [{{< elmurl >}}]({{< elmurl >}}) for course discussion.
 
 ### Other policies
 

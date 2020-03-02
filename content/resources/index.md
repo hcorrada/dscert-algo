@@ -27,6 +27,6 @@ to get you started:
 *	[Numpy User's Guide](http://docs.scipy.org/doc/numpy/user/)  
 *	[Scipy docs](http://docs.scipy.org/doc/)  
 * [Keras documentation](https://keras.io/)  
-* [Tensorflow documentation]()https://www.tensorflow.org/tutorials/)
+* [Tensorflow documentation](https://www.tensorflow.org/tutorials/)
 
 
