@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Logistics on CMSC644: Algorithms for Data Science</title>
+    <title>Logistics on DATA606: Algorithms for Data Science</title>
     <link>http://www.hcbravo.org/dscert-algo/logistics/</link>
-    <description>Recent content in Logistics on CMSC644: Algorithms for Data Science</description>
+    <description>Recent content in Logistics on DATA606: Algorithms for Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license</copyright>
@@ -19,20 +19,18 @@
       
       <guid>http://www.hcbravo.org/dscert-algo/logistics/</guid>
       <description>This page and the Course Calendar constitute the official syllabus for this class.
-Course Information Algorithms for Data Science CMSC644 Spring 2019
+Course Information Algorithms for Data Science DATA 606 Spring 2020
  Lecture Meeting Times
-Wednesdays 7:00pm-9:30pm CSI 3120
+Tuesdays 6:00pm-9:30pm CSI 3118
  Instructor:
- Samir Khuller
-Department of Computer Science
-samir@cs.umd.edu
-Office: 3369 AV Williams
- H&amp;eacute;ctor Corrada Bravo
+H&amp;eacute;ctor Corrada Bravo
 Center for Bioinformatics and Computational Biology
 Department of Computer Science
 hcorrada@umiacs.umd.edu
-Office: 3114F Biomolecular Sciences Building
-   Office Hours: before and after class or by appointment</description>
+Office: IRB 3226
+  Office Hours: before and after class or by appointment
+ Communication:
+All communication will done through ELMS at https://umd.</description>
     </item>
     
   </channel>
