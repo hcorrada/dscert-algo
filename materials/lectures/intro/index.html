@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="" xml:lang="">
   <head>
-    <title>Machine Learning and Data Mining</title>
-    <meta charset="utf-8">
+    <title>DATA 606: Algorithms for Data Science</title>
+    <meta charset="utf-8" />
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2018-08-28" />
+    <meta name="date" content="2020-03-03" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
@@ -18,13 +18,13 @@ count: false
 
 .banner[![](img/epiviz.png)]
 
-.title[Machine Learning and Data Mining: Overview]
+.title[Algorithms for Data Science: Overview]
 
 .author[Héctor Corrada Bravo]
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC643: 2018-08-28
+DATA 606: 2020-03-03
 ]
 
 .logo[![](img/logo.png)]
@@ -34,17 +34,16 @@ CMSC643: 2018-08-28
 
 ### Course Webpage
 
-- http://www.hcbravo.org/dscert-mldm/  
-- Shortened: http://bit.ly/hcb-mldm
+- Shortened: http://bit.ly/hcb-dsalgo
 
 ### Other Sites
 
 - **ELMS**: Grades, assignments, etc. 
-- **Piazza**: Discussion, questions, etc. 
 
 Links in course webpage
 
 ---
+exclude: true
 
 ## UMD Data Science Certificate
 
@@ -56,22 +55,22 @@ Links in course webpage
 ---
 class: split-50
 
-## Machine Learning in the modern world
+## Data Science in the modern world
 
 
 .column[
-**Self-driving cars**
+**ML: Self-driving cars**
 ![](img/tesla.jpeg)
 
-**Image processing**
-![](img/face_recognition.jpeg)
+**Networks: Social Media**
+.image-70[![](img/forbes.jpeg)]
 ]
 
 .column[
-**Medical Diagnosis**
+**ML: Medical Diagnosis**
 .image-30[![](img/pathology.png)]
 
-**Smart Cities**
+**Data Mining: Smart Cities**
 ![](img/chicago-skyline.jpg)
 ]
 
@@ -79,21 +78,22 @@ class: split-50
 
 ## Introduction and Preliminaries
 
--  What is Machine Learning, what is it useful for;  
--  types of Machine Learning problems and solutions;    
--  challenges in application of Machine Learning;  
--  ethical and fair application of Machine Learning;
--  deployment of Machine Learning systems
+-  What is Data Science, what is it useful for;  
+-  types of Data Science problems and the algorithms behind their solutions;    
+
+-  challenges in application of Data Science methods;  
+-  ethical and fair application of Data Science;
+-  deployment of Data Science algorithms
 
 ---
 
 ## Structure
 
-- Project-based (scikit-learn, Keras)
+- Coding projects (Python)
 - Problem sets
-- Oral examination final (tech interview)
+- Written final 
 
-- Tuesdays 7:00-9:30pm CSIC 2118
+- Tuesdays 6:00-9:30pm CSIC 2118
 
 ---
 class: inverse, middle, center
@@ -103,13 +103,16 @@ class: inverse, middle, center
 ---
 class: middle, center
 
-# What is Machine Learning?
+# A Data Science Problem: Prediction
 
-.large[Machine Learning is the practice of creating computational systems that predict the future from the past] 
+.large[Create a computational system that predicts outcomes from the data observations] 
 
 ---
+layout: true
 
-# What is Machine Learning?
+## A Data Science Problem: Prediction
+
+---
 
 Suppose we want to predict if customer Bob has health insurance. 
 
@@ -122,11 +125,9 @@ and try to **predict** if Bob has health insurance.
 
 ---
 
-# What is Machine Learning?
+### First Attempt: Hand-made ruleset
 
-## First Attempt: Hand-made ruleset
-
-Create a set of rules that let's us predict if customers have health insurance. 
+Create a set of rules that lets us predict if customers have health insurance. 
 
 --
 
@@ -134,9 +135,7 @@ Example - "customers with only a High School diploma  that make less than 25,000
 
 ---
 
-# What is Machine Learning?
-
-## First Attempt: Hand-made ruleset
+### First Attempt: Hand-made ruleset
 
 - Takes a lot of expertise to create such a rulebase 
 
@@ -150,9 +149,7 @@ Example - "customers with only a High School diploma  that make less than 25,000
 
 ---
 
-# What is Machine Learning
-
-## Second Attempt: Instance-based Predictions
+### Second Attempt: Instance-based Predictions
 
 Gather data about customers, those that have health insurance and those that do not 
 
@@ -162,9 +159,7 @@ predict based on customers that have the same attribute values
 
 ---
 
-# What is Machine Learning
-
-## Second Attempt: Instance-based Predictions
+### Second Attempt: Instance-based Predictions
 
 Suppose Alice is a past customer. She has 
   - the same age as Bob, 
@@ -178,8 +173,6 @@ Then predict that Bob will also have health insurance.
 
 ---
 
-# What is Machine Learning
-
 What if there is no customer Alice, that is, there is no customer that has exactly the same attributes as Bob?
 
 --
@@ -188,43 +181,42 @@ Even if we were able to make accurate predictions this way, have we gained any i
 
 ---
 
-# What is Machine Learning
-
-.center[In Machine Learning we build systems that use existing data, **training data**, to create a model that predicts a particular outcome]
+.center[In Data Science we build systems that use existing data, **training data**, to create a model that predicts a particular outcome]
 
 ---
-
-# What is Machine Learning
+exclude: true
 
 Arthur Samuel defined Machine Learning as
 
 &gt; the field of study that gives computers the ability to learn without being explicitly programmed
 
 ---
-
-# What is Machine Learning
+exclude: true
 
 In our example, the rulebased system is a computational system that is _explicitly programmed_. 
 
 --
+exclude: true
 
 Instead, ML creates systems that learn from examples 
 
 --
+exclude: true
 
 - examples: data from previous instances 
 
 ---
+layout: false
 
-# Data Mining
+## Two Flavors of Data Science
 
-ML: use probabilistic and statistical principles to build systems that _learn_ from examples  
+**Machine Learning**: use probabilistic and statistical principles to build systems that _learn_ from examples  
 
-Data Mining: use computational approaches to answer complex queries about data
+**Data Mining**: use computational approaches to answer complex queries about data
 
 ---
 
-# Data Mining
+## Data Mining
 
 - Summarization: effectively summarize large collections of data
   - e.g., Google PageRank algorithm as summary of World Wide Web
@@ -235,20 +227,19 @@ Data Mining: use computational approaches to answer complex queries about data
   - e.g., similar items
   
 ---
+layout: true
 
-# Why use ML?
+## Why use Data Science?
 
 --
 
-- Building rule systems that capture non-trivial prediction problems require substantial expertise
+- Building rule systems that capture non-trivial patterns in data require substantial expertise
 
 --
 
 - Using attributes like social media activity, is very difficult to encode in explicit programs. 
 
 ---
-
-# Why use ML?
 
 There is _natural, non-reducible, variation_ in the tasks we are trying to model. 
 
@@ -260,17 +251,13 @@ Bob may have health insurance while Alice does not due to reasons we are not awa
 
 ---
 
-# Why use ML?
-
 Capturing this type of natural variation is very difficult in rule-based systems
 
-ML models try to capture it as stochastic behavior.
+Data Science models (ML in particular) try to capture it as stochastic behavior.
 
 ---
 
-# Why use ML?
-
-Learning systems can help human users gain insights. 
+Data Science systems can help human users gain insights. 
 
 --
 
@@ -285,8 +272,11 @@ ML systems can identify attributes that are important for prediction,
 Users can then in turn study further to understand the relationship between these attributes and the outcome of interest.
 
 ---
+layout: true
 
-# An illustrative example
+## An illustrative example
+
+---
 
 Suppose I have training data from customers and want to model health insurance status 
 
@@ -347,7 +337,7 @@ Suppose I have training data from customers and want to model health insurance s
 
 A first simple rule is to predict health status from the majority of the training instances.
 
-&lt;img src="index_files/figure-html/ch1_overall-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_overall-1.png" style="display: block; margin: auto;" /&gt;
 
 --
 
@@ -363,7 +353,7 @@ In this case, we see that the rate of insurance changes significantly depending 
 
 ---
 
-&lt;img src="index_files/figure-html/ch1_attributes-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_attributes-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -376,7 +366,7 @@ That is, there is an interaction between wage and education level that would aff
 
 
 
-&lt;img src="index_files/figure-html/ch1_edleve_plot-1.png" width="1056" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_edleve_plot-1.png" style="display: block; margin: auto;" /&gt;
 
 the rate of insurance in the high earners is similar regardless of education level, whereas for mid earners, the insurance rate varies significantly depending on education level.
 
@@ -388,9 +378,9 @@ A rule-based system that incorporates this type of interaction, would perhaps re
 
 ---
 
-### A ML Approach
+### A DS Approach
 
-One of the workhorse methods in ML, which we will see again in more detail at later sessions, is the Decision Tree. 
+One of the workhorse methods in Machine Learning is the Decision Tree. 
 
 --
 
@@ -402,7 +392,7 @@ It is a highly interpretable model since we can think the Decision Tree algorith
 
 
 
-&lt;img src="index_files/figure-html/ch1_plot_tree-1.png" width="1056" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_plot_tree-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -411,8 +401,6 @@ It is a highly interpretable model since we can think the Decision Tree algorith
 The predictions given by this tree would be wrong roughly 27% of the time. 
 
 ---
-
-### An illustrative example
 
 Now that we have trained this Decision Tree we can deploy it to make predictions on new customers. 
 
@@ -425,10 +413,244 @@ Do we think our predictions will be incorrect 27% of the time?
 We'll see a little later that this may not be quite correct.
 
 ---
+layout: true
 
-# Types of Machine Learning Systems
+## Tree models
 
-Machine Learning methods can be categorized based on 
+---
+
+So, how do we build a decision tree like this?
+
+What's the algorithm?
+
+.source[Leskovec Ch. 12]
+
+---
+
+Decision trees operate by predicting an outcome variable `\(Y\)` (health insurance) by partitioning feature (predictor) space.
+
+--
+
+In general, the tree model:
+
+1. Partitions feature space into `\(J\)` non-overlapping regions, `\(R_1, R_2, \ldots, R_J\)`.
+2. For every example that falls within region `\(R_j\)`, predict outcome as majority of outcome for training examples in `\(R_j\)`.
+
+--
+
+The important observation is that **Decision Trees create data partitions recursively**
+
+
+---
+
+For example, consider finding a good predictor `\(j\)` to partition space along its axis. A recursive algorithm would look like this:
+
+- Find predictor `\(j\)` and value `\(s\)` that minimize error:
+
+`$$\sum_{i:\, x_i \in R_1(j,s))} \mathrm{error}(y_i, \hat{y}_{R_1}) +
+\sum_{i:\, x_i \in R_2(j,s))} \mathrm{error}(y_i, \hat{y}_{R_2})$$`
+
+Where `\(R_1\)` and `\(R_2\)` are regions resulting from splitting observations on predictor `\(j\)` and value `\(s\)`:
+
+$$
+R_1(j,s) = \{X|X_j &lt; s\} \, \mathrm{ and } \, R_2(j,s) \{X|X_j \geq s\}
+$$
+
+---
+
+For example, consider finding a good predictor `\(j\)` to partition space along its axis. A recursive algorithm would look like this:
+
+- Find predictor `\(j\)` and value `\(s\)` that minimize RSS:
+
+`$$\sum_{i:\, x_i \in R_1(j,s))} \mathrm{error}(y_i, \hat{y}_{R_1}) +
+\sum_{i:\, x_i \in R_2(j,s))} \mathrm{error}(y_i, \hat{y}_{R_2})$$`
+
+- Apply recursively to regions `\(R_1\)` and `\(R_2\)`. 
+
+---
+
+Within each region a prediction `\(\hat{y}_{R_j}\)` is made as the majority of the response `\(Y\)` of observations in `\(R_j\)`.
+
+---
+layout: true
+
+## Specifics of the partitioning algorithm
+
+---
+
+### The predictor space
+
+Suppose we have `\(p\)` features `\(X_1,\ldots,X_p\)` and `\(n\)` examples. 
+
+--
+
+Each of the `\(X_i\)` can be 
+
+a)   a numeric feature: there are `\(n-1\)` possible splits
+b)   an unordered `\(k\)`-categorical feature: `\(2^{k-1}-1\)` possible splits.
+c)   an ordered `\(k\)`-categorical feature: there are `\(k-1\)` possible splits  
+
+---
+
+### Learning Algorithm
+
+The general procedure for tree learning is the following:
+
+**Grow**: an overly large tree using forward selection as follows: at each step, find the *best* split among all attributes. Grow until all terminal nodes either
+
+(a) have `\(&lt; m\)` (perhaps `\(m=1\)`) data points  
+(b) are "pure" (all points in a node have [almost] the same outcome).
+
+---
+
+### Learning Algorithm
+
+The general procedure for tree learning is the following:
+
+**Grow**: an overly large tree using forward selection 
+
+**Prune**: the tree back decreasing in *complexity*
+
+---
+
+### Tree Growing
+
+The recursive partitioning algorithm is as follows:
+
+INITIALIZE    All example in the root node  
+REPEAT	      Find optimal split; Partition examples  according to split  
+STOP	        Stop when pre-defined criterion is met
+
+---
+
+### Tree Growing
+
+An important issue in tree construction is how to use the training data to determine the binary splits of dataset `\(\mathcal{X}\)` 
+
+--
+
+The fundamental idea is to select each split of a subset so that the data in each of the descendent subsets are "purer" than the data in the parent subset.
+
+---
+
+### Deviance as a measure of impurity
+
+A simple approach is to assume a multinomial model and then use deviance as a definition of impurity.
+
+---
+
+### Deviance as a measure of impurity
+
+Assume `\(Y \in \mathcal{G}=\{1,2,\ldots,k\}\)`.
+
+*      At each node `\(i\)` of a classification tree we have a probability
+       distribution `\(p_{ik}\)` over the `\(k\)` classes.
+
+*      We observe a random sample `\(n_{ik}\)` from the multinomial
+       distribution specified by the probabilities `\(p_{ik}\)`.
+
+---
+
+### Deviance as a measure of impurity
+
+Assume `\(Y \in \mathcal{G}=\{1,2,\ldots,k\}\)`.
+
+*      Given `\(X\)`, the conditional likelihood is then proportional to `\(\prod_{(\text{leaves } i)} \prod_{(\text{classes } k)} p_{ik}^{n_{ik}}\)`.
+
+*      Estimate `\(p_{ik}\)` by `\(\hat{p}_{ik}=\frac{n_{ik}}{n_i}\)`.
+
+*      Define deviance `\(D=\sum D_i\)`, where `\(D_i=-2\sum_k n_{ik} \log(p_{ik})\)`.
+
+--
+
+Select splits that improve deviance `\(D\)`
+
+---
+
+### Deviance as a measure of impurity
+
+_Quiz_ Compute deviance for the following cases
+
+a) `\(n_{i1}=6, \, n_{i2}=1, \, n_{i3}=1\)`  
+b) `\(n_{i1}=9, \, n_{i2}=1, \, n_{i3}=0\)`  
+c) `\(n_{i1}=90, \, n_{i2}=10, \, n_{i3}=0\)`  
+
+---
+
+### Other measures of impurity
+
+Other commonly used measures of impurity at a node `\(i\)` of a
+classification tree are
+
+**missclasification rate**: `\(\frac{1}{n_i} \sum_{j\in A_i} I(y_j \neq k_i)=1-\hat{p}_{ik_i}\)`  
+**entropy**: `\(\sum p_{ik} \log(p_{ik})\)`  
+**GINI index**: `\(\sum_{j\neq k} p_{ij}p_{ik} = 1-\sum_k p_{ik}^2\)`  
+
+where `\(k_i\)` is the most frequent class in node `\(i\)`.
+
+--
+
+In practice, the GINI index is preferred
+
+---
+exclude: true
+
+## Specifics of the partitioning algorithm
+
+For regression trees we use the residual sum of squares:
+
+`$$D = \sum_{\text{cases } j} (y_j-\mu_{[j]})^2$$`
+
+where `\(\mu_{[j]}\)` is the mean values in the node that case `\(j\)` belongs
+to.
+---
+
+### Algorithmic considerations
+
+- How to select a split?
+- Can process be parallelized how?
+
+---
+
+### Tree Pruning
+
+*	Grow a big tree `\(T\)`
+*	Consider snipping off terminal subtrees (resulting in
+	so-called rooted subtrees)
+*	Let `\(D_i\)` be a measure of impurity at leaf `\(i\)` in a
+	tree. Define `\(D=\sum_i D_i\)`
+*	Define size as the number leaves in a tree
+*	Let `\(D_{\alpha} = D + \alpha \times \mathrm{size}\)`
+
+--
+exclude: true
+
+The set of rooted subtrees of `\(T\)` that minimize `\(D_{\alpha}\)` is
+nested.
+
+---
+
+### Tree Pruning
+
+We can prune the tree sequentially
+
+--
+
+Given tree `\(T\)`, 
+- for every node `\(R_j\)` in tree, compute `\(D_{\alpha}\)` after removing subtree rooted at `\(R_j\)`  
+- select node `\(R_j\)` that minimizes `\(D_{\alpha}\)`
+- Remote subtree rooted at `\(R_j\)` from `\(T\)`
+- Continue until `\(D_{\alpha}\)` increases
+
+
+---
+layout: true
+
+## Types of Data Science Algorithms
+
+---
+
+Data Science algorithms can be categorized based on 
 
 --
 
@@ -436,15 +658,18 @@ Machine Learning methods can be categorized based on
 
 --
 
-- the way data is used to train the model, 
+- the way data is used build models, 
 
 --
 
-- and the nature of the learning algorithm itself. 
+- and the nature of the algorithm itself. 
 
 ---
+layout: true
 
-# Types of ML Systems
+# Types of Data Science Systems
+
+---
 
 ## Supervised vs. Unsupervised Learning
 
@@ -459,8 +684,6 @@ We have attributes over observations of interest, we want to _predict_ a specifi
 each instance is _labeled_ with the outcome we want to learn.
 
 ---
-
-# Types of ML Systems
 
 ## Supervised vs. Unsupervised Learning
 
@@ -488,8 +711,6 @@ exclude: true
 
 ---
 
-# Types of ML Systems
-
 ## Supervised vs. Unsupervised Learning
 
 In _unsupervised_ learning we are not interested in predicting an outcome, but rather trying to learn some underlying structure, or patterns, from the data. 
@@ -499,8 +720,6 @@ In _unsupervised_ learning we are not interested in predicting an outcome, but r
 In this case, instances in our training data are _unlabeled_. 
 
 ---
-
-# Types of ML Systems
 
 ## Supervised vs. Unsupervised Learning
 
@@ -528,6 +747,7 @@ represent instances for which we have a large number of attributes using a small
 | t-distributed Stochastic Neighbor Embedding (tSNE) | dimensionality reduction |
 
 ---
+exclude: true
 
 # Types of ML Systems
 
@@ -539,83 +759,64 @@ In this case, we want to use similarity between unlabeled and labeled data to le
 
 ---
 
-# Types of ML Systems
+## Batch vs. Stream Processing
 
-## Batch vs. Online Learning
+In _stream processing_, we assume data for our system arrives in a stream, a small number of examples at a time. 
 
-In _online learning_, we assume training data for our system arrives in a stream, a small number of training instances at a time. 
-
-We want to build a system that continuously updates its prediction function as new training instances arrives. 
+We want to build a system that continuously updates models as new examples arrive. 
 
 ---
 
-# Types of ML Systems
+## Batch vs. Stream Processing
 
-## Batch vs. Online Learning
+In contrast, _batch processing_ is the case where we have all of the examples we want to use to build our system at training time. 
 
-In contrast, _batch learning_ is the case where we have all of the training instances we want to use to build our system at training time. 
-
-Batch learning is the most common use case, although 
-online learning is useful for extremely large datasets.
+Batch processing is the most common use case, but
+stream processing is useful for extremely large datasets.
 
 ---
 
-# Types of ML Systems
+## Instance vs. Model-based methods
 
-## Instance vs. Model-based Learning
+Instance-based systems are based on directly looking up instances in a data set that are similar to the instance we want to analyze and, e.g., make prediction based on the outcomes for those similar instances. 
 
-Instance-based systems are based on directly looking up instances in a training set that are similar to the instance we want to predict and making a prediction based on the outcomes for those similar instances. 
-
-We can think of K-Nearest neighbors as an instance-based method. 
 
 ---
 
-# Types of ML Systems
+## Instance vs. Model-based methods
 
-## Instance vs. Model-based Learning
-
-Model-based methods summarize training instances and learn a function based on that summary to make predictions. 
+Model-based methods summarize training instances and learn a function based on that summary to, e.g., make predictions. 
 
 --
 
 ### A rule of thumb: 
 
-systems that can make predictions after discarding the training data are _model-based_ systems. 
+systems that can produce output after discarding _all_ the input data are _model-based_ systems. 
 
 --
 
-systems that need to keep the training data to make predictions are _instance-based_ methods. 
+systems that need to keep _some_ input data to produce output are _instance-based_ methods. 
+
+---
+layout: true
+
+## Challenges of DS Application
 
 ---
 
-# Types of ML Systems
-
-We will spend most of our time in this course covering
-_batch_, _model-based_ learning for _supervised_ and _unsupervised_ tasks. 
+While Data Science systems and algorithms can be very powerful tools, their application can pose some problems.
 
 ---
 
-# Challenges of ML Application
+### Insufficient data
 
-While Machine Learning models can be very powerful tools, their application can pose some problems.
-
----
-
-# Challenges of ML Application
-
-## Insufficient training data
-
-For very complex tasks, think image or voice recognition, or cases where we have many relevant attributes, many training instances are required to succesfully learn useful models. 
-
-In cases where there is not enough training data to do so, predictions made by the trained models may not be very good.
+For very complex tasks, think image or voice recognition, or cases where we have many relevant attributes, many examples are required to succesfully learn useful models or summaries.
 
 ---
 
-# Challenges of ML Application
+### Nonrepresentative data
 
-## Nonrepresentative training data
-
-If the training data is not representative of the instances the model will make predictions for after deployment, the predictions will not be very good. 
+If the data is not representative of the examples we will analyze after deployment, then the model or summaries we create will not be very useful.
 
 --
 
@@ -623,39 +824,31 @@ For example, suppose in our insurance example, all our training data is for cust
 
 ---
 
-# Challenges of ML Application
+### Poor-quality data
 
-## Poor-quality data
+Data that is missing and/or incorrect will make system-building extremely difficult. 
 
-Data that is missing and/or incorrect will make training extremely difficult. 
-
-A significant effort is usually spent cleaning data before training ML models.
+A significant effort is usually spent cleaning data before building DS systems.
 
 ---
 
-# Challenges of ML Application
+### Irrelevant data
 
-## Irrelevant data
+Including features that are irrelevant to the analyes we want to perform make system building more difficult. 
 
-Including attributes that are irrelevant to the predictions we want to make will also make training more difficult. 
-
-While many ML methods are capable of alleviating this problem by ignoring irrelevant attributes, it is a good practice to not include these in the training data. 
+While many methods are capable of alleviating this problem by ignoring irrelevant features, it is a good practice to not include these in data. 
 
 ---
-
-# Challenges of ML Application
 
 In general, the last few problems we've mentioned can be summarized as "garbage in, garbage out", 
 
 --
 
-the better the training data, the better the predictions we will get from our models.
+the better the data, the better the models and summaries we will get from our systems.
 
 ---
 
-# Challenges of ML Application
-
-## Overfitting training data
+### Overfitting training data
 
 The ultimate goal when applying ML models is to be able to make good predictions for new unobserved data based on training data. 
 
@@ -667,15 +860,9 @@ There is a danger however, that our model will learn to predict the training dat
 
 This problem is called "over-fitting". 
 
---
-
-We will see later, that most methods provide ways to control over-fitting during training.
-
 ---
 
-# Challenges of ML Application
-
-## Overfitting
+### Overfitting
 
 In Decision Trees, we can characterize the complexity of the models we learn by measuring the "depth" of the tree. 
 
@@ -697,11 +884,9 @@ If we make very deep trees we can easily overfit the data.
 
 ---
 
-&lt;img src="index_files/figure-html/ch1_overfit-1.png" width="1536" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_overfit-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
-
-# Challenges of ML Application
 
 ## Underfitting
 
@@ -713,20 +898,23 @@ In the decision tree case, this would result from building trees that are too sh
 
 ---
 
-&lt;img src="index_files/figure-html/ch1_underfit-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_underfit-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+layout: true
+
+## Testing and validating Data Science systems
 
 ---
 
-# Testing and validating Machine Learning systems
-
-For the most part, the goal of applying ML systems is to obtain accurate predictions for future data by building models using past data. 
+Often the goal of applying DS systems is to obtain accurate predictions, or relevant patterns for future data by building models using past data. 
 
 --
 
 This leads to the natural questions of 
 
-a) how do we quantify prediction accuracy, and 
-b) how can we estimate what that accuracy will be for future data. 
+a) how do we quantify performance, and 
+b) how can we estimate what that performance will be for future data. 
 
 --
 
@@ -734,11 +922,9 @@ This introduces two fundamental notions in ML: the _performance metrics_ and _pe
 
 ---
 
-# Testing and validating Machine Learning systems
+### Performance Metrics
 
-## Performance Metrics
-
-To determine how useful are ML models we are building we first need to specify a metric to quantify the accuracy of predictions. 
+To determine how useful are the DS systems we are building we first need to specify a metric to quantify the performance of predictions or patterns. 
 
 --
 
@@ -746,9 +932,7 @@ This decision must be made specifically for the task we are targeting.
 
 ---
 
-# Testing and validating Machine Learning systems
-
-## Performance Metrics
+### Performance Metrics
 
 Consider our insurance case again. 
 
@@ -760,9 +944,7 @@ The first tree we built previously made wrong predictions about 27% of the time 
 
 ---
 
-# Testing and validating Machine Learning systems
-
-## Performance Metrics
+### Performance Metrics
 
 But what if our interest in using our model is a bit more nuanced? 
 
@@ -770,11 +952,9 @@ What if we wanted to make sure we are able to correctly identify almost all of o
 
 ---
 
-# Testing and validating Machine Learning systems
+### Confusion Matrix
 
-## Confusion Matrix
-
-For classification, we use a more precise language to describe classification accuracy:
+For prediction, we use a more precise language to describe prediction accuracy:
 
 
 |                   | True Class +        | True Class -        | Total |
@@ -785,9 +965,7 @@ For classification, we use a more precise language to describe classification ac
 
 ---
 
-# Testing and validating Machine Learning systems
-
-## Performance Metrics
+### Performance Metrics
 
 | Name                            | Definition | Synonyms                                          |
 |:-------------------------------------|:-----------|---------------------------------------------------:|
@@ -797,9 +975,7 @@ For classification, we use a more precise language to describe classification ac
 | Negative Predicitve Value (NPV) | FN / N*    |                                                   |
 ---
 
-# Testing and validating Machine Learning systems
-
-## Performance Metrics
+### Performance Metrics
 
 In the insurance case we may want to 
 
@@ -811,9 +987,7 @@ In the insurance case we may want to
 
 ---
 
-# Testing and validating Machine Learning systems
-
-## Performance Metrics
+### Performance Metrics
 
 Here is the confusion matrix for our first decision tree and the training data we used to train it:
 
@@ -845,15 +1019,21 @@ From this matrix you should be able to calculate all metrics defined above. What
 
 ---
 
-# Testing and validating Machine Learning systems
-
 ## Performance Metrics
 
 This leads to a natural question: Can we adjust TPR and FPR for our predictors? 
 
 ---
 
-&lt;img src="index_files/figure-html/ch1_treeagain-1.png" width="1344" style="display: block; margin: auto;" /&gt;
+
+```
+## Warning: Cannot retrieve the data used to build the model (so cannot determine roundint and is.binary for the variables).
+## To silence this warning:
+##     Call rpart.plot with roundint=FALSE,
+##     or rebuild the rpart model with model=TRUE.
+```
+
+&lt;img src="index_files/figure-html/ch1_treeagain-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -882,8 +1062,6 @@ This would of course increase TPR, but might decrease FPR as well.
 
 ---
 
-# Testing and validating Machine Learning systems
-
 ## Performance Metrics
 
 Since we can use different prediction cutoffs to get different TPR and FPR, comparing ML models becomes a bit more challenging. 
@@ -892,16 +1070,12 @@ We need a way of capturing the behavior of models across these different cutoffs
 
 ---
 
-# Testing and validating Machine Learning systems
-
 ## Performance Metrics
 
 We can do this using a ROC curve. ROC refers to Receiver-Operator Characteristic curves, first used to describe the performance of radar operators in the military. 
 
---
-
 ---
-class: split-30
+class: split-50
 
 .column[
 Plots TPR and FPR at different cutoffs comparing the behavior of two predictors across the cutoff range. 
@@ -912,14 +1086,12 @@ Compare behavior of numerically based by computing the _area under the ROC curve
 .column[
 
 
-&lt;img src="index_files/figure-html/ch1_rocplot-1.png" width="672" /&gt;
+![](index_files/figure-html/ch1_rocplot-1.png)&lt;!-- --&gt;
 ]
 
 ---
 
-# Testing and validating Machine Learning systems
-
-## Performance Metrics
+### Performance Metrics
 
 For regression problems there is usually a bit less variety in performance metrics. 
 
@@ -927,19 +1099,15 @@ The most common metric is the root mean squared error (RMSE).
 
 ---
 
-# Testing and validating Machine Learning systems
-
 ### Performance Estimation
 
 Now that we established a _performance metric_ the next question is how to _estimate performance_ of ML systems on future data given the data we have at hand. 
 
 ---
 
-# Testing and validating Machine Learning systems
-
 ### Performance Estimation
 
-Measuring performance of an ML system on the training data we used to create the model is not correct for two related reasons: 
+Measuring performance of an DS system on training data we used to create the model is not correct for two related reasons: 
 
 1) if we choose models based on performance on the training data we would be biased to choose models that _overfit_ the training data
 
@@ -949,17 +1117,13 @@ Measuring performance of an ML system on the training data we used to create the
 
 ---
 
-# Testing and validating Machine Learning systems
-
 ### Performance Estimation
 
 The key here is to have access to _test data_ and measure system performance on the test data. 
 
-However, it is important to remember to **never look at the test data** while developing or training the ML system. 
+However, it is important to remember to **never look at the test data** while developing or training the DS system. 
 
 ---
-
-# Testing and validating Machine Learning systems
 
 ### Performance Estimation
 
@@ -969,8 +1133,6 @@ Here are some guidelines on how to use test data:
 
 ---
 
-# Testing and validating Machine Learning systems
-
 ### Performance Estimation
 
 Here are some guidelines on how to use test data:
@@ -979,8 +1141,6 @@ Here are some guidelines on how to use test data:
 - **Good**: Set aside a portion of your training data (say 20%-50% depending on how much training data you have) as test data, and _don't look at it again_ until you have finished developing your system and are ready to measure performance before deployment.
 
 ---
-
-# Testing and validating Machine Learning systems
 
 ### Performance Estimation
 
@@ -992,15 +1152,13 @@ Here are some guidelines on how to use test data:
 
 ---
 
-# Testing and validating Machine Learning systems
-
 ### Cross-validation
 
 1. Partition the training data into 10 groups (for example). 
 2. Now treat each group of training instances as a test set in turn:
 
 --
-- first, train the ML system using instances from all the other groups,
+- first, build the DS system using instances from all the other groups,
 
 --
 - then, measure performance on set-aside instances. 
@@ -1011,15 +1169,11 @@ This will give you 10 (for example) measures of perforamance to compare the mode
 
 ---
 
-# Testing and validating Machine Learning systems
-
 ### Cross-validation
 
-The downside of this approach is that in practice people tend to do this cross-validation exercise multiple times during the development of the ML system which invalidates the maxim of _never looking at the test data_.
+The downside of this approach is that in practice people tend to do this cross-validation exercise multiple times during the development of the DS system which invalidates the maxim of _never looking at the test data_.
 
 ---
-
-# Testing and validating Machine Learning systems
 
 ### Performance Estimation for Model Selection
 
@@ -1027,11 +1181,9 @@ We saw that many of these models have tuning parameters that we use to control o
 
 In the case of the decision tree, the depth of the tree controls over-fitting. 
 
-How do we determine which tuning parameters to use in our ML system?
+How do we determine which tuning parameters to use in our DS system?
 
 ---
-
-# Testing and validating Machine Learning systems
 
 ### Performance Estimation for Model Selection
 
@@ -1040,8 +1192,6 @@ The same principle holds, you do not want to use tuning parameters that perform 
 In this case we use _validation data_ to determine tuning set parameters to use. 
 
 ---
-
-# Testing and validating Machine Learning systems
 
 The ideal workflow would be as follows:
 
@@ -1052,8 +1202,6 @@ The ideal workflow would be as follows:
 - Use a cross-validation approach on the _training data_ to determine which model and tuning parameters to use. In this case, the cross-validation approach is using _validation data_ to measure performance.
 
 ---
-
-# Testing and validating Machine Learning systems
 
 The ideal workflow would be as follows:
 
@@ -1069,7 +1217,7 @@ The ideal workflow would be as follows:
 
 # Summary
 
-**ML** Systems that predict outcomes of future instances from past data
+**DS** Systems that build models or summaries of data to make predictions or detect patterns in existing or new data
 
 --
 
@@ -1077,7 +1225,7 @@ The ideal workflow would be as follows:
 
 --
 
-**System Types** supervised or unsupervised, batch or online, instance or model-based
+**System Types** supervised or unsupervised, batch or stream, instance or model-based
 
 --
 
@@ -1096,9 +1244,13 @@ We will use Python to experiment with algorithms and datasets in the course. Fol
 
 ## Setting up your learning system
 
-- You can use anaconda to manage your python environment from the terminal or using the _Anaconda Navigator_ graphical interface. For the latter, here is a quick guide: https://docs.continuum.io/anaconda/navigator/getting-started 
-- Install the modules we will be using in class: `jupyter, matplotlib, numpy, pandas, scipy, scikit-learn`
+- You can use anaconda to manage your python environment from the terminal or using the _Anaconda Navigator_ graphical interface. For the latter, here is a quick guide: https://docs.continuum.io/anaconda/navigator/getting-started
+
+- I highly recommend using Jupyter Lab. You can follow installation directions here: https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html (`conda install -c conda-forge jupyterlab`)
+
+- Install scikit-learn as well: https://scikit-learn.org/stable/install.html#install-official-release (`conda install scikit-learn`)
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "ratio": "16:9"
@@ -1106,11 +1258,41 @@ We will use Python to experiment with algorithms and datasets in the course. Fol
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
 })();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
@@ -1119,19 +1301,42 @@ remark.macros['scale'] = function (percentage) {
 };
 </script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
   }
-});
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

@@ -7,11 +7,15 @@ date = "3/3"
 
 [[day01.covers]]
 title = "Overview, data analysis, algorithms, Machine Learning"
-#notes = "lectures/cmsc643-intro.pdf"
+notes = "lectures/data606-intro.pdf"
 
 [[day01.covers]]
-title = "Sampling, Hash functions"
-#notes = "lectures/cmsc643_itemsets.pdf"
+title = "Setting up"
+notes = "resources/"
+
+[[day01.covers]]
+title = "Hash functions"
+notes = "notebooks/hash_functions.ipynb"
 
 [[day01.prep]]
 title = "Leskovec et al, Ch. 1"
