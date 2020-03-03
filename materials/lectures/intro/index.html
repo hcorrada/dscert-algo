@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="" xml:lang="">
   <head>
     <title>Machine Learning and Data Mining</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2018-08-28" />
+    <meta name="date" content="2020-03-03" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
@@ -24,7 +24,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC643: 2018-08-28
+CMSC643: 2020-03-03
 ]
 
 .logo[![](img/logo.png)]
@@ -347,7 +347,7 @@ Suppose I have training data from customers and want to model health insurance s
 
 A first simple rule is to predict health status from the majority of the training instances.
 
-&lt;img src="index_files/figure-html/ch1_overall-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_overall-1.png" style="display: block; margin: auto;" /&gt;
 
 --
 
@@ -363,7 +363,7 @@ In this case, we see that the rate of insurance changes significantly depending 
 
 ---
 
-&lt;img src="index_files/figure-html/ch1_attributes-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_attributes-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -376,7 +376,7 @@ That is, there is an interaction between wage and education level that would aff
 
 
 
-&lt;img src="index_files/figure-html/ch1_edleve_plot-1.png" width="1056" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_edleve_plot-1.png" style="display: block; margin: auto;" /&gt;
 
 the rate of insurance in the high earners is similar regardless of education level, whereas for mid earners, the insurance rate varies significantly depending on education level.
 
@@ -402,7 +402,15 @@ It is a highly interpretable model since we can think the Decision Tree algorith
 
 
 
-&lt;img src="index_files/figure-html/ch1_plot_tree-1.png" width="1056" style="display: block; margin: auto;" /&gt;
+
+```
+## Warning: Cannot retrieve the data used to build the model (so cannot determine roundint and is.binary for the variables).
+## To silence this warning:
+##     Call rpart.plot with roundint=FALSE,
+##     or rebuild the rpart model with model=TRUE.
+```
+
+&lt;img src="index_files/figure-html/ch1_plot_tree-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -697,7 +705,7 @@ If we make very deep trees we can easily overfit the data.
 
 ---
 
-&lt;img src="index_files/figure-html/ch1_overfit-1.png" width="1536" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_overfit-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -713,7 +721,7 @@ In the decision tree case, this would result from building trees that are too sh
 
 ---
 
-&lt;img src="index_files/figure-html/ch1_underfit-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/ch1_underfit-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -853,7 +861,15 @@ This leads to a natural question: Can we adjust TPR and FPR for our predictors?
 
 ---
 
-&lt;img src="index_files/figure-html/ch1_treeagain-1.png" width="1344" style="display: block; margin: auto;" /&gt;
+
+```
+## Warning: Cannot retrieve the data used to build the model (so cannot determine roundint and is.binary for the variables).
+## To silence this warning:
+##     Call rpart.plot with roundint=FALSE,
+##     or rebuild the rpart model with model=TRUE.
+```
+
+&lt;img src="index_files/figure-html/ch1_treeagain-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -912,7 +928,7 @@ Compare behavior of numerically based by computing the _area under the ROC curve
 .column[
 
 
-&lt;img src="index_files/figure-html/ch1_rocplot-1.png" width="672" /&gt;
+![](index_files/figure-html/ch1_rocplot-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1099,6 +1115,7 @@ We will use Python to experiment with algorithms and datasets in the course. Fol
 - You can use anaconda to manage your python environment from the terminal or using the _Anaconda Navigator_ graphical interface. For the latter, here is a quick guide: https://docs.continuum.io/anaconda/navigator/getting-started 
 - Install the modules we will be using in class: `jupyter, matplotlib, numpy, pandas, scipy, scikit-learn`
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "ratio": "16:9"
@@ -1106,11 +1123,41 @@ We will use Python to experiment with algorithms and datasets in the course. Fol
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
 })();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
@@ -1119,19 +1166,42 @@ remark.macros['scale'] = function (percentage) {
 };
 </script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
   }
-});
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
