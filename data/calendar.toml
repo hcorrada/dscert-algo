@@ -29,10 +29,11 @@ date = "3/10"
 
 [[day02.covers]]
 title = "Similarity, MinHash"
-#notes = "lectures/cmsc643-linear_models.pdf"
+notes = "lectures/data606-itemsets.pdf"
 
 [[day02.covers]]
 title = "Locality Sensitive Hashing"
+notes = "lectures/data606-itemsets.pdf"
 
 [[day02.prep]]
 title = "Leskovec et al, Ch. 3"

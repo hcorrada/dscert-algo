@@ -19,13 +19,13 @@ count: false
 
 .banner[![](img/epiviz.png)]
 
-.title[Data Mining: Itemsets]
+.title[Algorithms for Data Science: Itemsets]
 
 .author[Héctor Corrada Bravo]
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: `r Sys.Date()`
+DATA 606: `r Sys.Date()`
 ]
 
 .logo[![](img/logo.png)]
@@ -49,7 +49,7 @@ Using **high-throughput** experimental methods
 
 ## Data Mining
 
-For today: the analysis of itemsets
+Next two lectures: the analysis of itemsets
 
 - Similar itemsets
 - Frequent itemsets
@@ -142,9 +142,7 @@ $$\frac{S \bigcap T}{S \bigcup T}$$
 
 ## Exercises
 
-- Compute the Jaccard bag similarity of each pair of sets: $\{1,1,1,2\}$, $\{1,1,2,2,3\}$, $\{1,2,3,4\}$
-
-- Suppose we have a universal set $U$ of $n$ elements. We chose two subsets $S$ and $T$, each with $m$ of the $n$ elements. What is the expected value of the JS of $S$ and $T$?
+- Compute the Jaccard similarities of each pair of sets: $\{1,2,3,4\}$, $\{2,3,5,7\}$, $\{2,4,6\}$
 
 ---
 
@@ -215,13 +213,13 @@ Permuted characteristic Matrix
 
 --
 
-$h(S_1)=a$, $h(S_2)=c$
+$\textrm{min_hash}(S_1)=a$, $\textrm{min_hash}(S_2)=c$
 
 ---
 
 ## Min-Hash
 
-Property: $Pr(h(S_i) = h(S_j)) = JS(S_i,S_j)$
+Property: $Pr(\textrm{min_hash}(S_i) = \textrm{min_hash}(S_j)) = JS(S_i,S_j)$
 
 Pf: on the board
 

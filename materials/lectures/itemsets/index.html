@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="" xml:lang="">
   <head>
     <title>Data Mining: Itemsets</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2018-09-09" />
+    <meta name="date" content="2020-03-09" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
@@ -18,13 +18,13 @@ count: false
 
 .banner[![](img/epiviz.png)]
 
-.title[Data Mining: Itemsets]
+.title[Algorithms for Data Science: Itemsets]
 
 .author[Héctor Corrada Bravo]
 
 .other-info[
 University of Maryland, College Park, USA  
-Fannie Mae: 2018-09-09
+DATA 606: 2020-03-09
 ]
 
 .logo[![](img/logo.png)]
@@ -48,7 +48,7 @@ Using **high-throughput** experimental methods
 
 ## Data Mining
 
-For today: the analysis of itemsets
+Next two lectures: the analysis of itemsets
 
 - Similar itemsets
 - Frequent itemsets
@@ -141,9 +141,7 @@ The _Jaccard Similarity_ of sets `\(S\)` and `\(T\)` is
 
 ## Exercises
 
-- Compute the Jaccard bag similarity of each pair of sets: `\(\{1,1,1,2\}\)`, `\(\{1,1,2,2,3\}\)`, `\(\{1,2,3,4\}\)`
-
-- Suppose we have a universal set `\(U\)` of `\(n\)` elements. We chose two subsets `\(S\)` and `\(T\)`, each with `\(m\)` of the `\(n\)` elements. What is the expected value of the JS of `\(S\)` and `\(T\)`?
+- Compute the Jaccard similarities of each pair of sets: `\(\{1,2,3,4\}\)`, `\(\{2,3,5,7\}\)`, `\(\{2,4,6\}\)`
 
 ---
 
@@ -214,13 +212,13 @@ Permuted characteristic Matrix
 
 --
 
-`\(h(S_1)=a\)`, `\(h(S_2)=c\)`
+`\(\textrm{min_hash}(S_1)=a\)`, `\(\textrm{min_hash}(S_2)=c\)`
 
 ---
 
 ## Min-Hash
 
-Property: `\(Pr(h(S_i) = h(S_j)) = JS(S_i,S_j)\)`
+Property: `\(Pr(\textrm{min_hash}(S_i) = \textrm{min_hash}(S_j)) = JS(S_i,S_j)\)`
 
 Pf: on the board
 
@@ -329,7 +327,7 @@ Let `\(JS(S,T)=s\)`
 
 ## Analysis of LSH
 
-&lt;img src="index_files/figure-html/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -590,6 +588,7 @@ Itemset analysis: applications to collaborative filtering, recommendation engine
 - A-priori Algorithm
 - Hashing for large datasets
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "ratio": "16:9"
@@ -597,11 +596,41 @@ Itemset analysis: applications to collaborative filtering, recommendation engine
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
 })();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
@@ -612,7 +641,18 @@ remark.macros['scale'] = function (percentage) {
 
 <script>
 (function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -626,14 +666,15 @@ remark.macros['scale'] = function (percentage) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
