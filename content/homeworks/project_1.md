@@ -25,5 +25,11 @@ https://github.com/chrisjmccormick/MinHash/tree/master/data
 You will base your solution off of the code provided by this repository:
 https://github.com/hcorrada/data606_plagiarism
 
+To access: 
+1. Create a github account (or use an existing one) at https://github.com
+2. Send me your github id and I will give you access to the repository
+3. **Fork** the repository to your github account
+4. Download and work on **your fork**
+
 Open the notebook `plagiarism_solution.ipynb` and follow instructions there.
 
