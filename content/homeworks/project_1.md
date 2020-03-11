@@ -32,5 +32,5 @@ To access:
 3. **Fork** the repository to your github account  
 4. Download and work on **your fork**  
 
-Open the notebook `plagiarism_solution.ipynb` and follow instructions there.
+Open the notebook `plagiarism.ipynb` and follow instructions there.
 
