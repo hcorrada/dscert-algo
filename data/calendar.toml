@@ -50,22 +50,25 @@ title = "NO LECTURE: SPRING BREAK"
 date = "3/24"
 
 [[day04.covers]]
-title = "Frequent Itemset Mining"
-
-[[day04.prep]]
-title = "Leskovec et al, Ch. 6"
+topic = "CLASS CANCELLED"
+notes = "https://umd.edu/virusinfo"
 
 ### DAY 5
 [day05]
 date = "3/31"
 
-
 [[day05.covers]]
-title = "Streaming, Frequency Estimation, Distinct Element Estimation"
-#notes = "lectures/cmsc643-preliminaries.pdf"
+title = "Frequent Itemset Mining"
 
 [[day05.prep]]
-title = "Leskovec et al, Ch. 4"
+title = "Leskovec et al, Ch. 6"
+
+#[[day05.covers]]
+#title = "Streaming, Frequency Estimation, Distinct Element Estimation"
+#notes = "lectures/cmsc643-preliminaries.pdf"
+
+#[[day05.prep]]
+#title = "Leskovec et al, Ch. 4"
 
 #### DAY 6
 [day06]
