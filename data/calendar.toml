@@ -50,7 +50,7 @@ title = "NO LECTURE: SPRING BREAK"
 date = "3/24"
 
 [[day04.covers]]
-topic = "CLASS CANCELLED"
+title = "CLASS CANCELLED"
 notes = "https://umd.edu/virusinfo"
 
 ### DAY 5
