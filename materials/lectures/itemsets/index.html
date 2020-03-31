@@ -4,7 +4,7 @@
     <title>Data Mining: Itemsets</title>
     <meta charset="utf-8" />
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2020-03-09" />
+    <meta name="date" content="2020-03-30" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
@@ -24,7 +24,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-DATA 606: 2020-03-09
+DATA 606: 2020-03-30
 ]
 
 .logo[![](img/logo.png)]
@@ -375,14 +375,14 @@ Find items that occur frequently together in sets
 
 Examples: 
 
-- items frequently bought together in the same transaction
+- items frequently bought together in the same transaction  
 - words that appear frequently together in the same document
 
 ---
 
 ## Market-Basket Model
 
-Items: objects we are modeling
+Items: objects we are modeling  
 Baskets: sets of items (transactions)
 
 Frequent itemsets: items that co-occur frequently in baskets
@@ -391,9 +391,9 @@ Frequent itemsets: items that co-occur frequently in baskets
 
 ## Frequent Itemsets
 
-Support: define the support of an itemset `\(I\)` as the number of baskets in which itemset `\(I\)` appears
+`\(\mathrm{support}(I)\)` the number of baskets in which itemset `\(I\)` appears
 
-Frequent itemsets: Itemsets `\(I\)` with support at least some support threshold `\(s\)`
+Frequent itemsets: Itemsets `\(I\)` with `\(\mathrm{support}(I)\geq s\)` (for some threshold `\(s\)`)
 
 ---
 
@@ -405,8 +405,22 @@ Frequent itemsets: Itemsets `\(I\)` with support at least some support threshold
 (4) {Professional, free, advice, on, dog, training, puppy, training}  
 (5) {Cat, and, kitten, training, and, behavior}  
 (6) {Dog, &amp;, Cat, provides, dog, training, in, Eugene, Oregon}  
-(7) {"Dog, and, cat", is, a, slang, term, used, by, police, officers, for, a, male-female, relationship}  
-(8) {Shop, for, your, show, dog, grooming, and, pet, supplies}
+(7) {Shop, for, your, show, dog, grooming, and, pet, supplies}
+
+For `\(s=3\)` what are frequent itemsets of size 1 or 2
+---
+
+## Exercise
+
+Suppose there are 100 items, numbered 1 to 100, and also 100 baskets, numbered 1 to 100.
+
+Item `\(i\)` is in basket `\(B\)` iff `\(i\)` divides `\(B\)` with no remainder
+
+- Item 1 is in all baskets, item 2 in the even-numbered baskets
+- Basket 24 contains items {1,2,3,4,6,8,12,24}
+
+a) If support threshold is 5, which items are frequent?
+b) Which pairs are frequent?
 
 ---
 
@@ -414,39 +428,25 @@ Frequent itemsets: Itemsets `\(I\)` with support at least some support threshold
 
 Rules of the form `I -&gt; j`: if itemset `\(I\)` is in basket, then item `\(j\)` is likely in basket as well
 
-_rule confidence_: ratio of support of `\(I \bigcup \{j\}\)` to support of `\(I\)`.
+_rule confidence_: `\(\mathrm{confidence}(I \to j) = \frac{\mathrm{support}(I \bigcup \{j\})}{\mathrm{support}(I)}\)`
 
-_rule interest_: difference between confidence of rule and fraction of baskets that contain `\(j\)`
+_rule interest_: `\(\mathrm{confidence}(I \to j) - |\{ B \in \mathrm{Baskets} \textrm{ s.t. } j \in B\}|\)`
 
 ---
 
 ## Association Rules
 
-Note: once we have itemsets, we can get association rules easily
+Note: once we have frequent itemsets, we can get association rules with high confidence easily
 
 --
 
-Suppose we find all frequent itemsets over some support threshold
+Suppose we find **all** frequent itemsets over some support threshold `\(s\)`
 
-Let itemset `\(J\)` with `\(n\)` items be one of those itemsets, then
+Let itemset `\(J\)` with `\(n\)` items be one of those itemsets ( `\(\mathrm{support}(J) \geq s\)` ), then
 
-1. there are only `\(n\)` candidate Association Rules `\(J-\{j\}\rightarrow j\)`  
-2. Both `\(J-\{j\}\)` and `\(j\)` are also frequent itemsets, so we have already calculated their support
+1. there are only `\(n\)` candidate Association Rules `\((J-\{j\}) \rightarrow j\)`  
+2. `\(\mathrm{support}(J)\geq s\)` implies `\(\mathrm{support}(J-\{j\}) \geq s\)` so we must have already calculated the latter
 3. We can quickly compute the _confidence_ and _interest_ of each rule
-
----
-
-## Exercise
-
-Suppose there are 100 items, numbered 1 to 100, and also 100 baskets, numbered 1 to 100.
-
-Item `\(i\)` is in basket `\(b\)` iff `\(i\)` divides `\(b\)` with no remainder
-
-- Item 1 is in all baskets, item 2 in the even-numbered baskets
-- Basket 24 contains items {1,2,3,4,6,8,12,24}
-
-a) If support threshold is 5, which items are frequent?
-b) Which pairs are frequent?
 
 ---
 
@@ -460,7 +460,7 @@ Why?
 
 ## The A-priori algorithm
 
-Suppose we are given baskets over `\(n\)` items
+Suppose we are given a set of baskets over `\(n\)` items
 
 ### First pass
 
@@ -529,7 +529,7 @@ PCY algorithm: hash item pairs and keep count in hash bucket
 
 Define candidate frequent pairs as
 
-- `\(i\)` and `\(j\)` anre frequent items
+- `\(i\)` and `\(j\)` are frequent items
 - `\(\{i,j\}\)` hashes to a frequent bucket (with count &gt; threshold)
 
 ---
