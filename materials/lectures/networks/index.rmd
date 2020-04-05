@@ -25,7 +25,7 @@ count: false
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC644 `r Sys.Date()`
+DATA606 `r Sys.Date()`
 ]
 
 .logo[![](img/logo.png)]
@@ -151,7 +151,7 @@ _edges_: links
 
 .column[
 
-```{r toygraph, echo=FALSE, message=FALSE}
+```{r toygraph, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidygraph)
 library(ggraph)
 
@@ -534,7 +534,7 @@ undirected_plot_1958 +
 ]
 
 .column[
-```{r adjplot2, echo=FALSE, fig.align="center", fig.width=5}
+```{r adjplot2, echo=FALSE, fig.align="center", fig.width=5, warning=FALSE}
 undirected_amat_plot_1958 <- undirected_graph_1958 %>%
   igraph::as_adj() %>%
   as.matrix() %>%
@@ -568,7 +568,7 @@ On the board:
 ]
 
 .column[
-```{r adjplot3, echo=FALSE, fig.align="center", fig.width=5}
+```{r adjplot3, echo=FALSE, fig.align="center", fig.width=5, warning=FALSE}
 undirected_amat_plot_1958
 ```
 ]
@@ -589,7 +589,7 @@ graph_1958 %>%
 ]
 
 .column[
-```{r adjplot4, echo=FALSE, fig.align="center", fig.width=5,eval=TRUE}
+```{r adjplot4, echo=FALSE, fig.align="center", fig.width=5,eval=TRUE, warning=FALSE}
 graph_1958 %>% 
   igraph::as_adj() %>%
   as.matrix() %>%
@@ -625,7 +625,7 @@ Edges are assigned a weight indicating quantitative property of interaction
 
 - Spatial distance in an ecological network
 
----
+--
 
 Adjacency matrix contains weights instead of 0/1 entries
 
