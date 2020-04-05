@@ -77,7 +77,7 @@ date = "4/7"
 
 [[day06.covers]]
 title = "Network Analysis"
-# notes = "lectures/cmsc644-networks.pdf"
+notes = "lectures/data606_networks.pdf"
 
 [[day06.prep]]
 title = "Leskovec et al, Ch. 10"
