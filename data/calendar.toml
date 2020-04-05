@@ -59,6 +59,7 @@ date = "3/31"
 
 [[day05.covers]]
 title = "Frequent Itemset Mining"
+notes = "lectures/data606-itemsets.pdf"
 
 [[day05.prep]]
 title = "Leskovec et al, Ch. 6"
