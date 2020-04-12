@@ -88,7 +88,7 @@ date = "4/14"
 
 [[day07.covers]]
 title = "Clustering"
-# notes = "lectures/cmsc644-clustering.pdf"
+notes = "lectures/data606_clustering.pdf"
 
 [[day07.prep]]
 title = "Leskovec et al, Ch. 7"
