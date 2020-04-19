@@ -98,7 +98,8 @@ title = "Leskovec et al, Ch. 7"
 date = "4/21"
 
 [[day08.covers]]
-title = "Numerical Optimization"
+title = "Numeric Optimization"
+notes = "lectures/data606_numeric-optimization.pdf"
 
 ### DAY 9
 [day09]

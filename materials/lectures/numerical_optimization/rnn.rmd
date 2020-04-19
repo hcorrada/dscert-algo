@@ -1,0 +1,9 @@
+
+---
+layout: false
+class: inverse, middle, center
+
+# More on RNN
+
+Next few slides from Fei Fei Li, Justin Johnson and Serena Yeung at Stanford http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture10.pdf
+
