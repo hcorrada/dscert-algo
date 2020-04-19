@@ -101,6 +101,10 @@ date = "4/21"
 title = "Numeric Optimization"
 notes = "lectures/data606_numeric-optimization.pdf"
 
+[[day08.prep]]
+title = "Ruder (2017). An overview of gradient descent optimization algorithms"
+link = "https://arxiv.org/pdf/1609.04747.pdf"
+
 ### DAY 9
 [day09]
 date = "4/28"
