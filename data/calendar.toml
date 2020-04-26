@@ -114,7 +114,7 @@ title = "Probabilistic Inference: The EM algorithm"
 notes = "lectures/data606_em-algorithm.pdf"
 
 [[day09.prep]]
-title = "Hastie, Tibshirani and Friedman, ESL Ch. 12.1-12.3"
+title = "Hastie, Tibshirani and Friedman, ESL Ch. 8.5"
 link = "https://web.stanford.edu/~hastie/ElemStatLearn/"
 
 # [[day11.covers]]
