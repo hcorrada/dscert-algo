@@ -111,7 +111,11 @@ date = "4/28"
 
 [[day09.covers]]
 title = "Probabilistic Inference: The EM algorithm"
-# notes = "lectures/cmsc644-em_algorithm.pdf"
+notes = "lectures/data606_em-algorithm.pdf"
+
+[[day09.prep]]
+title = "Hastie, Tibshirani and Friedman, ESL Ch. 8.5"
+link = "https://web.stanford.edu/~hastie/ElemStatLearn/"
 
 # [[day11.covers]]
 # title = "Approximate Inference, Variational Methods"

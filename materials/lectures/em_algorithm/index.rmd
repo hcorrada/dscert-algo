@@ -22,13 +22,13 @@ library(cowplot)
 
 .banner[![](img/epiviz.png)]
 
-.title[The EM Algorithm]
+.title[Algorithms for Data Science: The EM Algorithm]
 
 .author[Héctor Corrada Bravo]
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC 644: `r Sys.Date()`
+DATA 606: `r Sys.Date()`
 ]
 
 .logo[![](img/logo.png)]
@@ -120,17 +120,17 @@ layout: false
 
 ## Soft K-means Clustering
 
-Instead of the combinatorial approach of the $K$-means algorithm, take a more direct probabilistic approach to modeling distribution $Pr(X)$. 
+Instead of the combinatorial approach of the $K$-means algorithm, take a more direct probabilistic approach to modeling distribution $P(X)$. 
 
-Assume each of the $K$ clusters corresponds to a multivariate distribution $Pr_k(X)$, 
+Assume each of the $K$ clusters corresponds to a multivariate distribution $P_k(X)$, 
 
-$Pr(X)$ is given by _mixture_ of these distributions as $Pr(X)=\sum_{k=1}^K \pi_k Pr_k(X)$. 
+$P(X)$ is then a _mixture_ of these distributions as $P(X)=\sum_{k=1}^K \pi_k P_k(X)$. 
 
 ---
 
 ## Soft K-means Clustering
 
-Specifically, take $Pr_k(X)$ as a multivariate normal distribution $f_k(X) = N(\mu_k, \sigma_k^2 I)$ 
+Specifically, take $P_k(X)$ as a multivariate normal distribution $f_k(X) = N(\mu_k, \sigma_k^2 I)$ 
 
 and mixture density 
 $f(X) = \sum_{k=1}^K \pi_k f_k(X)$. 
@@ -212,6 +212,51 @@ $\hat{\mu}_k = \frac{\sum_{i=1}^N \Delta_{ik} x_i}{\sum_{i=1}^N\Delta_{ik}}$
 $\hat{\sigma}_k^2 = \frac{\sum_{i=1}^N \Delta_{ik} (x_i-\hat{\mu}_k)^2}{\sum_{i=1}^N \Delta_{ik}}$
 
 $\hat{\pi}_k=\frac{\sum_{i=1}^K \Delta_{ik}}{N}$.
+
+
+---
+layout: true
+
+## Constrained optimization
+
+---
+
+We have a problem of type 
+
+$$
+\begin{array}
+{} \mathrm{min}_x & f_0(x) \\
+\textrm{s.t.} & f_i(x) \leq 0 \; i=1,\ldots,m \\
+{} & h_i(x) = 0\; i=1,\ldots,p
+\end{array}
+$$
+
+Note: This discussion follows Boyd and Vandenberghe, _Convex Optimization_
+
+---
+
+To solve these type of problems we will look at the _Lagrangian_ function:
+
+$$L(x,\lambda,\nu) = f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) + \sum_{i=1}^p \nu_i g_i(x)$$
+
+---
+
+There is a beautiful result giving _optimality conditions_ based on the Lagrangian:
+
+Suppose $\tilde{x}$, $\tilde{\lambda}$ and $\tilde{\nu}$ are _optimal_, then
+
+$$
+\begin{array}
+{} f_i(\tilde{x}) \leq 0 \\
+h_i(\tilde{x}) = 0 \\
+\tilde{\lambda_i} \geq 0 \\
+\tilde{\lambda_i}f_i(\tilde{x}) = 0 \\
+\nabla L(\tilde{x},\tilde{\lambda},\tilde{\nu}) = 0
+\end{array}
+$$
+---
+
+We can use the gradient and feasibility conditions to prove the MLE result.
 
 ---
 
@@ -407,16 +452,48 @@ $Z^m$: missing observations
 Requires a likelihood model...
 
 ---
+layout: true
 
 ## Latent semantic analysis
 
+---
+
 Documents as _mixtures_ of topics (Hoffman 1998) 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.height=4}
 knitr::include_graphics("img/plsa.png")
 ```
 
+---
 
+Notation:
+
+We have a set of documents $D$
+
+Each document modeled as a bag-of-words (bow) over dictionary $W$.
+
+$x_{w,d}$: the number of times word $w \in W$ appears in document $d \in D$.
+
+---
+
+Let's start with a simple model based on the frequency of word occurrences.
+
+Each document is modeled as $n_d$ draws from a _Multinomial_ distribution with parameters $\theta_d = \{ \theta_{1,d}, \ldots, \theta_{W,d} \}$
+
+Note $\theta_{w,d} \geq 0$ and $\sum_{w} \theta_{w,d} = 1$.
+
+---
+
+_Probability of observed corpus $D$_
+
+$$Pr(D|\{ \theta_d \} ) \propto \prod_{d=1}^D \prod_{w=1}^W \theta_{w,d}^{x_{w,d}}$$
+
+
+---
+
+## Problem 1:
+
+Prove MLE $\hat{\theta}_{w,d} = \frac{x_{w,d}}{n_d}$
 
 
 
