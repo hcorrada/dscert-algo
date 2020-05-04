@@ -1,5 +1,5 @@
 ---
-title: "EM (cont'd) and Gibbs Sampling"
+title: "Gibbs Sampling"
 author: "Héctor Corrada Bravo"
 company: "University of Maryland"
 date: "`r Sys.Date()`"
@@ -22,7 +22,7 @@ library(cowplot)
 
 .banner[![](img/epiviz.png)]
 
-.title[Gibbs Sampling]
+.title[Algorithms For Data Science: Gibbs Sampling]
 
 .author[Héctor Corrada Bravo]
 
@@ -183,110 +183,6 @@ and maximize fully observed likelihood plugging in $\gamma_{w,d,t}$ for $\Delta_
 **Problem 4**: Show
 
 $$\gamma_{w,d,t} = x_{w,d} \times \frac{ p_{t,d} \theta_{w,t} }{\sum_{t'=1}^T p_{t',d} \theta_{w,t'}}$$
-
----
-layout: true
-
-## The EM Algorithm in General
-
----
-
-So, why does that work?
-
-Why does plugging in $\gamma_{w,d,t}$ for the latent variables $\Delta_{w,d,t}$ work?
-
-Why does that maximize log-likelihood $\ell(\{p_d\},\{\theta_t\};D)$?
-
----
-
-Think of it as follows:
-
-$Z$: observed data  
-$Z^m$: missing _latent_ data
-$T=(Z,Z^m)$: complete data (observed and missing)
-
---
-
-$\ell(\theta';Z)$: log-likehood w.r.t.  *observed* data  
-$\ell_0(\theta';T)$: log-likelihood w.r.t. *complete* data
-
----
-
-Next, notice that
-
-$$
-Pr(Z|\theta') = \frac{Pr(T|\theta')}{Pr(Z^m|Z,\theta')}
-$$
-
---
-
-As likelihood:
-
-$$
-\ell(\theta';Z) = \ell_0(\theta';T) - \ell_1(\theta';Z^m|Z)
-$$
-
----
-
-Iterative approach: given parameters $\theta$ take expectation of log-likelihoods
-
-$$
-\begin{array}
-\, \ell(\theta';Z) & = & E[\ell_0(\theta';T)|Z,\theta] - E[\ell_1(\theta';Z^m|Z)|Z,\theta] \\
-{} & \equiv & Q(\theta',\theta) - R(\theta',\theta)
-\end{array}
-$$
-
---
-
-In pLSA, $Q(\theta',\theta)$ is the log likelihood of complete data with $\Delta_{w,d,t}$ replaced by $\gamma_{w,d,t}$
-
----
-
-The general EM algorithm
-
-1. Initialize parameters $\theta^{(0)}$  
-2. Construct _function_ $Q(\theta',\theta^{(j)})$  
-3. Find next set of parameters $\theta^{(j+1)} = \arg \max_{\theta'} Q(\theta', \theta^{(j)})$  
-4. Iterate steps 2 and 3 until convergence  
-
----
-
-So, why does that work?
-
-$$
-\begin{aligned}
-\ell(\theta^{(j+1)};Z) - \ell(\theta^{(j)};Z) & = &
-[Q(\theta^{(j+1)},\theta^{(j)}) - Q(\theta^{(j)},\theta^{(j)})] \\ 
-{} & {} & - [R(\theta^{(j+1)},\theta^{(j)})-R(\theta^{(j)},\theta^{(j)})] \\
-{} & \geq & 0
-\end{aligned}
-$$
-
---
-
-I.E., every step makes log-likehood larger
-
----
-
-Why else does it work? $Q(\theta',\theta)$ _minorizes_ $\ell(\theta';Z)$
-
-```{r, echo=FALSE, fig.width=1}
-knitr::include_graphics("img/minorizes.png")
-```
-
----
-
-General algorithmic concept:
-
-Iterative approach:
-  - Initialize parameters
-  - Construct bound based on current parameters
-  - Optimize bound
-
---
-
-We will see this again when we look at _variational_ methods
 
 ---
 layout: true
@@ -527,9 +423,6 @@ Two inference procedures:
   - Exact Inference with Maximum Likelihood using the EM algorithm
   - Approximate Inference using Gibbs Sampling
 
---
-
-Next, we will go back to Maximum Likelihood but learn about Approximate Inference using Variational Methods
 
 
 

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="" xml:lang="">
   <head>
-    <title>EM (cont’d) and Gibbs Sampling</title>
-    <meta charset="utf-8">
+    <title>Gibbs Sampling</title>
+    <meta charset="utf-8" />
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2019-04-02" />
+    <meta name="date" content="2020-05-04" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
@@ -19,13 +19,13 @@ count: false
 
 .banner[![](img/epiviz.png)]
 
-.title[Gibbs Sampling]
+.title[Algorithms For Data Science: Gibbs Sampling]
 
 .author[Héctor Corrada Bravo]
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC 644: 2019-04-02
+CMSC 644: 2020-05-04
 ]
 
 .logo[![](img/logo.png)]
@@ -178,108 +178,6 @@ and maximize fully observed likelihood plugging in `\(\gamma_{w,d,t}\)` for `\(\
 **Problem 4**: Show
 
 `$$\gamma_{w,d,t} = x_{w,d} \times \frac{ p_{t,d} \theta_{w,t} }{\sum_{t'=1}^T p_{t',d} \theta_{w,t'}}$$`
-
----
-layout: true
-
-## The EM Algorithm in General
-
----
-
-So, why does that work?
-
-Why does plugging in `\(\gamma_{w,d,t}\)` for the latent variables `\(\Delta_{w,d,t}\)` work?
-
-Why does that maximize log-likelihood `\(\ell(\{p_d\},\{\theta_t\};D)\)`?
-
----
-
-Think of it as follows:
-
-`\(Z\)`: observed data  
-`\(Z^m\)`: missing _latent_ data
-`\(T=(Z,Z^m)\)`: complete data (observed and missing)
-
---
-
-`\(\ell(\theta';Z)\)`: log-likehood w.r.t.  *observed* data  
-`\(\ell_0(\theta';T)\)`: log-likelihood w.r.t. *complete* data
-
----
-
-Next, notice that
-
-$$
-Pr(Z|\theta') = \frac{Pr(T|\theta')}{Pr(Z^m|Z,\theta')}
-$$
-
---
-
-As likelihood:
-
-$$
-\ell(\theta';Z) = \ell_0(\theta';T) - \ell_1(\theta';Z^m|Z)
-$$
-
----
-
-Iterative approach: given parameters `\(\theta\)` take expectation of log-likelihoods
-
-$$
-`\begin{array}
-\, \ell(\theta';Z) &amp; = &amp; E[\ell_0(\theta';T)|Z,\theta] - E[\ell_1(\theta';Z^m|Z)|Z,\theta] \\
-{} &amp; \equiv &amp; Q(\theta',\theta) - R(\theta',\theta)
-\end{array}`
-$$
-
---
-
-In pLSA, `\(Q(\theta',\theta)\)` is the log likelihood of complete data with `\(\Delta_{w,d,t}\)` replaced by `\(\gamma_{w,d,t}\)`
-
----
-
-The general EM algorithm
-
-1. Initialize parameters `\(\theta^{(0)}\)`  
-2. Construct _function_ `\(Q(\theta',\theta^{(j)})\)`  
-3. Find next set of parameters `\(\theta^{(j+1)} = \arg \max_{\theta'} Q(\theta', \theta^{(j)})\)`  
-4. Iterate steps 2 and 3 until convergence  
-
----
-
-So, why does that work?
-
-$$
-`\begin{aligned}
-\ell(\theta^{(j+1)};Z) - \ell(\theta^{(j)};Z) &amp; = &amp;
-[Q(\theta^{(j+1)},\theta^{(j)}) - Q(\theta^{(j)},\theta^{(j)})] \\ 
-{} &amp; {} &amp; - [R(\theta^{(j+1)},\theta^{(j)})-R(\theta^{(j)},\theta^{(j)})] \\
-{} &amp; \geq &amp; 0
-\end{aligned}`
-$$
-
---
-
-I.E., every step makes log-likehood larger
-
----
-
-Why else does it work? `\(Q(\theta',\theta)\)` _minorizes_ `\(\ell(\theta';Z)\)`
-
-&lt;img src="img/minorizes.png" width="2355" /&gt;
-
----
-
-General algorithmic concept:
-
-Iterative approach:
-  - Initialize parameters
-  - Construct bound based on current parameters
-  - Optimize bound
-
---
-
-We will see this again when we look at _variational_ methods
 
 ---
 layout: true
@@ -517,11 +415,8 @@ We have now seen two different mixture models: soft k-means and topic models
 Two inference procedures: 
   - Exact Inference with Maximum Likelihood using the EM algorithm
   - Approximate Inference using Gibbs Sampling
-
---
-
-Next, we will go back to Maximum Likelihood but learn about Approximate Inference using Variational Methods
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "ratio": "16:9"
@@ -529,11 +424,67 @@ Next, we will go back to Maximum Likelihood but learn about Approximate Inferenc
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
 })();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
@@ -543,8 +494,8 @@ remark.macros['scale'] = function (percentage) {
 </script>
 
 <script>
-(function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -558,7 +509,8 @@ remark.macros['scale'] = function (percentage) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

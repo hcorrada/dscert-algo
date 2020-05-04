@@ -132,7 +132,7 @@ date = "5/5"
 
 [[day10.covers]]
 title = "Probabilistic Inference, Sampling Methods"
-# notes = "lectures/cmsc644-gibbs_sampling.pdf"
+notes = "lectures/data606-gibbs_sampling.pdf"
 
 #### DAY 11
 [day11]
