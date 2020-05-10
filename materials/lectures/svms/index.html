@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="" xml:lang="">
   <head>
     <title>Support Vector Machines</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="Héctor Corrada Bravo" />
-    <meta name="date" content="2019-04-10" />
+    <meta name="date" content="2020-05-10" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
@@ -18,13 +18,13 @@ count: false
 
 .banner[![](img/epiviz.png)]
 
-.title[Support Vector Machines]
+.title[Algorithms for Data Science: Support Vector Machines]
 
 .author[Héctor Corrada Bravo]
 
 .other-info[
 University of Maryland, College Park, USA  
-CMSC644: 2019-04-10
+CMSC644: 2020-05-10
 ]
 
 .logo[![](img/logo.png)]
@@ -76,11 +76,11 @@ Training data: `\(\{(\mathbf{x}_1,y_1), (\mathbf{x}_2,y_2),\ldots,(\mathbf{x}_n,
 Build a classifier by defining
 a _discriminative_ function such that
 
-`$$\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ip} &gt; 0 \, \mathrm{ if } y_i = 1$$`
+`$$w_0 + w_1 x_{i1} + w_2 x_{i2} + \cdots + w_p x_{ip} &gt; 0 \, \mathrm{ if } y_i = 1$$`
 
 and
 
-`$$\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ip} &lt; 0 \, \mathrm{ if } y_i = -1$$`
+`$$w_0 + w_1 x_{i1} + w_2 x_{i2} + \cdots + w_p x_{ip} &lt; 0 \, \mathrm{ if } y_i = -1$$`
 
 ---
 
@@ -88,7 +88,7 @@ and
 
 Points where the _discriminative_ function equals 0 form a _hyper-plane_ (i.e., a line in 2D)
 
-`$$\{x \, : \, \beta_0 + \beta_1 x_{1} + \cdots + \beta_p x_p = 0 \}$$`
+`$$\{x \, : \, w_0 + w_1 x_{1} + \cdots + w_p x_p = 0 \}$$`
 
 .center[.image-70[![](images/9_2.png)]]
 
@@ -99,17 +99,17 @@ Points where the _discriminative_ function equals 0 form a _hyper-plane_ (i.e., 
 Hyper-plane partitions the predictor space into two sets on
 each side of the line. 
 
-Denote `\(\beta\)` is the vector `\((\beta_1, \beta_2, \ldots, \beta_p)\)`
+Denote `\(\mathbf{w}\)` is the vector `\((w_1, w_2, \ldots, w_p)\)`
 
 --
 
 Restrict estimates to those for which
-`\(\beta'\beta=\|\beta\|^2=1\)` 
+`\(\mathbf{w}'\mathbf{w}=\|\mathbf{w}\|^2=1\)` 
 
 --
 
 Then, the *signed* distance of any point
-`\(x\)` to the decision boundary `\(L\)` is `\(\beta_0 + \beta'x\)`. 
+`\(x\)` to the decision boundary `\(L\)` is `\(w_0 + \mathbf{w}'\mathbf{x}\)`. 
 
 ---
 
@@ -120,8 +120,8 @@ describe the two partitions as
 
 $$
 `\begin{aligned}
-L^+ &amp; =\{x:\beta_0 + \beta'x&gt;0\}, \\\\
-L^{-} &amp; =\{x:\beta_0 + \beta'x&lt;0\}
+L^+ &amp; =\{\mathbf{x}:w_0 + \mathbf{w}'\mathbf{x}&gt;0\}, \\\\
+L^{-} &amp; =\{\mathbf{x}:w_0 + \mathbf{w}'\mathbf{x}&lt;0\}
 \end{aligned}`
 $$
 
@@ -129,7 +129,7 @@ $$
 
 ## Separating Hyperplanes
 
-The `\(\beta\)` we want as an estimate is one that separates
+The `\(\mathbf{w}\)` we want as an estimate is one that separates
 the training data as perfectly as possible.
 
 --
@@ -137,37 +137,37 @@ the training data as perfectly as possible.
 Describe this requirement as
 
 $$
-y_i(\beta_0 + \beta'x_i) &gt; 0, i=1,\ldots,N
+y_i(w_0 + \mathbf{w}'\mathbf{x}_i) &gt; 0, i=1,\ldots,N
 $$
 
 ---
 
 ## Rosenblatt's algorithm
 
-Algorithm to find vector `\(\beta\)` that
+Algorithm to find vector `\(\mathbf{w}\)` that
 satisfies the separation requirement as much as possible. 
 
-Penalize `\(\beta\)` by how far into the wrong side misclassified
+Penalize `\(\mathbf{w}\)` by how far into the wrong side misclassified
 points are:
 
-`$$D(\beta_0, \beta) = - \sum_{i\in \mathcal{M}} y_i (\beta_0 + \beta'x_i)$$`
+`$$D(w_0, \mathbf{w}) = - \sum_{i\in \mathcal{M}} y_i (w_0 + \mathbf{w}'\mathbf{x}_i)$$`
 
-`\(\mathcal{M}\)`: set of points misclassified  by `\(\beta\)` (on the wrong side of the
+`\(\mathcal{M}\)`: set of points misclassified  by `\(\mathbf{w}\)` (on the wrong side of the
 hyper-plane).
 
 ---
 
 ## Rosenblatt's Algorithm
 
-Estimate `\(\beta\)` by minimizing `\(D\)`. 
+Estimate `\(\mathbf{w}\)` by minimizing `\(D\)`. 
 
 Assuming `\(\mathcal{M}\)` is fixed, the gradient of `\(D\)` is
 
-`$$\frac{\partial D(\beta_0, \beta)}{\partial \beta} = -\sum_{i\in \mathcal{M}} y_i x_i$$`
+`$$\nabla_{\mathbf{w}}D(w_0,\mathbf{w}) = -\sum_{i\in \mathcal{M}} y_i \mathbf{x}_i$$`
 
 and
 
-`$$\frac{\partial D(\beta_0, \beta)}{\partial \beta_0} = -\sum_{i \in \mathcal{M}} y_i$$`
+`$$\frac{\partial D(w_0, \mathbf{w})}{\partial w_0} = -\sum_{i \in \mathcal{M}} y_i$$`
 
 ---
 
@@ -175,21 +175,21 @@ and
 
 Rosenblatt's algorithm uses *stochastic gradient descent*: 
 
-- Initialize parameters `\(\beta_0\)` and `\(\beta\)`
+- Initialize parameters `\(w_0\)` and `\(\mathbf{w}\)`
 - Cycle through training points `\(i\)`, if it is misclassified, update parameters as
 
 $$
-\beta \leftarrow \beta + \rho y_ix_i
+\mathbf{w} \leftarrow \mathbf{w} + \rho y_i\mathbf{x}_i
 $$
 
 and
 
 $$
-\beta_0 \leftarrow \beta_0 + \rho y_i
+w_0 \leftarrow w_0 + \rho y_i
 $$
 
 - Stop when converged (or get tired of waiting)
-
+- ($rho$ is a learning rate parameter)
 ---
 
 ## Rosenblatt's Algorithm
@@ -197,10 +197,10 @@ $$
 Update Rule:
 
 $$
-\beta \leftarrow \beta + \rho y_ix_i
+\mathbf{w} \leftarrow \mathbf{w} + \rho y_ix_i
 $$
 
-Learning rate parameter `\(\rho\)` is used to control how much we update `\(\beta\)` in each
+Learning rate parameter `\(\rho\)` is used to control how much we update `\(\mathbf{w}\)` in each
 step. 
 
 --
@@ -213,11 +213,11 @@ This is the gradient descent algorithm that forms the basis of neural networks a
 
 There are a few problems with this algorithm:
 
-If there exists `\(\beta_0\)` and `\(\beta\)` that separates the training points perfectly, 
+If there exists `\(w_0\)` and `\(\mathbf{w}\)` that separates the training points perfectly, 
 
 --
 
-then there are an infinite number of `\(\beta_0\)` and `\(\beta\)`s that also separate the data perfectly
+then there are an infinite number of `\(w_0\)` and `\(\mathbf{w}\)`s that also separate the data perfectly
 
 ---
 
@@ -258,7 +258,7 @@ class: split-50
 ## Support Vector Machines
 
 When the data are separable, SVMs will choose the single
-optimal `\(\beta\)` that _maximizes_ the distance between the decision
+optimal `\(\mathbf{w}\)` that _maximizes_ the distance between the decision
 boundary and the closest point in each class.
 
 --
@@ -294,9 +294,9 @@ This will tend to _generalize_ better since new observations have room to fall w
 This can be cast as _optimization_ problem:
 
 $$
-\mathrm{max}_{\beta_0,\beta} M \\\\
-\mathrm{s.t.} \|\beta\|^2 = 1 \\\\
-y_i(\beta_0 + \beta'x_i) \geq M \, \forall i
+\mathrm{max}_{w_0,\mathbf{w}} M \\\\
+\mathrm{s.t.} \|\mathbf{w}\|^2 = 1 \\\\
+y_i(w_0 + \mathbf{w}'\mathbf{x}_i) \geq M \, \forall i
 $$
 
 
@@ -304,11 +304,11 @@ $$
 
 ## Maximum margin hyper-planes
 
-Rewrite optimization problem setting `\(M=1/\|\beta\|^2\)` and using a little bit of algebra:
+Rewrite optimization problem setting `\(M=1/\|\mathbf{w}\|^2\)` and using a little bit of algebra:
 
 $$
-\mathrm{min}_{\beta_0, \beta} \frac{1}{2} \|\beta\|^2 \\\\
-\mathrm{s.t.} y_i(\beta_0 + \beta'x_i) \geq 1 \, \forall i
+\mathrm{min}_{w_0, \mathbf{w}} \frac{1}{2} \|\mathbf{w}\|^2 \\\\
+\mathrm{s.t.} y_i(w_0 + \mathbf{w}'\mathbf{x}_i) \geq 1 \, \forall i
 $$
 
 ---
@@ -316,13 +316,13 @@ $$
 ## Maximum margin hyper-planes
 
 $$
-\mathrm{min}_{\beta_0, \beta} \frac{1}{2} \|\beta\|^2 \\\\
-\mathrm{s.t.} y_i(\beta_0 + \beta'x_i) \geq 1 \, \forall i
+\mathrm{min}_{w_0, \mathbf{w}} \frac{1}{2} \|\mathbf{w}\|^2 \\\\
+\mathrm{s.t.} y_i(w_0 + \mathbf{w}'\mathbf{x}_i) \geq 1 \, \forall i
 $$
 
 This is a _constrained_ optimization problem
 
-Minimize the norm of `\(\beta\)` under the constraint that it classifies every observation correctly. 
+Minimize the norm of `\(\mathbf{w}\)` under the constraint that it classifies every observation correctly. 
 
 ---
 
@@ -403,7 +403,7 @@ $$
 What does the Lagrangian look like for the maximum-margin hyper-plane problem?
 
 $$
-L(\beta_0, \beta, \alpha) = \frac{1}{2} \|\beta \|^2 + \sum_i -\alpha_i[y_i(\beta_0 + \beta'x_i) - 1)]
+L(w_0, \mathbf{w}, \mathbf{\alpha}) = \frac{1}{2} \|\mathbf{w} \|^2 + \sum_i -\alpha_i[y_i(w_0 + \mathbf{w}'\mathbf{x}_i) - 1)]
 $$
 
 --
@@ -416,21 +416,21 @@ You can then find _dual function_ by solving `\(\min_x L(x,\lambda,\nu)\)`
 
 In the maximum-margin hyper-plane case, the equivalent constrained maximization problem (the _dual_ problem) is:
 
-`$$\mathrm{max}_{\alpha} \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k x_i'x_k \\\\
+`$$\mathrm{max}_{\mathbf{\alpha}} \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k \mathbf{x}_i'\mathbf{x}_k \\\\
 \mathrm{s.t.} \alpha_i \geq 0 \, \forall i$$`
 
 ---
 
 ## Maximum margin hyper-planes
 
-`$$\mathrm{max}_{\alpha} \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k x_i'x_k \\\\
+`$$\mathrm{max}_{\alpha} \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k \mathbf{x}_i'\mathbf{x}_k \\\\
 \mathrm{s.t.} \alpha_i \geq 0 \, \forall i$$`
 
 This quadratic optimization problem is usually easier to optimize than the original problem (notice there is only positivity constraints on `\(\alpha\)`).
 
 --
 
-We can still recover original parameters `\(\beta_0\)` and `\(\beta\)` from solution `\(\alpha\)`.
+We can still recover original parameters `\(w_0\)` and `\(\mathbf{w}\)` from solution `\(\alpha\)`.
 
 ---
 
@@ -438,7 +438,7 @@ We can still recover original parameters `\(\beta_0\)` and `\(\beta\)` from solu
 
 _Key insight no. 2_: **SVMs only depend on pairwise "similarity" functions of observations**
 
-`$$\mathrm{max}_{\alpha} \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k x_i'x_k \\\\
+`$$\mathrm{max}_{\alpha} \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k \mathbf{x}_i'\mathbf{x}_k \\\\
 \mathrm{s.t.} \alpha_i = 0 \, \forall i$$`
 
 Only inner products between observations are required as opposed to the observations themselves.
@@ -450,7 +450,7 @@ Only inner products between observations are required as opposed to the observat
 
 Also, we can write the _discriminant_ function in equivalent form
 
-`$$f(x) = \beta_0 + \sum_{i=1}^n y_i \alpha_i x'x_i$$`
+`$$f(x) = w_0 + \sum_{i=1}^n y_i \alpha_i \mathbf{x}'\mathbf{x}_i$$`
 
 --
 
@@ -466,10 +466,10 @@ Therefore, we can fit these models with other measures that works as "similariti
 
 _Key insight no. 3_: **SVMs only depend on a subset of observations (support vectors)**
 
-Optimial solutions `\(\beta\)` and `\(\alpha\)` must satisfy the following condition:
+Optimial solutions `\(\mathbf{w}\)` and `\(\alpha\)` must satisfy the following condition:
 
 $$
-\alpha_i [ y_i(\beta_0 + \beta'x_i) -1] = 0 \, \forall i.
+\alpha_i [ y_i(w_0 + \mathbf{w}'\mathbf{x}_i) -1] = 0 \, \forall i.
 $$
 
 ---
@@ -477,22 +477,22 @@ $$
 ## Support Vector Machines
 
 $$
-\alpha_i [ y_i(\beta_0 + \beta'x_i) -1] = 0 \, \forall i.
+\alpha_i [ y_i(w_0 + \mathbf{w}'\mathbf{x}_i) -1] = 0 \, \forall i.
 $$
 
 Case 1: `\(\alpha_i &gt; 0\)`, then the signed distance between observation `\(x_i\)` and the decision boundary is 1. 
 
-This means that observation `\(x_i\)` is _on the margin_
+This means that observation `\(\mathbf{x}_i\)` is _on the margin_
 
 ---
 
 ## Support Vector Machines
 
 $$
-\alpha_i [ y_i(\beta_0 + \beta'x_i) -1] = 0 \, \forall i.
+\alpha_i [ y_i(w_0 + \mathbf{w}'\mathbf{x}_i) -1] = 0 \, \forall i.
 $$
 
-Case 2: `\(y_i (\beta_0 + \beta'x_i) &gt; 1\)`, then observation `\(x_i\)` is not on the margin and `\(\alpha_i=0\)`.
+Case 2: `\(y_i (w_0 + \mathbf{w}'\mathbf{x}_i) &gt; 1\)`, then observation `\(x_i\)` is not on the margin and `\(\alpha_i=0\)`.
 
 ---
 
@@ -530,16 +530,16 @@ class: split-30
 The solution is to penalize observations on the **wrong side of the margin** by introducing _slack variables_ to the optimization problem.
 
 
-`$$\mathrm{min}_{\beta_0,\beta,\xi} \; C\sum_{i=1}^N \xi_i + \frac{1}{2} \|\beta\|^2 \\\\
-\mathrm{s.t} \; y_i(\beta_0 + \beta'x_i) \geq 1 - \xi_i \, \forall i \\\\
+`$$\mathrm{min}_{w_0,\mathbf{x},\xi} \; C\sum_{i=1}^N \xi_i + \frac{1}{2} \|\mathbf{w}\|^2 \\\\
+\mathrm{s.t} \; y_i(w_0 + \mathbf{w}'\mathbf{x}_i) \geq 1 - \xi_i \, \forall i \\\\
 \xi_i \geq 0 \, \forall i$$`
 
 ---
 
 ## Non-separable data
 
-`$$\mathrm{min}_{\beta_0,\beta,\xi} \; C\sum_{i=1}^N \xi_i + \frac{1}{2} \|\beta\|^2 \\\\
-\mathrm{s.t} \; y_i(\beta_0 + \beta'x_i) \geq 1 - \xi_i \, \forall i \\\\
+`$$\mathrm{min}_{w_0,\mathbf{w},\xi} \; C\sum_{i=1}^N \xi_i + \frac{1}{2} \|\mathbf{w}\|^2 \\\\
+\mathrm{s.t} \; y_i(w_0 + \mathbf{w}'\mathbf{x}_i) \geq 1 - \xi_i \, \forall i \\\\
 \xi_i \geq 0 \, \forall i$$`
 
 `\(C\)` is a parameter that tradeoffs the width of the margin vs. the penalty on observations on the _wrong_ side of the margin. 
@@ -602,7 +602,7 @@ We can define the SVM discriminant function in terms of inner products of observ
 
 We can generalize inner product using "kernel" functions that provide something like an inner product:
 
-`$$f(x) = \beta_0 + \sum_{i=1}^n y_i \alpha_i k(x, x_i)$$`
+`$$f(\mathbf{x}) = w_0 + \sum_{i=1}^n y_i \alpha_i k(\mathbf{x}, \mathbf{x}_i)$$`
 
 
 ---
@@ -612,9 +612,9 @@ class: split-50
 
 .column[But, what is `\(k\)`? Let's consider two examples.
 
-- _Polynomial kernel_: `\(k(x,x_i) = 1+\langle x, x_i \rangle^d\)`
+- _Polynomial kernel_: `\(k(\mathbf{x},\mathbf{x}_i) = 1+\langle \mathbf{x}, \mathbf{x}_i \rangle^d\)`
 
-- _RBF (radial) kernel_: `\(k(x,x_i) = \exp\{-\gamma \sum_{j=1}^p (x_{j}-x_{ij})^2\}\)`
+- _RBF (radial) kernel_: `\(k(\mathbf{x},\mathbf{x}_i) = \exp\{-\gamma \sum_{j=1}^p (x_{j}-x_{ij})^2\}\)`
 ]
 
 .column[![](images/9_9.png)]
@@ -631,7 +631,7 @@ class: split-50
 
 The optimization problem is very similar
 
-`$$\mathrm{max}_{\alpha} \; \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k k(x_i,x_k) \\\\
+`$$\mathrm{max}_{\alpha} \; \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i=1}^N \sum_{k=1}^N \alpha_i \alpha_k y_i y_k k(\mathbf{x}_i,\mathbf{x}_k) \\\\
 \mathrm{s.t.} \; 0 \leq \alpha_i \leq C \, \forall i$$`
 
 ---
@@ -660,21 +660,21 @@ Here we are fitting three different SVMs resulting from using three different va
 &lt;tbody&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 1e-02 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 352 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.48 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 350 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.22 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 1e+00 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 359 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.48 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 352 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.22 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 1e+02 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 364 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.48 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 354 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.22 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -708,65 +708,65 @@ Notice now that we have two parameters to provide to the fitting function: cost 
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 0.01 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.01 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 348 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.48 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 344 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.22 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 1.00 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.01 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 359 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.48 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 348 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.22 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 10.00 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.01 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 352 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.48 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 347 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.22 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 0.01 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1.00 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 406 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.48 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 392 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.22 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 1.00 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1.00 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 432 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.88 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 426 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.82 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.58 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 10.00 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1.00 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 382 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.78 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.54 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.66 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 0.01 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 10.00 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 498 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.48 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 491 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.22 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 1.00 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 10.00 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1131 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.62 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.88 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1226 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.96 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 10.00 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 10.00 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 944 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.30 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 954 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.18 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -795,6 +795,7 @@ Very elegant formulation
 
 Kernel trick gives a lot of flexibility
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "ratio": "16:9"
@@ -802,11 +803,67 @@ Kernel trick gives a lot of flexibility
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
 })();</script>
 <script>
 remark.macros['scale'] = function (percentage) {
@@ -816,8 +873,8 @@ remark.macros['scale'] = function (percentage) {
 </script>
 
 <script>
-(function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -831,7 +888,8 @@ remark.macros['scale'] = function (percentage) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

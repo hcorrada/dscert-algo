@@ -140,7 +140,7 @@ date = "5/12"
 
 [[day11.covers]]
 title = "Support Vector Machines: Theory and Algorithms"
-# notes = "lectures/cmsc644-svms.pdf"
+notes = "lectures/data606_svms.pdf"
 
 # [[day11.prep]]
 # title = "Hastie, Tibshirani and Friedman, ESL Ch. 12.1-12.3"
